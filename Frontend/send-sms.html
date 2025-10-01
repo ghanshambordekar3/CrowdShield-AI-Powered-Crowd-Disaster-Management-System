@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Send SMS Preview</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+            padding: 18px;
+            background: #f7f7f8;
+            color: #111
+        }
+
+        .card {
+            max-width: 720px;
+            margin: 24px auto;
+            padding: 18px;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06)
+        }
+
+        label {
+            font-weight: 700;
+            margin-top: 8px;
+            display: block
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ddd
+        }
+
+        .btn {
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .primary {
+            background: #0b72ff;
+            color: #fff
+        }
+
+        .muted {
+            background: #eee;
+            color: #333
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .info {
+            color: #555;
+            margin-top: 8px;
+            font-size: 0.95rem
+        }
+
+        .qr-wrap {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-top: 16px
+        }
+
+        .qr-box {
+            width: 220px;
+            height: 220px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #fff;
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column
+        }
+
+        .qr-caption {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 8px;
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h2>Send SMS</h2>
+        <div>
+            <label>To</label>
+            <div id="toField" style="padding:10px;background:#fafafa;border:1px solid #eee;border-radius:6px"></div>
+            <label>Message</label>
+            <textarea id="msgField" readonly></textarea>
+            <div class="info">Click "Open SMS App / Link" to open your device SMS composer. If it does not open, scan
+                the QR code below with your phone camera or use "Copy Message".</div>
+
+            <div class="qr-wrap">
+                <div class="qr-box" id="qrBox">
+                    <div id="qrCode"></div>
+                    <div class="qr-caption">Scan to open SMS on phone</div>
+                </div>
+                <div style="flex:1">
+                    <div style="font-size:0.95rem;color:#444;margin-bottom:8px;"><strong>Preview / Actions</strong>
+                    </div>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap">
+                        <button id="openSmsBtn" class="btn primary">Open SMS App / Link</button>
+                        <button id="copyBtn" class="btn muted">Copy Message</button>
+                        <button id="copyUriBtn" class="btn" title="Copy sms: link">Copy SMS Link</button>
+                        <button id="closeBtn" class="btn" style="margin-left:auto">Close</button>
+                    </div>
+                    <div id="smsUriText" style="margin-top:12px;color:#6b7280;word-break:break-all;font-size:0.9rem">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        (function () {
+            function param(name) {
+                var m = new RegExp('[?&]' + name + '=([^&]*)').exec(location.search);
+                return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : '';
+            }
+            
+            var phone = param('phone') || '';
+            var message = param('message') || '';
+            var digits = phone.replace(/[^\d+]/g, '').trim();
+            if (/^\d{10}$/.test(digits)) digits = '+91' + digits;
+            var encoded = encodeURIComponent(message);
+            var smsUri = 'sms:' + digits + '?body=' + encoded;
+
+            document.getElementById('toField').textContent = digits || phone;
+            document.getElementById('msgField').textContent = message;
+            document.getElementById('smsUriText').textContent = smsUri;
+
+            // Generate QR code
+            try {
+                var qrContainer = document.getElementById('qrCode');
+                qrContainer.innerHTML = '';
+                new QRCode(qrContainer, {
+                    text: smsUri,
+                    width: 200,
+                    height: 200,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            } catch (e) {
+                var img = document.createElement('img');
+                img.src = 'https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=' + encodeURIComponent(smsUri);
+                document.getElementById('qrCode').appendChild(img);
+            }
+
+            function tryOpenSms() {
+                try {
+                    window.location.href = smsUri;
+                } catch (e) {
+                    setTimeout(function() {
+                        alert('SMS app could not be opened. Message copied to clipboard.');
+                        copyTextFallback();
+                    }, 1000);
+                }
+            }
+
+            function copyTextFallback() {
+                var text = 'To: ' + (digits || phone) + '\n\n' + message;
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(function () { 
+                        alert('Message copied to clipboard. Paste it in your SMS app.'); 
+                    }, function () { 
+                        textAreaCopy(text); 
+                    });
+                } else { 
+                    textAreaCopy(text); 
+                }
+            }
+            
+            function textAreaCopy(text) {
+                var ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                try { 
+                    document.execCommand('copy'); 
+                    alert('Message copied to clipboard. Paste it in your SMS app.'); 
+                } catch (e) { 
+                    alert('Unable to copy automatically. Please select and copy manually:\n\n' + text); 
+                }
+                document.body.removeChild(ta);
+            }
+
+            // Button event listeners
+            document.getElementById('openSmsBtn').addEventListener('click', function() {
+                var btn = this;
+                btn.textContent = 'Opening...';
+                btn.disabled = true;
+                tryOpenSms();
+                setTimeout(function() {
+                    btn.textContent = 'Open SMS App / Link';
+                    btn.disabled = false;
+                }, 2000);
+            });
+            
+            document.getElementById('copyBtn').addEventListener('click', function() {
+                var btn = this;
+                btn.textContent = 'Copying...';
+                copyTextFallback();
+                btn.textContent = 'Copied!';
+                setTimeout(function() {
+                    btn.textContent = 'Copy Message';
+                }, 1500);
+            });
+            
+            document.getElementById('closeBtn').addEventListener('click', function() { 
+                window.close(); 
+            });
+            
+            document.getElementById('copyUriBtn').addEventListener('click', function() {
+                var btn = this;
+                btn.textContent = 'Copying...';
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(smsUri).then(function() {
+                        alert('SMS link copied to clipboard.');
+                        btn.textContent = 'Copied!';
+                        setTimeout(function() {
+                            btn.textContent = 'Copy SMS Link';
+                        }, 1500);
+                    }, function() {
+                        textAreaCopy(smsUri);
+                        btn.textContent = 'Copy SMS Link';
+                    });
+                } else { 
+                    textAreaCopy(smsUri);
+                    btn.textContent = 'Copy SMS Link';
+                }
+            });
+
+            // Auto-open on mobile
+            var isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            if (isMobile) {
+                setTimeout(tryOpenSms, 600);
+            }
+        })();
+    </script>
+</body>
+
+</html>

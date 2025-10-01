@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrowdShield - Alert History Database</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .controls {
+            padding: 20px 30px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .refresh-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .refresh-btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6b7280;
+        }
+
+        .loading i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .alerts-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .alerts-table th {
+            background: #f8fafc;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #374151;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .alerts-table td {
+            padding: 15px;
+            border-bottom: 1px solid #f3f4f6;
+            vertical-align: top;
+        }
+
+        .alerts-table tr:hover {
+            background: #f9fafb;
+        }
+
+        .alert-type {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .alert-type.fire {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .alert-type.overcrowding {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .alert-type.medical {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .alert-type.stampede {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .alert-type.critical {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .alert-type.warning {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .alert-type.info {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .status-resolved {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .zone-badge {
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .timestamp {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .no-alerts {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+        }
+
+        .no-alerts i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .back-btn {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: #4b5563;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .stats {
+                justify-content: center;
+            }
+
+            .alerts-table {
+                font-size: 0.9rem;
+            }
+
+            .alerts-table th,
+            .alerts-table td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-history"></i> Full Alert History</h1>
+            <p>Complete record of all alerts detected and saved to MySQL database</p>
+        </div>
+
+        <div class="controls">
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalAlerts">0</div>
+                    <div class="stat-label">Total Alerts</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="activeAlerts">0</div>
+                    <div class="stat-label">Active</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="resolvedAlerts">0</div>
+                    <div class="stat-label">Resolved</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="todayAlerts">0</div>
+                    <div class="stat-label">Today</div>
+                </div>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <a href="home.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+                <button class="refresh-btn" onclick="loadAlerts()">
+                    <i class="fas fa-sync-alt"></i> Refresh Data
+                </button>
+            </div>
+        </div>
+
+        <div class="content">
+            <div id="loading" class="loading">
+                <i class="fas fa-spinner"></i>
+                <p>Loading alert history from database...</p>
+            </div>
+
+            <div id="error" class="error" style="display: none;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Failed to load alert data. Please check if the backend server is running.</p>
+            </div>
+
+            <div id="alertsContainer" style="display: none;">
+                <table class="alerts-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Zone</th>
+                            <th>Type</th>
+                            <th>Message</th>
+                            <th>Status</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="alertsTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="noAlerts" class="no-alerts" style="display: none;">
+                <i class="fas fa-inbox"></i>
+                <h3>No Alerts Found</h3>
+                <p>No alerts have been recorded in the database yet.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load alerts when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAlerts();
+        });
+
+        function loadAlerts() {
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const alertsContainer = document.getElementById('alertsContainer');
+            const noAlerts = document.getElementById('noAlerts');
+
+            // Show loading state
+            loading.style.display = 'block';
+            error.style.display = 'none';
+            alertsContainer.style.display = 'none';
+            noAlerts.style.display = 'none';
+
+            // Update refresh button
+            const refreshBtn = document.querySelector('.refresh-btn');
+            refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            refreshBtn.disabled = true;
+
+            // Fetch alerts from backend
+            fetch('http://localhost:8080/api/alerts/history')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch alerts');
+                    }
+                    return response.json();
+                })
+                .then(alerts => {
+                    loading.style.display = 'none';
+                    refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Data';
+                    refreshBtn.disabled = false;
+
+                    if (alerts && alerts.length > 0) {
+                        displayAlerts(alerts);
+                        updateStats(alerts);
+                        alertsContainer.style.display = 'block';
+                    } else {
+                        noAlerts.style.display = 'block';
+                        updateStats([]);
+                    }
+                })
+                .catch(err => {
+                    console.error('Error loading alerts:', err);
+                    loading.style.display = 'none';
+                    error.style.display = 'block';
+                    refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Data';
+                    refreshBtn.disabled = false;
+                    updateStats([]);
+                });
+        }
+
+        function displayAlerts(alerts) {
+            const tbody = document.getElementById('alertsTableBody');
+            tbody.innerHTML = '';
+
+            alerts.forEach(alert => {
+                const row = document.createElement('tr');
+                
+                const alertTypeClass = getAlertTypeClass(alert.type);
+                const statusClass = alert.status === 'active' ? 'status-active' : 'status-resolved';
+                const timestamp = new Date(alert.timestamp).toLocaleString();
+
+                row.innerHTML = `
+                    <td><strong>#${alert.id}</strong></td>
+                    <td><span class="zone-badge">Zone ${alert.zoneId}</span></td>
+                    <td><span class="alert-type ${alertTypeClass}">${alert.type}</span></td>
+                    <td>${alert.message}</td>
+                    <td><span class="status-badge ${statusClass}">${alert.status}</span></td>
+                    <td class="timestamp">${timestamp}</td>
+                `;
+
+                tbody.appendChild(row);
+            });
+        }
+
+        function getAlertTypeClass(type) {
+            const typeMap = {
+                'Fire Emergency': 'fire',
+                'Overcrowding': 'overcrowding',
+                'Medical Emergency': 'medical',
+                'Stampede Risk': 'stampede',
+                'Critical': 'critical',
+                'Warning': 'warning',
+                'Info': 'info'
+            };
+            return typeMap[type] || type.toLowerCase().replace(/\s+/g, '-');
+        }
+
+        function updateStats(alerts) {
+            const total = alerts.length;
+            const active = alerts.filter(a => a.status === 'active').length;
+            const resolved = alerts.filter(a => a.status === 'resolved').length;
+            
+            // Count today's alerts
+            const today = new Date().toDateString();
+            const todayCount = alerts.filter(a => {
+                const alertDate = new Date(a.timestamp).toDateString();
+                return alertDate === today;
+            }).length;
+
+            document.getElementById('totalAlerts').textContent = total;
+            document.getElementById('activeAlerts').textContent = active;
+            document.getElementById('resolvedAlerts').textContent = resolved;
+            document.getElementById('todayAlerts').textContent = todayCount;
+        }
+
+        // Auto-refresh every 30 seconds
+        setInterval(loadAlerts, 30000);
+    </script>
+</body>
+</html>

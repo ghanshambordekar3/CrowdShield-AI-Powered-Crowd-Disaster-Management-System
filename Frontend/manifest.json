@@ -1,0 +1,113 @@
+{
+  "name": "CrowdShield - AI Crowd & Disaster Management",
+  "short_name": "CrowdShield",
+  "description": "AI-Powered Crowd & Disaster Management System for Nashik Kumbh Mela 2027",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["productivity", "utilities", "business"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiByeD0iMTIiIGZpbGw9IiMwZjE3MmEiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBmaWxsPSIjMDBGRjg4Ij4KPHA...(truncated)",
+      "sizes": "48x48",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHZpZXdCb3g9IjAgMCA3MiA3MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjcyIiBoZWlnaHQ9IjcyIiByeD0iMTgiIGZpbGw9IiMwZjE3MmEiLz4KPHN2ZyB4PSIxMiIgeT0iMTIiIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9IiMwMEZGODgiPgo8cGF0aCBkPSJNNDY2LjUgODMuN2wtMTkyLTE2YS0xOC41IDE4LjUgMCAwIDAtMTkgMGwtMTkyIDE2QTEyIDEyIDAgMCAwIDUyIDk1LjJ2MjA5LjFjMCA5OS4yIDUwLjggMTg3LjQgMTI5LjMgMjM5LjNhMTIgMTIgMCAwIDAgMTMuNCAwQzI3My4yIDQ5MS43IDMyNCA0MDMuNSAzMjQgMzA0LjNWOTUuMmExMiAxMiAwIDAgMC0xMC41LTExLjV6Ii8+Cjwvc3ZnPgo8L3N2Zz4K",
+      "sizes": "72x72",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMjQiIGZpbGw9IiMwZjE3MmEiLz4KPHN2ZyB4PSIxNiIgeT0iMTYiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9IiMwMEZGODgiPgo8cGF0aCBkPSJNNDY2LjUgODMuN2wtMTkyLTE2YS0xOC41IDE4LjUgMCAwIDAtMTkgMGwtMTkyIDE2QTEyIDEyIDAgMCAwIDUyIDk1LjJ2MjA5LjFjMCA5OS4yIDUwLjggMTg3LjQgMTI5LjMgMjM5LjNhMTIgMTIgMCAwIDAgMTMuNCAwQzI3My4yIDQ5MS43IDMyNCA0MDMuNSAzMjQgMzA0LjNWOTUuMmExMiAxMiAwIDAgMC0xMC41LTExLjV6Ii8+Cjwvc3ZnPgo8L3N2Zz4K",
+      "sizes": "96x96",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0IiBoZWlnaHQ9IjE0NCIgdmlld0JveD0iMCAwIDE0NCAxNDQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNDQiIGhlaWdodD0iMTQ0IiByeD0iMzYiIGZpbGw9IiMwZjE3MmEiLz4KPHN2ZyB4PSIyNCIgeT0iMjQiIHdpZHRoPSI5NiIgaGVpZ2h0PSI5NiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9IiMwMEZGODgiPgo8cGF0aCBkPSJNNDY2LjUgODMuN2wtMTkyLTE2YS0xOC41IDE4LjUgMCAwIDAtMTkgMGwtMTkyIDE2QTEyIDEyIDAgMCAwIDUyIDk1LjJ2MjA5LjFjMCA5OS4yIDUwLjggMTg3LjQgMTI5LjMgMjM5LjNhMTIgMTIgMCAwIDAgMTMuNCAwQzI3My4yIDQ5MS43IDMyNCA0MDMuNSAzMjQgMzA0LjNWOTUuMmExMiAxMiAwIDAgMC0xMC41LTExLjV6Ii8+Cjwvc3ZnPgo8L3N2Zz4K",
+      "sizes": "144x144",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iNDgiIGZpbGw9IiMwZjE3MmEiLz4KPHN2ZyB4PSIzMiIgeT0iMzIiIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgZmlsbD0iIzAwRkY4OCI+CjxwYXRoIGQ9Ik00NjYuNSA4My43bC0xOTItMTZhLTE4LjUgMTguNSAwIDAgMC0xOSAwbC0xOTIgMTZBMTIgMTIgMCAwIDAgNTIgOTUuMnYyMDkuMWMwIDk5LjIgNTAuOCAxODcuNCAxMjkuMyAyMzkuM2ExMiAxMiAwIDAgMCAxMy40IDBDMJM3LjIgNDkxLjcgMzI0IDQwMy41IDMyNCAzMDQuM1Y5NS4yYTEyIDEyIDAgMCAwLTEwLjUtMTEuNXoiLz4KPC9zdmc+Cjwvc3ZnPgo=",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTI4IiBmaWxsPSIjMGYxNzJhIi8+CjxzdmcgeD0iODYiIHk9Ijg2IiB3aWR0aD0iMzQwIiBoZWlnaHQ9IjM0MCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9IiMwMEZGODgiPgo8cGF0aCBkPSJNNDY2LjUgODMuN2wtMTkyLTE2YS0xOC41IDE4LjUgMCAwIDAtMTkgMGwtMTkyIDE2QTEyIDEyIDAgMCAwIDUyIDk1LjJ2MjA5LjFjMCA5OS4yIDUwLjggMTg3LjQgMTI5LjMgMjM5LjNhMTIgMTIgMCAwIDAgMTMuNCAwQzI3My4yIDQ5MS43IDMyNCA0MDMuNSAzMjQgMzA0LjNWOTUuMmExMiAxMiAwIDAgMC0xMC41LTExLjV6Ii8+Cjwvc3ZnPgo8L3N2Zz4K",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjU2OCIgdmlld0JveD0iMCAwIDMyMCA1NjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iNTY4IiBmaWxsPSIjMGYxNzJhIi8+CjxyZWN0IHg9IjEwIiB5PSI2MCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSI0MCIgcng9IjgiIGZpbGw9IiMxZTI5M2IiLz4KPHN2ZyB4PSIyMCIgeT0iNzAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9IiMwMEZGODgiPgo8cGF0aCBkPSJNNDY2LjUgODMuN2wtMTkyLTE2YS0xOC41IDE4LjUgMCAwIDAtMTkgMGwtMTkyIDE2QTEyIDEyIDAgMCAwIDUyIDk1LjJ2MjA5LjFjMCA5OS4yIDUwLjggMTg3LjQgMTI5LjMgMjM5LjNhMTIgMTIgMCAwIDAgMTMuNCAwQzI3My4yIDQ5MS43IDMyNCA0MDMuNSAzMjQgMzA0LjNWOTUuMmExMiAxMiAwIDAgMC0xMC41LTExLjV6Ii8+Cjwvc3ZnPgo8dGV4dCB4PSI1MCIgeT0iODUiIGZpbGw9IiMwMEZGODgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9ImJvbGQiPkNyb3dkU2hpZWxkPC90ZXh0Pgo8cmVjdCB4PSIxMCIgeT0iMTIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgcng9IjEyIiBmaWxsPSIjMWUyOTNiIi8+Cjx0ZXh0IHg9IjIwIiB5PSIxNDAiIGZpbGw9IiNmOGZhZmMiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiPkRhc2hib2FyZDwvdGV4dD4KPHN2ZyB4PSIyMCIgeT0iMTYwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDI4MCAxMjAiIGZpbGw9Im5vbmUiPgo8cmVjdCB3aWR0aD0iMjgwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzMzNDE1NSIvPgo8Y2lyY2xlIGN4PSI3MCIgY3k9IjQwIiByPSIyMCIgZmlsbD0iIzEwYjk4MSIgZmlsbC1vcGFjaXR5PSIwLjMiLz4KPGJ...(truncated)",
+      "sizes": "320x568",
+      "type": "image/svg+xml",
+      "form_factor": "narrow",
+      "label": "CrowdShield Mobile Dashboard"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI4MDAiIHZpZXdCb3g9IjAgMCAxMjgwIDgwMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyODAiIGhlaWdodD0iODAwIiBmaWxsPSIjMGYxNzJhIi8+CjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcwIiBmaWxsPSIjMWUyOTNiIi8+CjxzdmcgeD0iMjAiIHk9IjIwIiB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBmaWxsPSIjMDBGRjg4Ij4KPHA...(truncated)",
+      "sizes": "1280x800",
+      "type": "image/svg+xml",
+      "form_factor": "wide",
+      "label": "CrowdShield Desktop Dashboard"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "View real-time crowd monitoring dashboard",
+      "url": "/index.html#dashboard",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMjQiIGZpbGw9IiMwZjE3MmEiLz4KPHN2ZyB4PSIyNCIgeT0iMjQiIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9IiMwMEZGODgiPgo8cGF0aCBkPSJNMjU2IDMyYzEyMy43IDAgMjI0IDEwMC4zIDIyNCAyMjRTMzc5LjcgNDgwIDI1NiA0ODBTMzIgMzc5LjcgMzIgMjU2UzEzMi4zIDMyIDI1NiAzMnptMCA2NGMtODguNCAwLTE2MCA3MS42LTE2MCAxNjBzNzEuNiAxNjAgMTYwIDE2MHMxNjAtNzEuNiAxNjAtMTYwUzM0NC40IDk2IDI1NiA5NnptMCA2NGMxNi4xIDAgMzIgNi45IDQzIDIwLjJsNjQgOTZjOC4yIDEyLjMgNS4xIDI4LjktNy4yIDM3LjFzLTI4LjkgNS4xLTM3LjEtNy4ybC02NC05NkMyNDYuOSAxOTIgMjQwIDE3NiAyNTYgMTYweiIvPgo8L3N2Zz4KPC9zdmc+",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Live Alerts",
+      "short_name": "Alerts",
+      "description": "View emergency alerts and notifications",
+      "url": "/index.html#alerts",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMjQiIGZpbGw9IiNlZjQ0NDQiLz4KPHN2ZyB4PSIyNCIgeT0iMjQiIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9IndoaXRlIj4KPHA...(truncated)",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "short_name": "Analytics",
+      "description": "View crowd analytics and reports",
+      "url": "/index.html#analytics",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMjQiIGZpbGw9IiMyNTYzZWIiLz4KPHN2ZyB4PSIyNCIgeT0iMjQiIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9IndoaXRlIj4KPHA...(truncated)",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
+}
