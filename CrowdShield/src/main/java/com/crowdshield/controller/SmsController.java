@@ -14,7 +14,6 @@ import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequestMapping("/api/sms")
-@CrossOrigin(origins = "*")
 public class SmsController {
 
     @PostMapping("/send")
