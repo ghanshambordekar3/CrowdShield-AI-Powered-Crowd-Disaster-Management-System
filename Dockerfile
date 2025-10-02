@@ -5,15 +5,16 @@ FROM maven:3.8.5-eclipse-temurin-17 AS builder
 # Set the working directory inside the container
 WORKDIR /app
  
-# Copy the entire backend project into the container
-# This is simpler and ensures all files (pom.xml, mvnw, .mvn, src) are included.
+# Copy the pom.xml first to leverage Docker's layer caching.
+# This downloads dependencies only when pom.xml changes.
+COPY CrowdShield/pom.xml .
+RUN mvn dependency:go-offline -B
+
+# Copy the rest of the backend source code
 COPY CrowdShield/ .
  
-# Make the Maven wrapper executable
-RUN chmod +x mvnw
-
-# Build the application using the Maven wrapper for consistency
-RUN ./mvnw clean package -DskipTests
+# Build the application using the standard 'mvn' command
+RUN mvn clean package -DskipTests -B
 
 # --- Final Stage ---
 # Use a lightweight JRE image for the final container
