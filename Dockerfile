@@ -22,7 +22,7 @@ EXPOSE 8080
 # Set environment variables for database (can override in Render dashboard)
 ENV SPRING_DATASOURCE_URL=jdbc:mysql://your-mysql-host:3306/aibuilder_db
 ENV SPRING_DATASOURCE_USERNAME=root
-ENV SPRING_DATASOURCE_PASSWORD=yourpassword
+ENV SPRING_DATASOURCE_PASSWORD=password
 
 # Run the Spring Boot JAR
 CMD ["java", "-jar", "target/crowdshield-0.0.1-SNAPSHOT.jar"]
