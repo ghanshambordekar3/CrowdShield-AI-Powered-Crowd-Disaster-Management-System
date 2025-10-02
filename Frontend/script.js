@@ -1,4 +1,5 @@
 // =============== GLOBAL VARIABLES ===============
+const API_BASE_URL = "https://crowdshield-ais-powered-crowd-disaster.onrender.com"; // Render backend URL
 let map;
 let charts = {};
 let updateInterval;
@@ -616,7 +617,7 @@ function checkOvercrowdingStatus() {
     updateOvercrowdingAlertMessage("Monitoring Active");
 
     // Fetch latest density data to check overcrowding status
-    fetch("http://localhost:8080/api/density")
+    fetch(`${API_BASE_URL}/api/density`)
         .then(response => response.json())
         .then(data => {
             let isOvercrowding = false;
@@ -738,7 +739,7 @@ async function handleLogin(e) {
     }
 
     try {
-        const response = await fetch('http://localhost:8080/api/login', {
+        const response = await fetch(`${API_BASE_URL}/api/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -1693,8 +1694,8 @@ function refreshDatabaseData() {
 
     // Fetch fresh data from MySQL database
     Promise.all([
-        fetch('http://localhost:8080/api/density').catch(() => ({ json: () => [] })),
-        fetch('http://localhost:8080/api/alerts').catch(() => ({ json: () => [] }))
+        fetch(`${API_BASE_URL}/api/density`).catch(() => ({ json: () => [] })),
+        fetch(`${API_BASE_URL}/api/alerts`).catch(() => ({ json: () => [] }))
     ]).then(async ([densityRes, alertsRes]) => {
         const densityData = await densityRes.json().catch(() => []);
         const alertsData = await alertsRes.json().catch(() => []);
@@ -4530,7 +4531,7 @@ function fetchDensityData() {
 
 // Function to fetch and display alerts from backend
 function fetchAlerts() {
-    fetch("http://localhost:8080/api/alerts")
+    fetch(`${API_BASE_URL}/api/alerts`)
         .then(response => response.json())
         .then(data => {
             console.log("Alerts from Backend:", data);
@@ -4540,7 +4541,7 @@ function fetchAlerts() {
         .catch(error => console.error("Error fetching alerts:", error));
 
     // Also fetch and render alert history
-    fetch("http://localhost:8080/api/alerts/history")
+    fetch(`${API_BASE_URL}/api/alerts/history`)
         .then(response => response.json())
         .then(history => {
             updateAlertHistoryUI(history);
@@ -4551,7 +4552,7 @@ function fetchAlerts() {
 
 // Function to fetch and display routes from backend
 function fetchRoutes() {
-    fetch("http://localhost:8080/api/routes")
+    fetch(`${API_BASE_URL}/api/routes`)
         .then(response => response.json())
         .then(data => {
             console.log("Routes from Backend:", data);
@@ -4563,7 +4564,7 @@ function fetchRoutes() {
 
 // Fetch database-driven forecast and update chart + table
 function fetchForecast() {
-    fetch("http://localhost:8080/api/forecast")
+    fetch(`${API_BASE_URL}/api/forecast`)
         .then(response => response.json())
         .then(payload => {
             const zones = Array.isArray(payload && payload.zones) ? payload.zones : [];
@@ -6129,7 +6130,7 @@ function loadFullHistoryData() {
     `;
     
     // Fetch complete history from backend
-    fetch('http://localhost:8080/api/alerts/history')
+    fetch(`${API_BASE_URL}/api/alerts/history`)
         .then(response => response.json())
         .then(history => {
             displayFullHistory(history);
@@ -6744,8 +6745,8 @@ function preDeployResources() {
     
     // Fetch current database data to determine what resources are needed
     Promise.all([
-        fetch('http://localhost:8080/api/alerts/history').catch(() => ({json: () => []})),
-        fetch('http://localhost:8080/api/density').catch(() => ({json: () => []}))
+        fetch(`${API_BASE_URL}/api/alerts/history`).catch(() => ({json: () => []})),
+        fetch(`${API_BASE_URL}/api/density`).catch(() => ({json: () => []}))
     ]).then(async ([alertsRes, densityRes]) => {
         const alerts = await alertsRes.json().catch(() => []);
         const density = await densityRes.json().catch(() => []);
@@ -7790,8 +7791,8 @@ async function fetchDataForScan() {
     // This simulates fetching new records since the last scan.
     // In a real app, you might pass a timestamp to the backend.
     const [alertsRes, densityRes] = await Promise.all([
-        fetch('http://localhost:8080/api/alerts').catch(() => ({ json: () => [] })),
-        fetch('http://localhost:8080/api/density').catch(() => ({ json: () => [] }))
+        fetch(`${API_BASE_URL}/api/alerts`).catch(() => ({ json: () => [] })),
+        fetch(`${API_BASE_URL}/api/density`).catch(() => ({ json: () => [] }))
     ]);
 
     const alerts = await alertsRes.json();
