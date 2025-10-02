@@ -9,6 +9,9 @@ WORKDIR /app
 # This is simpler and ensures all files (pom.xml, mvnw, .mvn, src) are included.
 COPY CrowdShield/ .
  
+# Make the Maven wrapper executable
+RUN chmod +x mvnw
+
 # Build the application using the Maven wrapper for consistency
 RUN ./mvnw clean package -DskipTests
 
