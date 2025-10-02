@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "https://crowd-shield-ai-powered-crowd-disas-delta.vercel.app")
 @RequestMapping("/api")
 public class ApiController {
 
