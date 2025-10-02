@@ -6,36 +6,42 @@ services:
     image: mysql:8.0
     container_name: crowdshield-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: aibuilder_db
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: crowdshield
     ports:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-padmin"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # Spring Boot backend
   backend:
     build:
-      context: ./backend   # Path to backend Dockerfile
+      context: . # The root directory containing this docker-compose.yml
       dockerfile: Dockerfile
     container_name: crowdshield-backend
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/aibuilder_db
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/crowdshield
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: rootpassword
+      SPRING_DATASOURCE_PASSWORD: admin
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
 
-  # Optional: Frontend (if using React or Angular)
+  # Frontend Service (using Nginx for static files)
   frontend:
     build:
-      context: ./frontend   # Path to your frontend folder
+      context: ./Frontend   # Path to your frontend folder
       dockerfile: Dockerfile
     container_name: crowdshield-frontend
     ports:
-      - "3000:3000"
+      - "80:80"
     depends_on:
       - backend
 

@@ -1,28 +1,29 @@
-# Use official Java 17 JDK
-FROM eclipse-temurin:17-jdk-alpine
+# --- Build Stage ---
+# Use a Maven image with Java 17 to build the application
+FROM maven:3.8.5-eclipse-temurin-17 AS builder
+ 
+# Set the working directory inside the container
+WORKDIR /app
+ 
+# Copy the entire backend project into the container
+# This is simpler and ensures all files (pom.xml, mvnw, .mvn, src) are included.
+COPY CrowdShield/ .
+ 
+# Build the application using the Maven wrapper for consistency
+RUN ./mvnw clean package -DskipTests
+
+# --- Final Stage ---
+# Use a lightweight JRE image for the final container
+FROM eclipse-temurin:17-jre-alpine
 
 # Set working directory
 WORKDIR /app
 
-# Copy Maven wrapper and project files
-COPY mvnw .
-COPY .mvn .mvn
-COPY pom.xml .
-COPY src ./src
+# Copy the executable JAR from the builder stage
+COPY --from=builder /app/target/crowdshield-0.0.1-SNAPSHOT.jar app.jar
 
-# Make mvnw executable
-RUN chmod +x mvnw
-
-# Build the Spring Boot project
-RUN ./mvnw clean package -DskipTests
-
-# Expose the port your app runs on (default Spring Boot 8080)
+# Expose the port your app runs on
 EXPOSE 8080
 
-# Set environment variables for database (can override in Render dashboard)
-ENV SPRING_DATASOURCE_URL=jdbc:mysql://your-mysql-host:3306/aibuilder_db
-ENV SPRING_DATASOURCE_USERNAME=root
-ENV SPRING_DATASOURCE_PASSWORD=password
-
-# Run the Spring Boot JAR
-CMD ["java", "-jar", "target/crowdshield-0.0.1-SNAPSHOT.jar"]
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
