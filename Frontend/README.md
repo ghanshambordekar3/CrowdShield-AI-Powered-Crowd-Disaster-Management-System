@@ -98,7 +98,7 @@ const API_BASE_URL = 'http://localhost:8080/api';
 
 ## 🌐 Deployment
 
-### Deploying to Vercel
+### Deploying to Vercel / Render
 
 1. **Install Vercel CLI** (if not already installed):
    ```bash
@@ -160,9 +160,7 @@ const API_BASE_URL = process.env.API_URL || 'https://your-backend-api.com/api';
 
 ## 🔗 Deployment URL
 
-**Live Application**: `[Your Vercel Deployment URL will appear here]`
-
-Example: `https://crowdshield-frontend.vercel.app`
+**Live Application**: `https://crowd-shield-ai-powered-crowd-disas-delta.vercel.app/`
 
 ## 🎨 Features Breakdown
 

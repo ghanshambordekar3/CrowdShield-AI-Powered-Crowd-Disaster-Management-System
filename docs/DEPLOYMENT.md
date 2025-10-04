@@ -25,13 +25,13 @@ The backend will start on `http://localhost:8080`
 ### 3. Python Detection Service
 ```bash
 # Using default webcam (camera index 0)
-python detect.py --source 0 --api-url http://localhost:8080/api/density --zone-id 1
+python detect.py --source 0 --api-url https://crowdshield-ais-powered-crowd-disaster.onrender.com/api/density --zone-id 1
 
 # Using RTSP camera feed
-python detect.py --source "rtsp://username:password@camera-ip:554/stream" --api-url http://localhost:8080/api/density --zone-id 1
+python detect.py --source "rtsp://username:password@camera-ip:554/stream" --api-url https://crowdshield-ais-powered-crowd-disaster.onrender.com/api/density --zone-id 1
 
 # Using HTTP camera feed
-python detect.py --source "http://camera-ip/video" --api-url http://localhost:8080/api/density --zone-id 1
+python detect.py --source "http://camera-ip/video" --api-url https://crowdshield-ais-powered-crowd-disaster.onrender.com/api/density --zone-id 1
 ```
 
 ### 4. Frontend Setup

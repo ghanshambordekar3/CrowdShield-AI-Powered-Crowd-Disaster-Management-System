@@ -3676,7 +3676,7 @@ function fetchSafeRoutes(startCoords, destCoords) {
         destination: { lat: destCoords.lat, lng: destCoords.lng }
     };
 
-    return fetch('http://localhost:8080/api/routes/calculate', {
+    return fetch(`${API_BASE_URL}/api/routes/calculate`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -4310,7 +4310,7 @@ function addNewAlert(alertData) {
         lastSavedAlerts.set(alertKey, now);
         
         const timestamp = new Date().toISOString();
-        fetch('http://localhost:8080/api/alerts', {
+        fetch(`${API_BASE_URL}/api/alerts`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ zoneId, type: normalizedType, message, status: 'active', timestamp })
@@ -5326,7 +5326,7 @@ function sendDetectionData(count) {
     // Optimistically update UI with the latest detection before backend refresh
     updateStatusIndicatorsWithRealData({ zoneId: 1, count: count, density: densityLevel });
 
-    fetch('http://localhost:8080/api/density', {
+    fetch(`${API_BASE_URL}/api/density`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -6592,8 +6592,8 @@ function loadRiskForecastData() {
     
     // Fetch recent alerts and density data from MySQL
     Promise.all([
-        fetch('http://localhost:8080/api/alerts/history').catch(() => ({ json: () => [] })),
-        fetch('http://localhost:8080/api/density').catch(() => ({ json: () => [] }))
+        fetch(`${API_BASE_URL}/api/alerts/history`).catch(() => ({ json: () => [] })),
+        fetch(`${API_BASE_URL}/api/density`).catch(() => ({ json: () => [] }))
     ]).then(async ([alertsRes, densityRes]) => {
         const alerts = await alertsRes.json().catch(() => []);
         const density = await densityRes.json().catch(() => []);
@@ -6745,8 +6745,8 @@ function preDeployResources() {
     
     // Fetch current database data to determine what resources are needed
     Promise.all([
-        fetch(`${API_BASE_URL}/api/alerts/history`).catch(() => ({json: () => []})),
-        fetch(`${API_BASE_URL}/api/density`).catch(() => ({json: () => []}))
+        fetch(`${API_BASE_URL}/api/alerts/history`).catch(() => ({ json: () => [] })),
+        fetch(`${API_BASE_URL}/api/density`).catch(() => ({ json: () => [] }))
     ]).then(async ([alertsRes, densityRes]) => {
         const alerts = await alertsRes.json().catch(() => []);
         const density = await densityRes.json().catch(() => []);

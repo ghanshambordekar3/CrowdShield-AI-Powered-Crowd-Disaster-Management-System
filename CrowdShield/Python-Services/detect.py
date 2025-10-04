@@ -6,10 +6,11 @@ import json
 import time
 from datetime import datetime
 import argparse
+from typing import Union
 
 class CrowdDetector:
-    def __init__(self, video_source=0, api_url="http://localhost:8080/api/density", zone_id=1):
-        """
+    def __init__(self, video_source: Union[int, str] = 0, api_url: str = "https://crowdshield-ais-powered-crowd-disaster.onrender.com/api/density", zone_id: int = 1):
+        """_
         Initialize the crowd detector with YOLOv8 model and API configuration
         
         Args:
@@ -18,6 +19,9 @@ class CrowdDetector:
             zone_id: Zone identifier for this camera
         """
         self.video_source = video_source
+        if not api_url.endswith('/api/density'):
+            print(f"Warning: API URL does not end with '/api/density'. Appending it.")
+            self.api_url = api_url.rstrip('/') + '/api/density'
         self.api_url = api_url
         self.zone_id = zone_id
         
@@ -38,9 +42,10 @@ class CrowdDetector:
         # Initialize video capture
         self.cap = cv2.VideoCapture(self.video_source)
         if not self.cap.isOpened():
+            print(f"❌ Error: Cannot open video source: {self.video_source}")
             raise ValueError(f"Cannot open video source: {self.video_source}")
             
-        print(f"Video source opened: {video_source}")
+        print(f"✅ Video source opened successfully: {video_source}")
         
     def classify_density(self, count):
         """Classify crowd density based on count"""
@@ -70,7 +75,7 @@ class CrowdDetector:
             
             if response.status_code == 200:
                 print(f"✅ Data sent successfully: {count} people, {density_level} density")
-            else:
+            elif response.status_code >= 400:
                 print(f"❌ API Error: {response.status_code} - {response.text}")
                 
         except requests.exceptions.RequestException as e:
@@ -105,7 +110,7 @@ class CrowdDetector:
             while True:
                 ret, frame = self.cap.read()
                 if not ret:
-                    print("Failed to grab frame")
+                    print("❌ Failed to grab frame. End of video stream or camera error.")
                     break
                 
                 # Process frame
@@ -124,7 +129,7 @@ class CrowdDetector:
                 cv2.imshow('Crowd Detection', processed_frame)
                 
                 # Send data to backend at intervals
-                if frame_count % (30 * send_interval) == 0:  # Assuming 30 FPS
+                if frame_count > 0 and frame_count % (30 * send_interval) == 0:  # Assuming 30 FPS
                     self.send_to_backend(person_count, density_level)
                 
                 frame_count += 1
@@ -134,7 +139,7 @@ class CrowdDetector:
                     break
                     
         except KeyboardInterrupt:
-            print("Detection stopped by user")
+            print("\nℹ️ Detection stopped by user.")
         finally:
             self.cap.release()
             cv2.destroyAllWindows()
@@ -149,7 +154,7 @@ def main():
     parser = argparse.ArgumentParser(description='Real-time Crowd Detection with YOLOv8')
     parser.add_argument('--source', type=str, default='0',
                        help='Video source (0 for webcam, or RTSP/HTTP URL)')
-    parser.add_argument('--api-url', type=str, default='http://localhost:8080/api/density',
+    parser.add_argument('--api-url', type=str, default='https://crowdshield-ais-powered-crowd-disaster.onrender.com/api/density',
                        help='Backend API URL')
     parser.add_argument('--zone-id', type=int, default=1,
                        help='Zone identifier')

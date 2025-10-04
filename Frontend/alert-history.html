@@ -384,7 +384,7 @@
             refreshBtn.disabled = true;
 
             // Fetch alerts from backend
-            fetch('http://localhost:8080/api/alerts/history')
+            fetch('https://crowdshield-ais-powered-crowd-disaster.onrender.com/api/alerts/history') // This was already correct, but good to confirm.
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Failed to fetch alerts');
