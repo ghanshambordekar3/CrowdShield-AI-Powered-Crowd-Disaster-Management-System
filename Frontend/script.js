@@ -1,5 +1,5 @@
 // =============== GLOBAL VARIABLES ===============
-const API_BASE_URL = "https://crowdshield-ais-powered-crowd-disaster.onrender.com"; // Render backend URL
+const API_BASE_URL = "https://crowdshield-ais-powered-crowd-disaster.onrender.com"; // Render backend URL 
 let map;
 let charts = {};
 let updateInterval;
@@ -7765,7 +7765,7 @@ function startDatabaseScan() {
     // Fetch data from backend to get results
     fetchDataForScan().then(data => {
         setTimeout(() => {
-            scanStatusText.textContent = 'Scan Complete.';
+  scanStatusText.textContent = 'Scan Complete.';
             scanLight.classList.remove('scanning');
             scanLight.classList.add('complete');
             scanProgress.style.width = '100%';
@@ -7811,7 +7811,7 @@ async function fetchDataForScan() {
 (function() {
     'use strict';
     
-    // Register service worker for PWA functionality
+  // Register service worker for PWA functionality
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('/sw.js')
