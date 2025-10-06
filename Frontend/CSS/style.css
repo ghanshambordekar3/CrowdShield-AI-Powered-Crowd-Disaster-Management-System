@@ -4,6 +4,29 @@
       box-sizing: border-box;
   }
 
+  /* Mobile Viewport Fixes */
+  html {
+      overflow-x: hidden;
+      width: 100%;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+  }
+
+  body {
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
+  }
+
+  /* Prevent horizontal scroll on mobile */
+  .app-container,
+  .main-container,
+  .content,
+  .page {
+      max-width: 100vw;
+      overflow-x: hidden;
+  }
+
   :root {
       --primary-color: #2563eb;
       --secondary-color: #1e40af;
@@ -55,6 +78,8 @@
       visibility: hidden;
       /* Initially hidden */
       transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
   }
 
   .login-page.active-animated {
@@ -117,6 +142,76 @@
       justify-content: center;
       padding: 20px;
       position: relative;
+  }
+
+  /* Mobile Login Page Enhancements */
+  @media (max-width: 768px) {
+      .login-container {
+          padding: 15px;
+          align-items: flex-start;
+          padding-top: 10vh;
+      }
+
+      .login-panel {
+          width: 100%;
+          max-width: 100%;
+      }
+
+      .mission-title {
+          font-size: 1.5rem;
+          text-align: center;
+      }
+
+      .mission-subtitle {
+          font-size: 0.85rem;
+          text-align: center;
+      }
+
+      .access-form {
+          margin-top: 20px;
+      }
+
+      .input-wrapper {
+          margin-bottom: 15px;
+      }
+
+      .input-wrapper i {
+          font-size: 1.1rem;
+      }
+
+      .input-wrapper input {
+          font-size: 16px;
+          padding: 12px 12px 12px 40px;
+      }
+
+      .system-status {
+          flex-direction: column;
+          gap: 8px;
+          text-align: center;
+      }
+
+      .status-item {
+          font-size: 0.85rem;
+      }
+  }
+
+  @media (max-width: 480px) {
+      .login-container {
+          padding: 10px;
+          padding-top: 5vh;
+      }
+
+      .mission-title {
+          font-size: 1.3rem;
+      }
+
+      .mission-subtitle {
+          font-size: 0.8rem;
+      }
+
+      .login-panel {
+          padding: 25px 15px;
+      }
   }
 
   .login-card {
@@ -297,7 +392,7 @@
       border-bottom: 1px solid var(--border-light);
       display: flex;
       align-items: center;
-      justify-content: between;
+      justify-content: space-between;
       padding: 0 20px;
       position: fixed;
       top: 0;
@@ -611,6 +706,63 @@
       margin-bottom: 20px;
   }
 
+  /* Mobile Dashboard Optimizations */
+  @media (max-width: 768px) {
+      .dashboard-grid {
+          grid-template-columns: 1fr;
+          gap: 15px;
+      }
+
+      .map-wrapper {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
+          border-radius: 8px;
+      }
+
+      .map-overlay-controls {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          position: absolute;
+          right: 8px;
+          top: 8px;
+          z-index: 1000;
+      }
+
+      .map-overlay-controls > div {
+          background: white;
+          border-radius: 4px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      }
+
+      .zoom-controls button,
+      .layer-controls button,
+      .location-controls button,
+      .fullscreen-controls button,
+      .streetview-controls button {
+          width: 36px;
+          height: 36px;
+          font-size: 16px;
+          border: none;
+          background: white;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .smart-features-info {
+          padding: 12px;
+      }
+
+      .smart-features-grid {
+          grid-template-columns: 1fr;
+          gap: 8px;
+          font-size: 0.85rem;
+      }
+  }
+
   .map-container {
       background: var(--light-bg);
       border-radius: 12px;
@@ -833,6 +985,106 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
+  }
+
+  /* Mobile Alert Section Fixes */
+  @media (max-width: 768px) {
+      .alerts-grid {
+          grid-template-columns: 1fr;
+          gap: 15px;
+          padding: 0;
+      }
+
+      .alert-card {
+          width: 100%;
+          padding: 16px;
+          margin-bottom: 12px;
+          box-sizing: border-box;
+      }
+
+      .alert-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+      }
+
+      .alert-header h3 {
+          font-size: 1.1rem;
+          margin: 0;
+      }
+
+      .detection-result {
+          padding: 10px 12px;
+          font-size: 0.9rem;
+          margin-bottom: 12px;
+      }
+
+      .alert-actions {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          width: 100%;
+      }
+
+      .alert-btn {
+          width: 100%;
+          padding: 10px 16px;
+          font-size: 0.95rem;
+          justify-content: center;
+          min-height: 44px;
+      }
+
+      .alert-btn i {
+          margin-right: 6px;
+      }
+
+      /* Alert History Container Mobile */
+      .history-container {
+          padding: 15px;
+      }
+
+      .history-item {
+          padding: 12px;
+          flex-direction: column;
+          gap: 8px;
+      }
+
+      .history-item > div {
+          width: 100%;
+      }
+
+      .history-item strong {
+          font-size: 0.95rem;
+      }
+
+      .history-item p {
+          font-size: 0.85rem;
+          margin-top: 4px;
+      }
+
+      .history-item span {
+          font-size: 0.8rem;
+          align-self: flex-start;
+      }
+  }
+
+  @media (max-width: 480px) {
+      .alert-card {
+          padding: 14px;
+      }
+
+      .alert-header h3 {
+          font-size: 1rem;
+      }
+
+      .alert-btn {
+          padding: 10px 14px;
+          font-size: 0.9rem;
+      }
+
+      .detection-result {
+          font-size: 0.85rem;
+      }
   }
 
   .analytics-grid {
@@ -1108,10 +1360,12 @@
 
   /* =============== RESPONSIVE DESIGN =============== */
   @media (max-width: 768px) {
+      /* Main Layout */
       .main-container {
           grid-template-columns: 1fr;
       }
 
+      /* Sidebar Mobile Optimization */
       .sidebar {
           position: fixed;
           left: -280px;
@@ -1121,56 +1375,556 @@
           z-index: 1000;
           transition: left 0.3s ease;
           box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
       }
 
       .sidebar.open {
           left: 0;
       }
 
+      /* Navbar Mobile Optimization */
+      .navbar {
+          height: 60px;
+          padding: 0 12px;
+          position: fixed;
+          width: 100%;
+      }
+
+      .navbar-left {
+          gap: 12px;
+      }
+
+      .logo {
+          font-size: 1.2rem;
+      }
+
+      .navbar-right {
+          gap: 8px;
+      }
+
+      .theme-toggle {
+          padding: 6px;
+          font-size: 1rem;
+      }
+
+      .logout-btn {
+          padding: 6px 12px;
+          font-size: 0.85rem;
+      }
+
+      /* Dashboard Grid Mobile */
       .dashboard-grid {
           grid-template-columns: 1fr;
+          gap: 15px;
       }
 
+      /* Charts Section Mobile */
       .charts-section {
           grid-template-columns: 1fr;
+          gap: 15px;
       }
 
-      .alerts-grid,
+      /* Alerts Grid Mobile */
+      .alerts-grid {
+          grid-template-columns: 1fr;
+          gap: 15px;
+      }
+
       .analytics-grid {
           grid-template-columns: 1fr;
+          gap: 15px;
       }
 
+      /* Alert Cards Mobile */
+      .alert-card {
+          padding: 15px;
+          margin-bottom: 12px;
+      }
+
+      .alert-card h3 {
+          font-size: 1.1rem;
+      }
+
+      .alert-actions {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+      }
+
+      .alert-btn {
+          width: 100%;
+          justify-content: center;
+      }
+
+      /* Map Mobile */
       #map {
           height: 300px;
       }
 
+      .map-controls {
+          flex-direction: column;
+          gap: 8px;
+      }
+
+      .map-controls button {
+          width: 100%;
+      }
+
+      /* Status Indicators Mobile */
       .status-indicators {
           flex-wrap: wrap;
-          gap: 10px;
+          gap: 8px;
+          justify-content: center;
       }
 
       .status-indicator {
-          flex: 1;
+          flex: 1 1 calc(50% - 8px);
           min-width: 140px;
           justify-content: center;
-      }
-  }
-
-  @media (max-width: 480px) {
-      .login-card {
-          padding: 30px 20px;
+          font-size: 0.85rem;
+          padding: 6px 12px;
       }
 
-      .navbar {
-          padding: 0 15px;
-      }
-
+      /* Content Padding Mobile */
       .content {
-          padding: 15px;
+          padding: 12px;
+          margin-top: 60px;
+      }
+
+      /* Page Header Mobile */
+      .page-header {
+          margin-bottom: 20px;
       }
 
       .page-title {
           font-size: 1.5rem;
+      }
+
+      .page-subtitle {
+          font-size: 0.9rem;
+      }
+
+      /* Camera Controls Mobile */
+      .camera-controls {
+          grid-template-columns: 1fr;
+          gap: 8px;
+      }
+
+      .camera-btn {
+          width: 100%;
+          min-width: auto;
+      }
+
+      /* Heatmap Summary Mobile */
+      .heatmap-summary-section {
+          padding: 12px;
+      }
+
+      .summary-grid {
+          grid-template-columns: 1fr;
+          gap: 10px;
+      }
+
+      .heatmap-controls {
+          flex-direction: column;
+          gap: 8px;
+      }
+
+      .heatmap-controls button {
+          width: 100%;
+      }
+
+      /* Settings Mobile */
+      .settings-section {
+          padding: 15px;
+      }
+
+      .setting-item {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+      }
+
+      /* Analytics Layout Mobile */
+      .analytics-layout {
+          grid-template-columns: 1fr;
+      }
+
+      .analytics-left-column {
+          grid-column: span 1;
+      }
+
+      /* Modal Mobile */
+      .modal {
+          width: 95%;
+          max-width: none;
+          padding: 20px;
+          margin: 10px;
+      }
+
+      .modal-header {
+          padding: 15px;
+      }
+
+      .modal-title {
+          font-size: 1.2rem;
+      }
+
+      .modal-body {
+          padding: 15px;
+      }
+
+      /* Form Groups Mobile */
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+          font-size: 16px; /* Prevents zoom on iOS */
+      }
+  }
+
+  @media (max-width: 480px) {
+      /* Login Page Mobile */
+      .login-card {
+          padding: 25px 15px;
+          width: 95%;
+      }
+
+      .login-header h1 {
+          font-size: 1.8rem;
+      }
+
+      .login-header p {
+          font-size: 0.9rem;
+      }
+
+      .form-group input {
+          padding: 12px 16px;
+          font-size: 16px;
+      }
+
+      .login-btn {
+          padding: 12px;
+          font-size: 15px;
+      }
+
+      /* Welcome Page Mobile */
+      .welcome-container {
+          padding: 15px;
+      }
+
+      .welcome-title {
+          font-size: 1.8rem;
+      }
+
+      .subtitle {
+          font-size: 0.9rem;
+      }
+
+      .feature-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+      }
+
+      .feature-item {
+          padding: 12px;
+      }
+
+      .feature-title {
+          font-size: 0.95rem;
+      }
+
+      .feature-desc {
+          font-size: 0.8rem;
+      }
+
+      /* Navbar Extra Small */
+      .navbar {
+          height: 56px;
+          padding: 0 10px;
+      }
+
+      .logo {
+          font-size: 1.1rem;
+      }
+
+      .logout-btn span {
+          display: none;
+      }
+
+      .logout-btn {
+          padding: 6px 10px;
+      }
+
+      /* Content Extra Small */
+      .content {
+          padding: 10px;
+      }
+
+      .page-title {
+          font-size: 1.3rem;
+      }
+
+      /* Alert Cards Extra Small */
+      .alert-card {
+          padding: 12px;
+      }
+
+      .alert-card h3 {
+          font-size: 1rem;
+      }
+
+      /* Status Indicators Extra Small */
+      .status-indicator {
+          flex: 1 1 100%;
+          font-size: 0.8rem;
+      }
+
+      /* Map Extra Small */
+      #map {
+          height: 250px;
+      }
+
+      /* Chart Container Extra Small */
+      .chart-container {
+          padding: 12px;
+      }
+
+      .chart-container h3 {
+          font-size: 1rem;
+      }
+
+      /* Modal Extra Small */
+      .modal {
+          width: 98%;
+          padding: 15px;
+      }
+
+      .modal-header {
+          padding: 12px;
+      }
+
+      .modal-title {
+          font-size: 1.1rem;
+      }
+
+      /* Settings Extra Small */
+      .setting-item {
+          padding: 12px 0;
+      }
+
+      .setting-item strong {
+          font-size: 0.95rem;
+      }
+
+      .setting-item p {
+          font-size: 0.85rem;
+      }
+  }
+
+  /* Landscape Mobile Optimization */
+  @media (max-width: 768px) and (orientation: landscape) {
+      .navbar {
+          height: 50px;
+      }
+
+      .sidebar {
+          top: 50px;
+          height: calc(100vh - 50px);
+      }
+
+      .content {
+          margin-top: 50px;
+      }
+
+      #map {
+          height: 200px;
+      }
+
+      .welcome-page,
+      .login-page {
+          padding: 10px;
+      }
+
+      .login-card {
+          max-width: 500px;
+      }
+  }
+
+  /* Touch-friendly Improvements */
+  @media (hover: none) and (pointer: coarse) {
+      /* Increase touch targets */
+      .nav-item,
+      .alert-btn,
+      .camera-btn,
+      .modal-btn,
+      button {
+          min-height: 44px;
+          min-width: 44px;
+      }
+
+      /* Remove hover effects on touch devices */
+      .nav-item:hover,
+      .alert-btn:hover,
+      .camera-btn:hover {
+          transform: none;
+      }
+
+      /* Add active states for touch feedback */
+      .nav-item:active,
+      .alert-btn:active,
+      .camera-btn:active,
+      button:active {
+          opacity: 0.7;
+          transform: scale(0.98);
+      }
+  }
+
+  /* Welcome Page Mobile Enhancements */
+  @media (max-width: 768px) {
+      .welcome-page {
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+      }
+
+      .welcome-container {
+          padding: 20px 15px;
+      }
+
+      .welcome-panel {
+          padding: 20px 15px;
+      }
+
+      .welcome-title {
+          font-size: 1.8rem;
+          text-align: center;
+      }
+
+      .subtitle {
+          font-size: 0.95rem;
+          text-align: center;
+      }
+
+      .feature-section {
+          padding: 20px 15px;
+          margin-bottom: 20px;
+      }
+
+      .feature-section h2 {
+          font-size: 1.3rem;
+          text-align: center;
+      }
+
+      .feature-grid {
+          grid-template-columns: 1fr;
+          gap: 15px;
+      }
+
+      .feature-item {
+          padding: 15px;
+      }
+
+      .steps-grid {
+          grid-template-columns: 1fr;
+          gap: 15px;
+      }
+
+      .steps-column {
+          gap: 15px;
+      }
+
+      .step-item {
+          padding: 15px;
+      }
+
+      .step-content-wrapper {
+          flex-direction: column;
+          gap: 12px;
+      }
+
+      .step-icon-container {
+          align-self: center;
+      }
+
+      .start-btn {
+          width: 100%;
+          padding: 14px 20px;
+          font-size: 1rem;
+      }
+
+      .intro-content {
+          text-align: center;
+      }
+
+      .key-points {
+          text-align: left;
+      }
+  }
+
+  @media (max-width: 480px) {
+      .welcome-title {
+          font-size: 1.5rem;
+      }
+
+      .subtitle {
+          font-size: 0.85rem;
+      }
+
+      .feature-section h2 {
+          font-size: 1.1rem;
+      }
+
+      .feature-item {
+          padding: 12px;
+      }
+
+      .feature-title {
+          font-size: 0.95rem;
+      }
+
+      .feature-desc {
+          font-size: 0.8rem;
+      }
+
+      .step-number {
+          width: 35px;
+          height: 35px;
+          font-size: 1.1rem;
+      }
+
+      .step-text h3 {
+          font-size: 1rem;
+      }
+
+      .step-text p {
+          font-size: 0.85rem;
+      }
+  }
+
+  /* Sidebar Overlay for Mobile */
+  @media (max-width: 768px) {
+      .sidebar-overlay {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          z-index: 999;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+      }
+
+      .sidebar.open ~ .sidebar-overlay,
+      .sidebar-overlay.active {
+          display: block;
+          opacity: 1;
+      }
+
+      /* Ensure sidebar is above overlay */
+      .sidebar {
+          z-index: 1001;
       }
   }
 
@@ -6660,7 +7414,7 @@
       /* Test Review Information popup - Tablet optimized */
       #testReviewPopup {
           position: relative;
-          top: 5;
+          top: 5px;
           right: 0;
           transform: none;
           width: 100%;
