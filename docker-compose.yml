@@ -1,23 +1,6 @@
 version: '3.8'
 
 services:
-  # MySQL database
-  mysql:
-    image: mysql:8.0
-    container_name: crowdshield-mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: crowdshield
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-padmin"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
   # Spring Boot backend
   backend:
     build:
@@ -27,12 +10,9 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/crowdshield
+      SPRING_DATASOURCE_URL: jdbc:mysql://trolley.proxy.rlwy.net:27879/crowdshield?useSSL=true&requireSSL=true&serverTimezone=UTC&allowPublicKeyRetrieval=true&useServerPrepStmts=true&cachePrepStmts=true
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: admin
-    depends_on:
-      mysql:
-        condition: service_healthy
+      SPRING_DATASOURCE_PASSWORD: bpanAyeSHpcJVKTJWzGgPOpDdYgnWTRU
 
   # Frontend Service (using Nginx for static files)
   frontend:
@@ -44,6 +24,3 @@ services:
       - "80:80"
     depends_on:
       - backend
-
-volumes:
-  mysql-data:
