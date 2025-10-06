@@ -80,7 +80,11 @@ public class ApiController {
         }
         try {
             densityData.setTimestamp(LocalDateTime.now());
-            densityDataRepository.save(densityData);
+            DensityData saved = densityDataRepository.save(densityData);
+            if (saved == null || saved.getId() == null) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Failed to save density data");
+            }
             return ResponseEntity.ok("Density data saved successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
