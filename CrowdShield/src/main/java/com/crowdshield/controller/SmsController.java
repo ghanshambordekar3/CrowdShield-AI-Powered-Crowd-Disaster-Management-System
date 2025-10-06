@@ -13,6 +13,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 @RestController
+@CrossOrigin(origins = "https://crowd-shield-ai-powered-crowd-disas-delta.vercel.app")
 @RequestMapping("/api/sms")
 public class SmsController {
 
