@@ -1,3 +1,0 @@
-- [x] Add 'spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect' to CrowdShield/src/main/resources/application.properties under JPA Configuration section
-- [x] Add 'spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect' to CrowdShield/src/main/resources/application-prod.properties under spring.jpa.hibernate.ddl-auto=update
-- [ ] Rebuild the project using Maven to apply changes
