@@ -1926,6 +1926,13 @@
       .sidebar {
           z-index: 1001;
       }
+      /* When sidebar is open, prevent body scrolling */
+      body.sidebar-open {
+          overflow: hidden;
+          touch-action: none;
+          position: fixed;
+          width: 100%;
+      }
   }
 
   /* =============== LOADING STATES =============== */
