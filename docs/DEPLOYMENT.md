@@ -120,7 +120,44 @@ python detect.py --source "http://camera3-ip/video" --zone-id 3
 3. **Data Privacy:**
    - No personal data is stored or processed
    - Only crowd counts and density levels are recorded
-   - Consider GDPR compliance for EU deployments
+- Consider GDPR compliance for EU deployments
+
+## Deploying Backend to Render
+
+### Prerequisites:
+- Railway database account with active MySQL database
+- Render account for hosting the backend
+
+### Steps:
+1. **Build the JAR:**
+   ```bash
+   cd CrowdShield
+   mvn clean package -DskipTests
+   ```
+
+2. **Deploy to Render:**
+   - Go to Render dashboard and create a new Web Service
+   - Connect your GitHub repository or upload the JAR
+   - Set the following environment variables in Render:
+     - `SPRING_DATASOURCE_URL`: Your Railway MySQL connection URL (e.g., `jdbc:mysql://trolley.proxy.rlwy.net:27879/crowdshield?useSSL=true&requireSSL=true&serverTimezone=UTC&allowPublicKeyRetrieval=true&useServerPrepStmts=true&cachePrepStmts=true`)
+     - `SPRING_DATASOURCE_USERNAME`: Your Railway DB username (e.g., `root`)
+     - `SPRING_DATASOURCE_PASSWORD`: Your Railway DB password
+     - `SPRING_PROFILES_ACTIVE`: `prod` (optional, as Dockerfile sets it)
+   - Set the build command: (if using GitHub) `mvn clean package -DskipTests`
+   - Set the start command: `java -jar target/crowdshield-0.0.1-SNAPSHOT.jar`
+   - Deploy the service
+
+3. **Update Python Service:**
+   - Modify `detect.py` to use the new Render backend URL:
+     ```python
+     api_url = "https://your-render-service-url.onrender.com/api/density"
+     ```
+
+4. **Troubleshooting Render Deployment:**
+   - Check Render logs for database connection errors
+   - Ensure Railway database allows connections from Render's IP ranges (Railway is publicly accessible)
+   - Verify environment variables are set correctly
+   - If SSL issues occur, try adding `&useSSL=false` to the URL (not recommended for production)
 
 ## Scaling
 
