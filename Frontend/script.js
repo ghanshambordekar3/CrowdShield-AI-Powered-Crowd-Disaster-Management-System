@@ -282,9 +282,7 @@ function setupMobileNavigation() {
                     // Add smooth closing animation
                     sidebar.style.transition = 'left 0.3s ease';
                     setTimeout(() => {
-                                sidebar.classList.remove('open');
-                                const overlay = document.getElementById('sidebarOverlay');
-                                if (overlay) overlay.classList.remove('active');
+                        sidebar.classList.remove('open');
                         showNotification('Navigated to ' + this.textContent.trim(), 'success');
                     }, 100);
                 }
@@ -309,7 +307,16 @@ function setupMobileNavigation() {
     const sidebarToggle = document.getElementById('sidebarToggle');
     if (sidebarToggle) {
         sidebarToggle.addEventListener('click', function() {
-            toggleSidebar();
+            const sidebar = document.getElementById('sidebar');
+            const isOpen = sidebar.classList.contains('open');
+            
+            if (isOpen) {
+                sidebar.classList.remove('open');
+                showNotification('Menu closed', 'info');
+            } else {
+                sidebar.classList.add('open');
+                showNotification('Menu opened', 'info');
+            }
         });
     }
 }
@@ -851,44 +858,8 @@ function showPage(pageName) {
 }
 
 function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebarOverlay');
-
-    if (!sidebar) return;
-
-    const isOpen = sidebar.classList.contains('open');
-    if (isOpen) {
-        sidebar.classList.remove('open');
-        if (overlay) overlay.classList.remove('active');
-        showNotification('Menu closed', 'info');
-    } else {
-        sidebar.classList.add('open');
-        if (overlay) overlay.classList.add('active');
-        showNotification('Menu opened', 'info');
-    }
-    // Lock body scroll when sidebar is open on mobile
-    if (document.body && window.innerWidth <= 768) {
-        if (sidebar.classList.contains('open')) {
-            document.body.classList.add('sidebar-open');
-        } else {
-            document.body.classList.remove('sidebar-open');
-        }
-    }
+    document.getElementById('sidebar').classList.toggle('open');
 }
-
-// Close sidebar when clicking overlay
-document.addEventListener('DOMContentLoaded', () => {
-    const overlay = document.getElementById('sidebarOverlay');
-    if (overlay) {
-        overlay.addEventListener('click', () => {
-            const sidebar = document.getElementById('sidebar');
-            if (sidebar && sidebar.classList.contains('open')) {
-                sidebar.classList.remove('open');
-            }
-            overlay.classList.remove('active');
-        });
-    }
-});
 
 // =============== THEME MANAGEMENT ===============
 function toggleTheme() {
