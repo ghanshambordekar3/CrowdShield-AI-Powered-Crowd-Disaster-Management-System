@@ -613,6 +613,17 @@ setTimeout(() => {
             checkOvercrowdingStatus();
         });
     }
+
+    // New: Event listener for the "Continue to Login" button
+    const continueBtn = document.getElementById('continueToLoginBtn');
+    if (continueBtn) {
+        continueBtn.addEventListener('click', () => {
+            const testPopup = document.getElementById('testReviewPopup');
+            const loginPanel = document.querySelector('.login-panel');
+            if (testPopup) testPopup.classList.add('hide-popup');
+            if (loginPanel) loginPanel.classList.add('show-panel');
+        });
+    }
 }
 
 
@@ -4859,23 +4870,25 @@ function showLoginPage() {
     const welcomePage = document.getElementById('welcomePage');
     const loginPage = document.getElementById('loginPage');
     const testReviewPopup = document.getElementById('testReviewPopup');
+    const loginPanel = document.querySelector('.login-panel');
 
-    if (welcomePage && loginPage && testReviewPopup) {
-        // Hide welcome page with a fade-out effect
+    if (welcomePage && loginPage) {
         welcomePage.style.opacity = '0';
         welcomePage.style.visibility = 'hidden';
         welcomePage.style.transition = 'opacity 0.8s ease-out, visibility 0.8s ease-out';
-        
-        // Show login page with a "wow factor" animation
-        loginPage.classList.add('active-animated'); // Add a class for animation
+
         loginPage.style.opacity = '1';
         loginPage.style.visibility = 'visible';
-        loginPage.style.transition = 'opacity 0.8s ease-in-out, visibility 0.8s ease-in-out';
-    }
+        loginPage.classList.add('active-animated');
 
-    // The popup is now part of the login page, so it will show with it.
-    if (testReviewPopup) {
-        testReviewPopup.classList.add('visible');
+        // Always show the review popup first and hide the login form
+        if (testReviewPopup) {
+            testReviewPopup.classList.remove('hide-popup');
+            testReviewPopup.classList.add('visible');
+        }
+        if (loginPanel) {
+            loginPanel.classList.remove('show-panel');
+        }
     }
 }
 

@@ -234,6 +234,69 @@
       }
   }
 
+  /* Login Page Flip Animation (All Devices) */
+  .login-panel {
+      /* Initially hide login panel */
+      opacity: 0;
+      transform: rotateY(-90deg) scale(0.9);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      display: none; /* Use display none to prevent interaction */
+  }
+
+  .login-panel.show-panel {
+      opacity: 1;
+      transform: rotateY(0deg) scale(1);
+      display: flex; /* Show the panel */
+  }
+
+  #testReviewPopup.hide-popup {
+      opacity: 0;
+      transform: rotateY(90deg) scale(0.9);
+      transition: opacity 0.6s ease-in, transform 0.6s ease-in;
+      pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+      .login-container {
+          padding: 15px;
+          flex-direction: column;
+          /* Use flex-start to prevent vertical centering from pushing content off-screen */
+          justify-content: flex-start;
+          padding-top: 5vh;
+          /* Add some space at the top */
+          padding-bottom: 5vh;
+          /* Add space at the bottom */
+          min-height: 100%;
+          /* Ensure it can scroll if content overflows */
+          align-items: center;
+          justify-content: center;
+          padding-top: 2vh;
+      }
+
+      .login-panel {
+          width: 100%;
+          margin: 0;
+          /* Initially hide login panel on mobile */
+          opacity: 0;
+          transform: rotateY(-90deg) scale(0.9);
+          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+          display: none; /* Use display none to prevent interaction */
+      }
+
+      .login-panel.show-panel {
+          opacity: 1;
+          transform: rotateY(0deg) scale(1);
+          display: flex; /* Show the panel */
+      }
+
+      #testReviewPopup.hide-popup {
+          opacity: 0;
+          transform: rotateY(90deg) scale(0.9);
+          transition: opacity 0.6s ease-in, transform 0.6s ease-in;
+          pointer-events: none;
+      }
+  }
+
   @media (max-width: 480px) {
       .login-container {
           padding: 10px;
