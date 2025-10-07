@@ -173,8 +173,10 @@
       perspective: 1000px;
   }
 
-  .login-panel, #testReviewPopup {
-      backface-visibility: hidden; /* Prevents flickering during 3D transform */
+  .login-panel,
+  #testReviewPopup {
+      backface-visibility: hidden;
+      /* Prevents flickering during 3D transform */
   }
 
   /* Mobile Login Page Enhancements */
@@ -248,13 +250,15 @@
       opacity: 0;
       transform: rotateY(-90deg) scale(0.9);
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-      pointer-events: none; /* Prevent interaction when hidden */
+      pointer-events: none;
+      /* Prevent interaction when hidden */
   }
 
   .login-panel.show-panel {
       opacity: 1;
       transform: rotateY(0deg) scale(1);
-      pointer-events: auto; /* Allow interaction when shown */
+      pointer-events: auto;
+      /* Allow interaction when shown */
   }
 
   #testReviewPopup.hide-popup {
@@ -6864,11 +6868,12 @@
           transition: all 0.3s ease !important;
           box-sizing: border-box !important;
       }
-  
-  .input-wrapper input::placeholder {
-    text-indent: 0px;
-    transition: text-indent 0.3s ease;
-  }
+
+      .input-wrapper input::placeholder {
+          text-indent: 0px;
+          margin-left: 10px;
+          transition: text-indent 0.3s ease;
+      }
 
 
       .input-wrapper i {
