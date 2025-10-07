@@ -432,11 +432,6 @@ function setupEventListeners() {
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
 
-    const sidebarToggleBtn = document.getElementById('sidebarToggle');
-    if (sidebarToggleBtn) {
-        sidebarToggleBtn.addEventListener('click', toggleSidebar);
-    }
-
     const sidebarOverlay = document.getElementById('sidebarOverlay');
     if (sidebarOverlay) {
         sidebarOverlay.addEventListener('click', toggleSidebar);
