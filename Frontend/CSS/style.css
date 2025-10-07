@@ -176,6 +176,11 @@
       .login-container {
         padding: 15px;
         flex-direction: column;
+        /* Use flex-start to prevent vertical centering from pushing content off-screen */
+        justify-content: flex-start;
+        padding-top: 5vh; /* Add some space at the top */
+        padding-bottom: 5vh; /* Add space at the bottom */
+        min-height: 100%; /* Ensure it can scroll if content overflows */
         align-items: center;
         justify-content: center;
         padding-top: 2vh;
@@ -183,6 +188,7 @@
 
       .login-panel {
           width: 100%;
+          margin: 0; /* Remove any top/bottom margin that might push it down */
           max-width: 100%;
       }
 
@@ -227,6 +233,7 @@
   @media (max-width: 480px) {
       .login-container {
           padding: 10px;
+          justify-content: flex-start;
           padding-top: 5vh;
       }
 
@@ -240,6 +247,7 @@
 
       .login-panel {
           padding: 25px 15px;
+          margin: 0;
       }
 
   }
@@ -1182,12 +1190,13 @@
       }
   
       .alert-actions {
-        display: flex;
-        flex-direction: row; /* Changed from column */
-        position: relative; /* Needed for positioning buttons on top of each other */
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
         gap: 10px;
         width: 100%;
         margin-top: 12px;
+        min-height: 48px; /* Ensure container has height */
       }
 
       .alert-btn {
@@ -1198,15 +1207,15 @@
           min-height: 48px;
           display: flex;
           align-items: center;
-        gap: 8px;
-        flex: 1; /* Make buttons share space */
-        transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+          gap: 8px;
+          grid-column: 1;
+          grid-row: 1;
+          transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
       }
 
-      .alert-actions .alert-btn {
-        position: absolute;
-        top: 0;
-        left: 0;
+      .alert-btn[id*="stop"] {
+        transform: rotateY(180deg);
+        opacity: 0;
       }
   
       .alert-btn i {
@@ -1618,6 +1627,11 @@
       .alert-actions {
           display: flex;
           flex-direction: column;
+          position: relative;
+          min-height: auto;
+      }
+      .alert-btn[id*="stop"] {
+          transform: none;
           gap: 8px;
       }
 
@@ -10293,10 +10307,10 @@
   @media (max-width: 768px) {
     .test-review-popup {
         position: relative; /* Changed from fixed */
-        top: auto;
-        right: auto;
+        top: 0;
+        right: 0;
         width: 100%;
-        max-width: 460px; /* Match login panel */
+        max-width: 100%;
         margin-bottom: 20px;
         order: -1; /* Place it before the login panel */
     }

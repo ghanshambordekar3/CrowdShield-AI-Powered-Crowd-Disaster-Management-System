@@ -5920,7 +5920,21 @@ function updateMonitoringUI(alertType, isMonitoring) {
     const monitorBtn = document.getElementById(`monitor${capitalizeFirst(alertType)}Btn`);
     const stopBtn = document.getElementById(`stop${capitalizeFirst(alertType)}Btn`);
     
-    if (monitorBtn && stopBtn) {
+    // New animation-based logic for mobile
+    if (window.innerWidth <= 768) {
+        const actionsContainer = monitorBtn.parentElement;
+        if (isMonitoring) {
+            monitorBtn.style.transform = 'rotateY(180deg)';
+            monitorBtn.style.opacity = '0';
+            stopBtn.style.transform = 'rotateY(0deg)';
+            stopBtn.style.opacity = '1';
+        } else {
+            monitorBtn.style.transform = 'rotateY(0deg)';
+            monitorBtn.style.opacity = '1';
+            stopBtn.style.transform = 'rotateY(180deg)';
+            stopBtn.style.opacity = '0';
+        }
+    } else { // Original logic for desktop
         if (isMonitoring) {
             monitorBtn.style.display = 'none';
             stopBtn.style.display = 'inline-block';
