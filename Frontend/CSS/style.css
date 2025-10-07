@@ -434,7 +434,7 @@
   }
 
   .dark-mode .navbar {
-      background: linear-gradient(90deg, #1e293b, #334155, #1e293b);
+      background: linear-gradient(90deg, #2c3e50, #3498db, #2c3e50);
       border-bottom-color: var(--border-dark);
       color: var(--text-light);
   }
