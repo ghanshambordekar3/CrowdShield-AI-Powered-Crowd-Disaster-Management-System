@@ -6870,7 +6870,7 @@
       }
 
       .input-wrapper input::placeholder {
-          text-indent: 10px;
+          text-indent: 20px;
           transition: text-indent 0.3s ease;
       }
 
