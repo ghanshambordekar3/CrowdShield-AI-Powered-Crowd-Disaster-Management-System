@@ -620,8 +620,14 @@ setTimeout(() => {
         continueBtn.addEventListener('click', () => {
             const testPopup = document.getElementById('testReviewPopup');
             const loginPanel = document.querySelector('.login-panel');
-            if (testPopup) testPopup.classList.add('hide-popup');
-            if (loginPanel) loginPanel.classList.add('show-panel');
+            if (testPopup) {
+                testPopup.classList.add('hide-popup');
+                testPopup.style.display = 'none'; // Hide it completely
+            }
+            if (loginPanel) {
+                loginPanel.style.display = 'flex'; // Make it visible before animation
+                setTimeout(() => loginPanel.classList.add('show-panel'), 10); // Animate in
+            }
         });
     }
 }
@@ -4883,10 +4889,12 @@ function showLoginPage() {
 
         // Always show the review popup first and hide the login form
         if (testReviewPopup) {
+            testReviewPopup.style.display = 'block'; // Ensure it's visible
             testReviewPopup.classList.remove('hide-popup');
             testReviewPopup.classList.add('visible');
         }
         if (loginPanel) {
+            loginPanel.style.display = 'none'; // Ensure it's hidden
             loginPanel.classList.remove('show-panel');
         }
     }

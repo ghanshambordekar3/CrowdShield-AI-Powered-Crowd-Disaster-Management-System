@@ -169,6 +169,12 @@
       justify-content: center;
       padding: 20px;
       position: relative;
+      /* Add perspective for 3D flip effect */
+      perspective: 1000px;
+  }
+
+  .login-panel, #testReviewPopup {
+      backface-visibility: hidden; /* Prevents flickering during 3D transform */
   }
 
   /* Mobile Login Page Enhancements */
@@ -236,24 +242,32 @@
 
   /* Login Page Flip Animation (All Devices) */
   .login-panel {
+      /* Use absolute positioning to stack panels */
+      position: absolute;
       /* Initially hide login panel */
       opacity: 0;
       transform: rotateY(-90deg) scale(0.9);
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-      display: none; /* Use display none to prevent interaction */
+      pointer-events: none; /* Prevent interaction when hidden */
   }
 
   .login-panel.show-panel {
       opacity: 1;
       transform: rotateY(0deg) scale(1);
-      display: flex; /* Show the panel */
+      pointer-events: auto; /* Allow interaction when shown */
   }
 
   #testReviewPopup.hide-popup {
+      /* Use absolute positioning to stack panels */
+      position: absolute;
       opacity: 0;
       transform: rotateY(90deg) scale(0.9);
       transition: opacity 0.6s ease-in, transform 0.6s ease-in;
       pointer-events: none;
+  }
+
+  #testReviewPopup.visible {
+      position: relative; /* Use relative when visible to occupy space initially */
   }
 
   @media (max-width: 768px) {
@@ -276,24 +290,6 @@
       .login-panel {
           width: 100%;
           margin: 0;
-          /* Initially hide login panel on mobile */
-          opacity: 0;
-          transform: rotateY(-90deg) scale(0.9);
-          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-          display: none; /* Use display none to prevent interaction */
-      }
-
-      .login-panel.show-panel {
-          opacity: 1;
-          transform: rotateY(0deg) scale(1);
-          display: flex; /* Show the panel */
-      }
-
-      #testReviewPopup.hide-popup {
-          opacity: 0;
-          transform: rotateY(90deg) scale(0.9);
-          transition: opacity 0.6s ease-in, transform 0.6s ease-in;
-          pointer-events: none;
       }
   }
 
