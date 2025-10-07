@@ -785,11 +785,6 @@
       grid-template-columns: 1fr;
     }
 
-    /* Show sidebar toggle on tablet */
-    #sidebarToggle {
-        display: block !important; /* Use block or flex as appropriate */
-    }
-
     .content {
         margin-left: 0;
         width: 100%;
@@ -814,11 +809,6 @@
 
       .logo {
           font-size: 1.1rem;
-      }
-
-      /* Hide the duplicate menu toggle that might appear in the content area on mobile */
-      #menu-toggle {
-          display: none !important;
       }
 
       /* Sidebar Mobile */
