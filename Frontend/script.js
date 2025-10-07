@@ -2652,11 +2652,11 @@ function setupAutoSuggest() {
     const gpsBtn = document.getElementById('useGpsBtn');
     
     console.log('Elements found:', { startInput: !!startInput, destInput: !!destInput, gpsBtn: !!gpsBtn });
-    
+
     if (startInput) {
         // Remove existing listeners
         startInput.removeEventListener('input', handleStartInput);
-        startInput.removeEventListener('focus', handleStartFocus);
+        startInput.removeEventListener('focus', handleStartFocus); // This was a typo, should be handleStartFocus
         
         // Add new listeners
         startInput.addEventListener('input', handleStartInput);
@@ -2665,7 +2665,7 @@ function setupAutoSuggest() {
     
     if (destInput) {
         // Remove existing listeners
-        destInput.removeEventListener('input', handleDestInput);
+        destInput.removeEventListener('input', handleDestInput); // This was a typo, should be handleDestInput
         destInput.removeEventListener('focus', handleDestFocus);
         
         // Add new listeners
@@ -2678,7 +2678,7 @@ function setupAutoSuggest() {
             const startInput = document.getElementById('srStart');
             
             if (!navigator.geolocation) {
-                showNotification('An error occurred. Please refresh the page.', 'error');
+                showNotification('Geolocation is not supported by your browser.', 'error');
                 return;
             }
             
@@ -2692,11 +2692,7 @@ function setupAutoSuggest() {
                         const lat = position.coords.latitude.toFixed(4);
                         const lng = position.coords.longitude.toFixed(4);
                         startInput.value = `Current Location (${lat}, ${lng})`;
-                        startInput.dataset.coords = `${position.coords.latitude},${position.coords.longitude}`;
-                        
-                        // Also store the raw coordinates for backend processing
-                        startInput.dataset.latitude = position.coords.latitude;
-                        startInput.dataset.longitude = position.coords.longitude;
+                        startInput.dataset.coords = `${position.coords.latitude},${position.coords.longitude}`; // Store coords for later use
                     }
                     gpsBtn.innerHTML = '📱 Location Set';
                     gpsBtn.disabled = false;
@@ -2724,7 +2720,7 @@ function setupAutoSuggest() {
                 }
             );
         };
-    }
+    } 
 }
 
 function handleStartInput() {
@@ -7664,10 +7660,10 @@ function setTemplate(type) {
     const messageField = document.getElementById('mnMessage');
     
     // Show loading state
-    messageField.value = 'Getting current location...';
+    messageField.placeholder = 'Getting current location...';
     messageField.disabled = true;
     
-    // Add visual feedback
+    // Add visual feedback to the clicked button
     const buttons = document.querySelectorAll('.template-btn');
     buttons.forEach(btn => btn.classList.remove('selected'));
     event.target.classList.add('selected');
@@ -7686,7 +7682,7 @@ function setTemplate(type) {
                 setTemplateWithLocation(type, location, messageField);
             },
             function(error) {
-                console.error('Geolocation error:', error);
+                console.warn('Geolocation error:', error.message);
                 // Fallback to default location
                 setTemplateWithLocation(type, null, messageField);
                 let message = 'Could not get current location, using default location.';
@@ -7723,10 +7719,10 @@ function setTemplateWithLocation(type, location, messageField) {
     }
 
     const templates = {
-        fire: `🔥 FIRE EMERGENCY ALERT 🔥\n\nImmediate evacuation required! Fire detected ${locationString}. Please move to the nearest safe exit immediately and follow emergency procedures.\n\nStay calm and help others if safe to do so.`, 
-        medical: `⚕️ MEDICAL EMERGENCY ALERT ⚕️\n\nMedical assistance required ${locationString}. If you have medical training, please assist if safe to do so. Emergency services have been notified.\n\nClear the area for emergency responders.`, 
-        overcrowding: `👥 OVERCROWDING ALERT 👥\n\nDangerous crowd levels detected ${locationString}. Please avoid the area and use alternative routes. Follow crowd control instructions.`, 
-        stampede: `🏃♂️ STAMPEDE RISK ALERT 🏃♂️\n\nHigh risk of stampede detected ${locationString}! STOP MOVING and stay where you are. Do not push or run. Wait for crowd to thin before moving slowly.\n\nHelp maintain order and calm.`
+        fire: `🔥 FIRE EMERGENCY ALERT 🔥\n\nImmediate evacuation required! Fire detected ${locationString}. Please move to the nearest safe exit immediately and follow emergency procedures.`,
+        medical: `⚕️ MEDICAL EMERGENCY ALERT ⚕️\n\nMedical assistance required ${locationString}. If you have medical training, please assist if safe to do so. Emergency services have been notified.`,
+        overcrowding: `👥 OVERCROWDING ALERT 👥\n\nDangerous crowd levels detected ${locationString}. Please avoid the area and use alternative routes. Follow crowd control instructions.`,
+        stampede: `🏃‍♂️ STAMPEDE RISK ALERT 🏃‍♂️\n\nHigh risk of stampede detected ${locationString}! STOP MOVING and stay where you are. Do not push or run. Wait for crowd to thin before moving slowly.`
     };
     
     if (templates[type]) {

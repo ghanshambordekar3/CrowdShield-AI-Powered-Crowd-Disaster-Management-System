@@ -1184,6 +1184,7 @@
       .alert-actions {
         display: flex;
         flex-direction: row; /* Changed from column */
+        position: relative; /* Needed for positioning buttons on top of each other */
         gap: 10px;
         width: 100%;
         margin-top: 12px;
@@ -1199,6 +1200,13 @@
           align-items: center;
         gap: 8px;
         flex: 1; /* Make buttons share space */
+        transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+      }
+
+      .alert-actions .alert-btn {
+        position: absolute;
+        top: 0;
+        left: 0;
       }
   
       .alert-btn i {
@@ -4326,11 +4334,11 @@
 
   /* Fix inline styles in dark mode */
   .dark-mode [style*="color: #6b7280"] {
-      color: #9ca3af !important;
+      color: #a0aec0 !important; /* Lighter gray for better contrast */
   }
 
   .dark-mode [style*="color: var(--text-dark)"] {
-      color: var(--text-light) !important;
+      color: #e2e8f0 !important; /* Slightly softer white */
   }
 
   /* =============== CHART.JS DARK MODE SUPPORT =============== */
@@ -4908,6 +4916,11 @@
       color: var(--text-light) !important;
   }
 
+  .dark-mode #fullHistoryContent div,
+  .dark-mode #fullHistoryContent p {
+    color: var(--text-light) !important;
+  }
+
   .dark-mode #fullHistoryContent h4 {
       color: var(--text-light) !important;
   }
@@ -5048,6 +5061,31 @@
       transform: rotate(180deg);
   }
 
+  @media (max-width: 768px) {
+    .quick-actions-header {
+        padding: 14px 20px;
+    }
+    .quick-actions-content {
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .panic-dispatch-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+    .mass-notification-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+    .risk-radar {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        margin: 20px auto;
+    }
+  }
   .quick-actions-content {
       display: none;
       padding: 15px 25px;
