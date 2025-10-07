@@ -3,17 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0f172a">
     <meta name="mobile-web-app-capable" content="yes">
     <title>CrowdShield - AI Crowd & Disaster Management</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
     <link rel="stylesheet" href="CSS/style.css">
 
@@ -30,1296 +27,1301 @@
 </head>
 
 <body class="dark-mode">
-    <!-- Welcome/Instruction Page -->
-    <div id="welcomePage" class="welcome-page active">
-        <div class="welcome-container">
-            <div class="welcome-panel">
-                <h1 class="welcome-title">
-                    <i class="fas fa-shield-alt pulse-icon"></i>
-                    Welcome to CrowdShield
-                    <div class="subtitle">AI-Powered Crowd & Disaster Management System</div>
-                </h1>
+        <!-- Welcome/Instruction Page -->
+        <div id="welcomePage" class="welcome-page active">
+            <div class="welcome-container">
+                <div class="welcome-panel">
+                    <h1 class="welcome-title">
+                        <i class="fas fa-shield-alt pulse-icon"></i>
+                        Welcome to CrowdShield
+                        <div class="subtitle">AI-Powered Crowd & Disaster Management System</div>
+                    </h1>
 
-                <div class="welcome-content">
-                    <div class="feature-section introduction">
-                        <h2><i class="fas fa-info-circle"></i> About CrowdShield</h2>
-                        <div class="intro-content">
-                            <p class="main-description">CrowdShield is an advanced crowd and disaster management
-                                system
-                                specifically designed for the Nashik Kumbh Mela 2027. Our system combines AI
-                                technology
-                                with real-time monitoring to ensure public safety and efficient crowd management.
-                            </p>
-                            <br>
-                            <div class="key-points">
-                                <div class="point">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>Real-time crowd density monitoring</span>
+                    <div class="welcome-content">
+                        <div class="feature-section introduction">
+                            <h2><i class="fas fa-info-circle"></i> About CrowdShield</h2>
+                            <div class="intro-content">
+                                <p class="main-description">CrowdShield is an advanced crowd and disaster management
+                                    system
+                                    specifically designed for the Nashik Kumbh Mela 2027. Our system combines AI
+                                    technology
+                                    with real-time monitoring to ensure public safety and efficient crowd management.
+                                </p>
+                                <br>
+                                <div class="key-points">
+                                    <div class="point">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Real-time crowd density monitoring</span>
+                                    </div>
+                                    <div class="point">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Instant emergency response system</span>
+                                    </div>
+                                    <div class="point">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>AI-powered risk assessment</span>
+                                    </div>
                                 </div>
-                                <div class="point">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>Instant emergency response system</span>
+                            </div>
+                        </div>
+
+                        <div class="feature-section features">
+                            <h2><i class="fas fa-star rotating-icon"></i> Key Features</h2>
+                            <div class="feature-grid">
+                                <div class="feature-item">
+                                    <div class="feature-icon camera-icon">
+                                        <div class="icon-animation">
+                                            <i class="fas fa-video"></i>
+                                            <div class="scan-line"></div>
+                                        </div>
+                                    </div>
+                                    <div class="feature-details">
+                                        <span class="feature-title">Real-time Camera Monitoring</span>
+                                        <span class="feature-desc">AI-powered surveillance</span>
+                                    </div>
                                 </div>
-                                <div class="point">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>AI-powered risk assessment</span>
+                                <div class="feature-item">
+                                    <div class="feature-icon heatmap-icon">
+                                        <div class="icon-animation">
+                                            <i class="fas fa-map-marked-alt"></i>
+                                            <div class="heatmap-pulse"></div>
+                                        </div>
+                                    </div>
+                                    <div class="feature-details">
+                                        <span class="feature-title">Live Heatmap Analysis</span>
+                                        <span class="feature-desc">Real-time crowd density</span>
+                                    </div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon route-icon">
+                                        <div class="icon-animation">
+                                            <i class="fas fa-route"></i>
+                                            <div class="route-path"></div>
+                                        </div>
+                                    </div>
+                                    <div class="feature-details">
+                                        <span class="feature-title">Smart Safe Routes</span>
+                                        <span class="feature-desc">Optimal evacuation paths</span>
+                                    </div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon alert-icon">
+                                        <div class="icon-animation">
+                                            <i class="fas fa-bell"></i>
+                                            <div class="alert-ring"></div>
+                                        </div>
+                                    </div>
+                                    <div class="feature-details">
+                                        <span class="feature-title">Instant Alert System</span>
+                                        <span class="feature-desc">Real-time notifications</span>
+                                    </div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon analytics-icon">
+                                        <div class="icon-animation">
+                                            <i class="fas fa-chart-line"></i>
+                                            <div class="chart-line"></div>
+                                        </div>
+                                    </div>
+                                    <div class="feature-details">
+                                        <span class="feature-title">Predictive Analytics</span>
+                                        <span class="feature-desc">AI-based forecasting</span>
+                                    </div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon sms-icon">
+                                        <div class="icon-animation">
+                                            <i class="fas fa-mobile-alt"></i>
+                                            <div class="message-dots"></div>
+                                        </div>
+                                    </div>
+                                    <div class="feature-details">
+                                        <span class="feature-title">SMS Notifications</span>
+                                        <span class="feature-desc">Mass emergency alerts</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="feature-section how-it-works">
+                            <h2><i class="fas fa-tasks rotating-icon"></i> How It Works</h2>
+                            <div class="steps-grid">
+                                <div class="steps-column">
+                                    <div class="step-item">
+                                        <div class="step-content-wrapper">
+                                            <div class="step-content">
+                                                <div class="step-number">1</div>
+                                                <div class="step-text">
+                                                    <h3>Secure Access</h3>
+                                                    <p>Login with your credentials for secure system access</p>
+                                                </div>
+                                            </div>
+                                            <div class="step-icon-container">
+                                                <div class="feature-icon">
+                                                    <div class="icon-animation">
+                                                        <i class="fas fa-lock"></i>
+                                                        <div class="signal-waves"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="step-item">
+                                        <div class="step-content-wrapper">
+                                            <div class="step-content">
+                                                <div class="step-number">2</div>
+                                                <div class="step-text">
+                                                    <h3>Real-time Monitoring</h3>
+                                                    <p>Monitor crowd density and safety metrics in real-time</p>
+                                                </div>
+                                            </div>
+                                            <div class="step-icon-container">
+                                                <div class="feature-icon">
+                                                    <div class="icon-animation">
+                                                        <i class="fas fa-chart-line"></i>
+                                                        <div class="signal-waves"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="steps-column">
+                                    <div class="step-item">
+                                        <div class="step-content-wrapper">
+                                            <div class="step-content">
+                                                <div class="step-number">3</div>
+                                                <div class="step-text">
+                                                    <h3>Instant Alerts</h3>
+                                                    <p>Receive immediate notifications for critical situations</p>
+                                                </div>
+                                            </div>
+                                            <div class="step-icon-container">
+                                                <div class="feature-icon">
+                                                    <div class="icon-animation">
+                                                        <i class="fas fa-bell"></i>
+                                                        <div class="signal-waves"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="step-item">
+                                        <div class="step-content-wrapper">
+                                            <div class="step-content">
+                                                <div class="step-number">4</div>
+                                                <div class="step-text">
+                                                    <h3>Emergency Response</h3>
+                                                    <p>Manage and coordinate emergency responses effectively</p>
+                                                </div>
+                                            </div>
+                                            <div class="step-icon-container">
+                                                <div class="feature-icon">
+                                                    <div class="icon-animation">
+                                                        <i class="fas fa-ambulance"></i>
+                                                        <div class="signal-waves"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="feature-section features">
-                        <h2><i class="fas fa-star rotating-icon"></i> Key Features</h2>
-                        <div class="feature-grid">
-                            <div class="feature-item">
-                                <div class="feature-icon camera-icon">
-                                    <div class="icon-animation">
-                                        <i class="fas fa-video"></i>
-                                        <div class="scan-line"></div>
-                                    </div>
-                                </div>
-                                <div class="feature-details">
-                                    <span class="feature-title">Real-time Camera Monitoring</span>
-                                    <span class="feature-desc">AI-powered surveillance</span>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon heatmap-icon">
-                                    <div class="icon-animation">
-                                        <i class="fas fa-map-marked-alt"></i>
-                                        <div class="heatmap-pulse"></div>
-                                    </div>
-                                </div>
-                                <div class="feature-details">
-                                    <span class="feature-title">Live Heatmap Analysis</span>
-                                    <span class="feature-desc">Real-time crowd density</span>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon route-icon">
-                                    <div class="icon-animation">
-                                        <i class="fas fa-route"></i>
-                                        <div class="route-path"></div>
-                                    </div>
-                                </div>
-                                <div class="feature-details">
-                                    <span class="feature-title">Smart Safe Routes</span>
-                                    <span class="feature-desc">Optimal evacuation paths</span>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon alert-icon">
-                                    <div class="icon-animation">
-                                        <i class="fas fa-bell"></i>
-                                        <div class="alert-ring"></div>
-                                    </div>
-                                </div>
-                                <div class="feature-details">
-                                    <span class="feature-title">Instant Alert System</span>
-                                    <span class="feature-desc">Real-time notifications</span>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon analytics-icon">
-                                    <div class="icon-animation">
-                                        <i class="fas fa-chart-line"></i>
-                                        <div class="chart-line"></div>
-                                    </div>
-                                </div>
-                                <div class="feature-details">
-                                    <span class="feature-title">Predictive Analytics</span>
-                                    <span class="feature-desc">AI-based forecasting</span>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon sms-icon">
-                                    <div class="icon-animation">
-                                        <i class="fas fa-mobile-alt"></i>
-                                        <div class="message-dots"></div>
-                                    </div>
-                                </div>
-                                <div class="feature-details">
-                                    <span class="feature-title">SMS Notifications</span>
-                                    <span class="feature-desc">Mass emergency alerts</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="feature-section how-it-works">
-                        <h2><i class="fas fa-tasks rotating-icon"></i> How It Works</h2>
-                        <div class="steps-grid">
-                            <div class="steps-column">
-                                <div class="step-item">
-                                    <div class="step-content-wrapper">
-                                        <div class="step-content">
-                                            <div class="step-number">1</div>
-                                            <div class="step-text">
-                                                <h3>Secure Access</h3>
-                                                <p>Login with your credentials for secure system access</p>
-                                            </div>
-                                        </div>
-                                        <div class="step-icon-container">
-                                            <div class="feature-icon">
-                                                <div class="icon-animation">
-                                                    <i class="fas fa-lock"></i>
-                                                    <div class="signal-waves"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="step-item">
-                                    <div class="step-content-wrapper">
-                                        <div class="step-content">
-                                            <div class="step-number">2</div>
-                                            <div class="step-text">
-                                                <h3>Real-time Monitoring</h3>
-                                                <p>Monitor crowd density and safety metrics in real-time</p>
-                                            </div>
-                                        </div>
-                                        <div class="step-icon-container">
-                                            <div class="feature-icon">
-                                                <div class="icon-animation">
-                                                    <i class="fas fa-chart-line"></i>
-                                                    <div class="signal-waves"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="steps-column">
-                                <div class="step-item">
-                                    <div class="step-content-wrapper">
-                                        <div class="step-content">
-                                            <div class="step-number">3</div>
-                                            <div class="step-text">
-                                                <h3>Instant Alerts</h3>
-                                                <p>Receive immediate notifications for critical situations</p>
-                                            </div>
-                                        </div>
-                                        <div class="step-icon-container">
-                                            <div class="feature-icon">
-                                                <div class="icon-animation">
-                                                    <i class="fas fa-bell"></i>
-                                                    <div class="signal-waves"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="step-item">
-                                    <div class="step-content-wrapper">
-                                        <div class="step-content">
-                                            <div class="step-number">4</div>
-                                            <div class="step-text">
-                                                <h3>Emergency Response</h3>
-                                                <p>Manage and coordinate emergency responses effectively</p>
-                                            </div>
-                                        </div>
-                                        <div class="step-icon-container">
-                                            <div class="feature-icon">
-                                                <div class="icon-animation">
-                                                    <i class="fas fa-ambulance"></i>
-                                                    <div class="signal-waves"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <button id="startButton" class="start-btn">
+                        <span>Begin System Access</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
-
-                <button id="startButton" class="start-btn">
-                    <span>Begin System Access</span>
-                    <i class="fas fa-arrow-right"></i>
-                </button>
             </div>
         </div>
-    </div>
 
-    <!-- Login Page -->
-    <div id="loginPage" class="login-page">
-        <div class="login-background">
-            <div class="radar-grid"></div>
-            <div class="heatmap-zone danger" style="left: 20%; top: 30%"></div>
-            <div class="heatmap-zone safe" style="right: 25%; top: 40%"></div>
-            <div class="heatmap-zone warning" style="left: 40%; bottom: 20%"></div>
-        </div>
+        <!-- Login Page -->
+        <div id="loginPage" class="login-page">
+            <div class="login-background">
+                <div class="radar-grid"></div>
+                <div class="heatmap-zone danger" style="left: 20%; top: 30%"></div>
+                <div class="heatmap-zone safe" style="right: 25%; top: 40%"></div>
+                <div class="heatmap-zone warning" style="left: 40%; bottom: 20%"></div>
+            </div>
 
-        <div class="login-container">
-            <div class="login-panel">
+            <div class="login-container">
                 <div id="testReviewPopup" class="test-review-popup">
                     <h2>Test Review Information</h2>
                     <p>This is for test review. Any user can test how it runs.</p>
                     <p><strong>Access ID:</strong> admin</p>
                     <p><strong>Security Clearance Code:</strong> password</p>
                 </div>
-                <h1 class="mission-title"><i class="fas fa-shield-alt"></i> CrowdShield Control Access</h1>
-                <p class="mission-subtitle">Monitoring Mega-Gatherings | Securing Nashik Kumbh Mela 2027</p>
-                <div class="access-form">
-                    <form id="loginForm" class="login-form">
-                        <div class="form-group">
-                            <div class="input-wrapper">
-                                <i class="fas fa-user"></i>
-                                <input type="text" id="username" placeholder="Command Access ID" required>
-                                <div class="input-line"></div>
+
+                <div class="login-panel">
+                    <h1 class="mission-title"><i class="fas fa-shield-alt"></i> CrowdShield Control Access</h1>
+                    <p class="mission-subtitle">Monitoring Mega-Gatherings | Securing Nashik Kumbh Mela 2027</p>
+                    <div class="access-form">
+                        <form id="loginForm" class="login-form">
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="username" placeholder="Command Access ID" required>
+                                    <div class="input-line"></div>
+                                </div>
                             </div>
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" id="password" placeholder="Security Clearance Code" required>
+                                    <div class="input-line"></div>
+                                </div>
+                            </div>
+                            <div id="loginStatus" class="login-status" role="alert"></div>
+                            <button type="submit" class="login-btn">
+                                <span id="loginText">Initialize System Access</span>
+                                <div id="loginLoading" class="hidden">
+                                    <div class="radar-sweep"></div>
+                                    <span>Authenticating...</span>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+                    <div id="systemStatus" class="system-status">
+                        <div class="status-item">
+                            <i class="fas fa-server"></i>
+                            <span>System Status: </span>
+                            <span class="status-text">Online</span>
                         </div>
-                        <div class="form-group">
-                            <div class="input-wrapper">
-                                <i class="fas fa-lock"></i>
-                                <input type="password" id="password" placeholder="Security Clearance Code" required>
-                                <div class="input-line"></div>
-                            </div>
-                        </div>
-                        <div id="loginStatus" class="login-status" role="alert"></div>
-                        <button type="submit" class="login-btn">
-                            <span id="loginText">Initialize System Access</span>
-                            <div id="loginLoading" class="hidden">
-                                <div class="radar-sweep"></div>
-                                <span>Authenticating...</span>
-                            </div>
-                        </button>
-                    </form>
-                </div>
-                <div id="systemStatus" class="system-status">
-                    <div class="status-item">
-                        <i class="fas fa-server"></i>
-                        <span>System Status: </span>
-                        <span class="status-text">Online</span>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
 
-    <!-- Dashboard App -->
-    <div id="app" class="app-container">
-        <!-- Navigation Bar -->
-        <nav class="navbar">
-            <div class="navbar-left">
-                <button id="sidebarToggle" class="theme-toggle"><i class="fas fa-bars"></i></button>
-                <div class="logo">
-                    <i class="fas fa-shield-alt"></i> CrowdShield
+        <!-- Dashboard App -->
+        <div id="app" class="app-container">
+            <!-- Navigation Bar -->
+            <nav class="navbar">
+                <div class="navbar-left">
+                    <button id="sidebarToggle" class="theme-toggle"><i class="fas fa-bars"></i></button>
+                    <div class="logo">
+                        <i class="fas fa-shield-alt"></i> CrowdShield
+                    </div>
                 </div>
-            </div>
-            <div class="navbar-right">
-                <button id="themeToggle" class="theme-toggle">
-                    <i class="fas fa-moon" id="themeIcon"></i>
-                </button>
-                <button id="logoutBtn" class="logout-btn">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </button>
-            </div>
-        </nav>
-
-        <!-- Main Container -->
-        <div class="main-container">
-            <!-- Mobile Sidebar Overlay -->
-            <div id="sidebarOverlay" class="sidebar-overlay"></div>
-
-            <!-- Sidebar -->
-            <aside class="sidebar" id="sidebar">
-                <div class="sidebar-header">
-                    <h3 class="sidebar-title">Navigation</h3>
+                <div class="navbar-right">
+                    <button id="themeToggle" class="theme-toggle">
+                        <i class="fas fa-moon" id="themeIcon"></i>
+                    </button>
+                    <button id="logoutBtn" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
                 </div>
-                <nav>
-                    <a href="#" class="nav-item active" data-page="dashboard">
-                        <i class="fas fa-tachometer-alt"></i> Dashboard
-                    </a>
-                    <a href="#" class="nav-item" data-page="alerts">
-                        <i class="fas fa-exclamation-triangle"></i> Live Alerts
-                    </a>
-                    <a href="#" class="nav-item" data-page="analytics">
-                        <i class="fas fa-chart-line"></i> Analytics
-                    </a>
-                    <a href="#" class="nav-item" data-page="settings">
-                        <i class="fas fa-cog"></i> Settings
-                    </a>
+            </nav>
 
-                    <!-- Quick Actions Section -->
-                    <div class="quick-actions-section">
-                        <div class="quick-actions-header" id="quickActionsToggle">
-                            <i class="fas fa-bolt"></i> Quick Actions
-                            <i class="fas fa-chevron-down toggle-icon"></i>
-                        </div>
-                        <div class="quick-actions-content" id="quickActionsContent">
-                            <button class="panic-dispatch-btn" id="panicDispatchBtn"
-                                title="Instantly alert all responders">
-                                <i class="fas fa-siren"></i>
-                            </button>
-                            <button class="mass-notification-btn" id="massNotificationBtn"
-                                title="Send safety messages to zones">
-                                <i class="fas fa-broadcast-tower"></i>
-                            </button>
-                        </div>
+            <!-- Main Container -->
+            <div class="main-container">
+                <!-- Mobile Sidebar Overlay -->
+                <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+                <!-- Sidebar -->
+                <aside class="sidebar" id="sidebar">
+                    <div class="sidebar-header">
+                        <h3 class="sidebar-title">Navigation</h3>
                     </div>
+                    <nav>
+                        <a href="#" class="nav-item active" data-page="dashboard">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                        <a href="#" class="nav-item" data-page="alerts">
+                            <i class="fas fa-exclamation-triangle"></i> Live Alerts
+                        </a>
+                        <a href="#" class="nav-item" data-page="analytics">
+                            <i class="fas fa-chart-line"></i> Analytics
+                        </a>
+                        <a href="#" class="nav-item" data-page="settings">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
 
-                    <!-- Predictive Risk Radar -->
-                    <div class="risk-radar" id="riskRadar" title="AI forecast: next 10 minutes risk levels">
-                        <div class="radar-circle">
-                            <div class="radar-sweep"></div>
-                            <div class="radar-dot dot-1"></div>
-                            <div class="radar-dot dot-2"></div>
-                            <div class="radar-dot dot-3"></div>
+                        <!-- Quick Actions Section -->
+                        <div class="quick-actions-section">
+                            <div class="quick-actions-header" id="quickActionsToggle">
+                                <i class="fas fa-bolt"></i> Quick Actions
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="quick-actions-content" id="quickActionsContent">
+                                <button class="panic-dispatch-btn" id="panicDispatchBtn"
+                                    title="Instantly alert all responders">
+                                    <i class="fas fa-siren"></i>
+                                </button>
+                                <button class="mass-notification-btn" id="massNotificationBtn"
+                                    title="Send safety messages to zones">
+                                    <i class="fas fa-broadcast-tower"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </nav>
-            </aside>
 
-            <!-- Main Content -->
-            <main class="content">
-                <!-- Dashboard Page -->
-                <div id="dashboard" class="page active">
-                    <div class="page-header">
-                        <h1 class="page-title">Dashboard</h1>
-                        <p class="page-subtitle">Real-time crowd monitoring and management</p>
-                    </div>
-
-                    <!-- Status Indicators -->
-                    <div class="status-indicators">
-                        <div class="status-indicator status-safe">
-                            <div class="status-dot"></div>
-                            <span>Safe Zones: 0</span>
+                        <!-- Predictive Risk Radar -->
+                        <div class="risk-radar" id="riskRadar" title="AI forecast: next 10 minutes risk levels">
+                            <div class="radar-circle">
+                                <div class="radar-sweep"></div>
+                                <div class="radar-dot dot-1"></div>
+                                <div class="radar-dot dot-2"></div>
+                                <div class="radar-dot dot-3"></div>
+                            </div>
                         </div>
-                        <div class="status-indicator status-warning">
-                            <div class="status-dot"></div>
-                            <span>Warning Zones: 0</span>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="content">
+                    <!-- Dashboard Page -->
+                    <div id="dashboard" class="page active">
+                        <div class="page-header">
+                            <h1 class="page-title">Dashboard</h1>
+                            <p class="page-subtitle">Real-time crowd monitoring and management</p>
                         </div>
-                        <div class="status-indicator status-critical">
-                            <div class="status-dot"></div>
-                            <span>Critical Zones: 0</span>
+
+                        <!-- Status Indicators -->
+                        <div class="status-indicators">
+                            <div class="status-indicator status-safe">
+                                <div class="status-dot"></div>
+                                <span>Safe Zones: 0</span>
+                            </div>
+                            <div class="status-indicator status-warning">
+                                <div class="status-dot"></div>
+                                <span>Warning Zones: 0</span>
+                            </div>
+                            <div class="status-indicator status-critical">
+                                <div class="status-dot"></div>
+                                <span>Critical Zones: 0</span>
+                            </div>
+                            <div class="status-indicator"
+                                style="background: rgba(37, 99, 235, 0.2); color: var(--primary-color);">
+                                <div class="status-dot"></div>
+                                <span>People Count: 0</span>
+                            </div>
                         </div>
-                        <div class="status-indicator"
-                            style="background: rgba(37, 99, 235, 0.2); color: var(--primary-color);">
-                            <div class="status-dot"></div>
-                            <span>People Count: 0</span>
-                        </div>
-                    </div>
 
-                    <!-- Dashboard Grid -->
-                    <div class="dashboard-grid">
-                        <!-- Map Container -->
-                        <div class="map-container">
-                            <h3>Real-Time Crowd Heatmap</h3>
-                            <div class="map-wrapper" style="position: relative;">
-                                <div id="map"></div>
+                        <!-- Dashboard Grid -->
+                        <div class="dashboard-grid">
+                            <!-- Map Container -->
+                            <div class="map-container">
+                                <h3>Real-Time Crowd Heatmap</h3>
+                                <div class="map-wrapper" style="position: relative;">
+                                    <div id="map"></div>
 
-                                <!-- Google Maps Style Controls -->
-                                <div class="map-overlay-controls">
+                                    <!-- Google Maps Style Controls -->
+                                    <div class="map-overlay-controls">
 
 
-                                    <!-- Zoom Controls -->
-                                    <div class="zoom-controls">
-                                        <button id="zoomIn" title="Zoom in">+</button>
-                                        <button id="zoomOut" title="Zoom out">−</button>
-                                    </div>
+                                        <!-- Zoom Controls -->
+                                        <div class="zoom-controls">
+                                            <button id="zoomIn" title="Zoom in">+</button>
+                                            <button id="zoomOut" title="Zoom out">−</button>
+                                        </div>
 
-                                    <!-- Layer Controls -->
-                                    <div class="layer-controls">
-                                        <button id="layerToggle" title="Map layers"><i
-                                                class="fas fa-layer-group"></i></button>
-                                        <div id="layerMenu" class="layer-menu hidden">
-                                            <div class="layer-option" data-layer="satellite">🛰️ Satellite</div>
-                                            <div class="layer-option active" data-layer="street">🗺️ Street Map
+                                        <!-- Layer Controls -->
+                                        <div class="layer-controls">
+                                            <button id="layerToggle" title="Map layers"><i
+                                                    class="fas fa-layer-group"></i></button>
+                                            <div id="layerMenu" class="layer-menu hidden">
+                                                <div class="layer-option" data-layer="satellite">🛰️ Satellite</div>
+                                                <div class="layer-option active" data-layer="street">🗺️ Street Map
+                                                </div>
+                                                <div class="layer-option" data-layer="terrain">🏔️ Terrain</div>
+                                                <div class="layer-option" data-layer="hybrid">🌍 Hybrid</div>
                                             </div>
-                                            <div class="layer-option" data-layer="terrain">🏔️ Terrain</div>
-                                            <div class="layer-option" data-layer="hybrid">🌍 Hybrid</div>
+                                        </div>
+
+                                        <!-- My Location -->
+                                        <div class="location-controls">
+                                            <button id="myLocation" title="My location"><i
+                                                    class="fas fa-crosshairs"></i></button>
+                                        </div>
+
+                                        <!-- Fullscreen -->
+                                        <div class="fullscreen-controls">
+                                            <button id="fullscreenMap" title="Fullscreen"><i
+                                                    class="fas fa-expand"></i></button>
+                                        </div>
+
+                                        <!-- Street View -->
+                                        <div class="streetview-controls">
+                                            <button id="streetView" title="Street View"><i
+                                                    class="fas fa-street-view"></i></button>
                                         </div>
                                     </div>
 
-                                    <!-- My Location -->
-                                    <div class="location-controls">
-                                        <button id="myLocation" title="My location"><i
-                                                class="fas fa-crosshairs"></i></button>
-                                    </div>
 
-                                    <!-- Fullscreen -->
-                                    <div class="fullscreen-controls">
-                                        <button id="fullscreenMap" title="Fullscreen"><i
-                                                class="fas fa-expand"></i></button>
-                                    </div>
-
-                                    <!-- Street View -->
-                                    <div class="streetview-controls">
-                                        <button id="streetView" title="Street View"><i
-                                                class="fas fa-street-view"></i></button>
-                                    </div>
                                 </div>
 
-
-                            </div>
-
-                            <div class="map-controls" style="margin-top: 15px;">
-                                <button id="refreshMap" class="login-btn"
-                                    style="width: auto; padding: 8px 16px; font-size: 14px;">
-                                    <i class="fas fa-sync-alt"></i> Refresh
-                                </button>
-                                <button id="safeRoutes" class="login-btn"
-                                    style="width: auto; padding: 8px 16px; font-size: 14px; margin-left: 10px; background: var(--success-color);">
-                                    <i class="fas fa-route"></i> Show Safe Routes
-                                </button>
-                                <button id="nearbyPlaces" class="login-btn"
-                                    style="display:none; width: auto; padding: 8px 16px; font-size: 14px; margin-left: 10px; background: var(--primary-color);">
-                                    <i class="fas fa-map-marker-alt"></i> Nearby
-                                </button>
-                            </div>
-
-                            <!-- Smart Features Info -->
-                            <div class="smart-features-info">
-                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                                    <i class="fas fa-shield-alt" style="color: #10b981; font-size: 1.1rem;"></i>
-                                    <strong style="color: #10b981; font-size: 1rem;">Smart Map Features</strong>
+                                <div class="map-controls" style="margin-top: 15px;">
+                                    <button id="refreshMap" class="login-btn"
+                                        style="width: auto; padding: 8px 16px; font-size: 14px;">
+                                        <i class="fas fa-sync-alt"></i> Refresh
+                                    </button>
+                                    <button id="safeRoutes" class="login-btn"
+                                        style="width: auto; padding: 8px 16px; font-size: 14px; margin-left: 10px; background: var(--success-color);">
+                                        <i class="fas fa-route"></i> Show Safe Routes
+                                    </button>
+                                    <button id="nearbyPlaces" class="login-btn"
+                                        style="display:none; width: auto; padding: 8px 16px; font-size: 14px; margin-left: 10px; background: var(--primary-color);">
+                                        <i class="fas fa-map-marker-alt"></i> Nearby
+                                    </button>
                                 </div>
-                                <div class="smart-features-grid">
-                                    <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span>🔍</span> Smart search & navigation
-                                    </div>
-                                    <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span>🛰️</span> Multiple map layers
-                                    </div>
 
-                                    <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span>🚦</span> Traffic & transit info
+                                <!-- Smart Features Info -->
+                                <div class="smart-features-info">
+                                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                                        <i class="fas fa-shield-alt" style="color: #10b981; font-size: 1.1rem;"></i>
+                                        <strong style="color: #10b981; font-size: 1rem;">Smart Map Features</strong>
                                     </div>
-                                    <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span>👥</span> Crowd density heatmap
-                                    </div>
+                                    <div class="smart-features-grid">
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span>🔍</span> Smart search & navigation
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span>🛰️</span> Multiple map layers
+                                        </div>
 
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span>🚦</span> Traffic & transit info
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span>👥</span> Crowd density heatmap
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Live Alerts Panel -->
+                            <div class="alerts-panel">
+                                <!-- Camera Box -->
+                                <div class="panel-box"
+                                    style="background: var(--light-bg); border: 1px solid var(--border-light); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                                    <div class="camera-header"
+                                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                        <h3 style="margin: 0;"><i class="fas fa-video"></i> Live Camera Feed</h3>
+                                        <div class="camera-view-controls" style="display: none;">
+                                            <button id="maximizeBtn" class="view-control-btn" title="Maximize">
+                                                <i class="fas fa-expand"></i>
+                                            </button>
+                                            <button id="minimizeBtn" class="view-control-btn" title="Minimize"
+                                                style="display: none;">
+                                                <i class="fas fa-compress"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="camera-container" id="cameraContainer">
+                                        <video id="cameraFeed" width="100%" height="240" autoplay muted playsinline
+                                            style="border-radius: 8px; border: 1px solid #ccc;"></video>
+                                    </div>
+                                    <div id="peopleCountDisplay"
+                                        style="margin-top: 8px; font-weight: 600; color: var(--text-dark);">People
+                                        Count: 0
+                                    </div>
+                                    <div class="camera-controls">
+                                        <div class="camera-controls-row">
+                                            <button id="openCameraBtn" class="camera-btn primary">
+                                                <i class="fas fa-video"></i> Open Camera
+                                            </button>
+                                            <button id="closeCameraBtn" class="camera-btn danger" disabled>
+                                                <i class="fas fa-video-slash"></i> Close Camera
+                                            </button>
+                                        </div>
+                                        <div class="camera-controls-row">
+                                            <button id="screenshotBtn" class="camera-btn secondary" disabled>
+                                                <i class="fas fa-camera"></i> Screenshot
+                                            </button>
+                                            <button id="startRecordingBtn" class="camera-btn warning" disabled>
+                                                <i class="fas fa-circle"></i> Start Recording
+                                            </button>
+                                            <button id="stopRecordingBtn" class="camera-btn danger" disabled>
+                                                <i class="fas fa-stop"></i> Stop Recording
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div id="recordingsList" style="margin-top: 10px;"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Live Alerts Panel -->
-                        <div class="alerts-panel">
-                            <!-- Camera Box -->
-                            <div class="panel-box"
-                                style="background: var(--light-bg); border: 1px solid var(--border-light); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
-                                <div class="camera-header"
-                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                                    <h3 style="margin: 0;"><i class="fas fa-video"></i> Live Camera Feed</h3>
-                                    <div class="camera-view-controls" style="display: none;">
-                                        <button id="maximizeBtn" class="view-control-btn" title="Maximize">
-                                            <i class="fas fa-expand"></i>
-                                        </button>
-                                        <button id="minimizeBtn" class="view-control-btn" title="Minimize"
-                                            style="display: none;">
-                                            <i class="fas fa-compress"></i>
-                                        </button>
-                                    </div>
+                        <!-- Heatmap Summary Section -->
+                        <div class="heatmap-summary-section"
+                            style="margin-top: 20px; padding: 15px; background: var(--light-bg); border-radius: 12px; border: 1px solid var(--border-light); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h3 style="margin: 0;">Real-Time Crowd Heatmap Summary</h3>
+                                <div
+                                    style="display: flex; align-items: center; gap: 8px; color: var(--success-color); font-size: 0.9rem;">
+                                    <i class="fas fa-database" style="animation: pulse 2s infinite;"></i>
+                                    <span>MySQL Connected</span>
                                 </div>
-                                <div class="camera-container" id="cameraContainer">
-                                    <video id="cameraFeed" width="100%" height="240" autoplay muted playsinline
-                                        style="border-radius: 8px; border: 1px solid #ccc;"></video>
+                            </div>
+
+                            <hr style="color: green; background-color: green; height: 2px;">
+                            <div class="summary-grid"
+                                style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                                <div class="summary-item">
+                                    <strong>Current Crowd Density:</strong> <span id="currentDensity"
+                                        data-source="mysql">Loading...</span>
                                 </div>
-                                <div id="peopleCountDisplay"
-                                    style="margin-top: 8px; font-weight: 600; color: var(--text-dark);">People
-                                    Count: 0
+                                <div class="summary-item">
+                                    <strong>Safe Zones:</strong> <span id="safeZonesCount"
+                                        data-source="mysql">Loading...</span>
                                 </div>
-                                <div class="camera-controls">
-                                    <div class="camera-controls-row">
-                                        <button id="openCameraBtn" class="camera-btn primary">
-                                            <i class="fas fa-video"></i> Open Camera
-                                        </button>
-                                        <button id="closeCameraBtn" class="camera-btn danger" disabled>
-                                            <i class="fas fa-video-slash"></i> Close Camera
-                                        </button>
-                                    </div>
-                                    <div class="camera-controls-row">
-                                        <button id="screenshotBtn" class="camera-btn secondary" disabled>
-                                            <i class="fas fa-camera"></i> Screenshot
-                                        </button>
-                                        <button id="startRecordingBtn" class="camera-btn warning" disabled>
-                                            <i class="fas fa-circle"></i> Start Recording
-                                        </button>
-                                        <button id="stopRecordingBtn" class="camera-btn danger" disabled>
-                                            <i class="fas fa-stop"></i> Stop Recording
-                                        </button>
-                                    </div>
+                                <div class="summary-item">
+                                    <strong>Warning Zones:</strong> <span id="warningZonesCount"
+                                        data-source="mysql">Loading...</span>
                                 </div>
-                                <div id="recordingsList" style="margin-top: 10px;"></div>
+                                <div class="summary-item">
+                                    <strong>Critical Zones:</strong> <span id="criticalZonesCount"
+                                        data-source="mysql">Loading...</span>
+                                </div>
+                                <div class="summary-item">
+                                    <strong>People Count:</strong> <span id="totalPeopleCount"
+                                        data-source="mysql">Loading...</span>
+                                </div>
+                                <div class="summary-item">
+                                    <strong>Last Updated:</strong> <span id="lastUpdateTime"
+                                        data-source="mysql">Connecting...</span>
+                                </div>
+                            </div>
+                            <div
+                                style="margin-top: 12px; padding: 10px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; font-size: 0.85rem; color: var(--text-dark);">
+                                <i class="fas fa-info-circle" style="color: var(--success-color);"></i>
+                                <strong>Database Status:</strong> Real-time data synchronized from MySQL database every
+                                3
+                                seconds
+                            </div>
+                            <div class="heatmap-controls"
+                                style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end;">
+                                <button id="refreshDatabase" class="camera-btn primary" title="Refresh data from MySQL">
+                                    <i class="fas fa-sync-alt"></i> Sync Database
+                                </button>
+                                <button id="exportHeatmap" class="camera-btn secondary">
+                                    <i class="fas fa-download"></i> Export Data
+                                </button>
+                                <button id="resetHeatmap" class="camera-btn warning">
+                                    <i class="fas fa-undo"></i> Reset View
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Charts Section -->
+                        <div class="charts-section">
+                            <div class="chart-container">
+                                <h3 style="margin-bottom: 15px;">Crowd Density Trends</h3>
+                                <canvas id="densityChart"></canvas>
+                            </div>
+                            <div class="chart-container">
+                                <h3 style="margin-bottom: 15px;">Predictions & Forecasts</h3>
+                                <canvas id="predictionsChart"></canvas>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Heatmap Summary Section -->
-                    <div class="heatmap-summary-section"
-                        style="margin-top: 20px; padding: 15px; background: var(--light-bg); border-radius: 12px; border: 1px solid var(--border-light); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <!-- Alerts Page -->
+                    <div id="alerts" class="page">
+                        <div class="page-header">
+                            <h1 class="page-title">Live Alerts</h1>
+                            <p class="page-subtitle">Real-time emergency and crowd management alerts</p>
+                        </div>
+
+                        <div class="alerts-grid">
+                            <div class="alert-card"
+                                style="background: var(--light-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-light); animation: alertSlide 0.6s ease-out;">
+                                <div class="alert-header"
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                    <h3 style="color: var(--danger-color);"><i class="fas fa-fire"></i> Fire Emergency
+                                    </h3>
+                                </div>
+                                <div id="fireResult" class="detection-result"
+                                    style="display: none; margin-bottom: 15px; padding: 10px; border-radius: 6px; font-weight: 600;">
+                                </div>
+                                <div class="alert-actions">
+                                    <button id="monitorFireBtn" class="alert-btn"
+                                        style="background: var(--danger-color); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">
+                                        <i class="fas fa-eye"></i> Monitor
+                                    </button>
+                                    <button id="stopFireBtn" class="alert-btn"
+                                        style="background: #6b7280; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin-left: 8px; display: none;">
+                                        <i class="fas fa-stop"></i> Stop
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="alert-card"
+                                style="background: var(--light-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-light); animation: alertSlide 0.6s ease-out 0.2s both;">
+                                <div class="alert-header"
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                    <h3 style="color: var(--warning-color);"><i class="fas fa-users"></i> Overcrowding
+                                    </h3>
+                                </div>
+                                <div id="overcrowdingResult" class="detection-result"
+                                    style="display: none; margin-bottom: 15px; padding: 10px; border-radius: 6px; font-weight: 600;">
+                                </div>
+                                <div class="alert-actions">
+                                    <button id="monitorOvercrowdingBtn" class="alert-btn"
+                                        style="background: var(--warning-color); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">
+                                        <i class="fas fa-eye"></i> Monitor
+                                    </button>
+                                    <button id="stopOvercrowdingBtn" class="alert-btn"
+                                        style="background: #6b7280; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin-left: 8px; display: none;">
+                                        <i class="fas fa-stop"></i> Stop
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="alert-card"
+                                style="background: var(--light-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-light); animation: alertSlide 0.6s ease-out 0.4s both;">
+                                <div class="alert-header"
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                    <h3 style="color: var(--primary-color);"><i class="fas fa-heartbeat"></i> Medical
+                                        Emergency</h3>
+                                </div>
+                                <div id="medicalResult" class="detection-result"
+                                    style="display: none; margin-bottom: 15px; padding: 10px; border-radius: 6px; font-weight: 600;">
+                                </div>
+                                <div class="alert-actions">
+                                    <button id="monitorMedicalBtn" class="alert-btn"
+                                        style="background: var(--primary-color); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">
+                                        <i class="fas fa-eye"></i> Monitor
+                                    </button>
+                                    <button id="stopMedicalBtn" class="alert-btn"
+                                        style="background: #6b7280; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin-left: 8px; display: none;">
+                                        <i class="fas fa-stop"></i> Stop
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="alert-card"
+                                style="background: var(--light-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-light); animation: alertSlide 0.6s ease-out 0.6s both;">
+                                <div class="alert-header"
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                    <h3 style="color: var(--danger-color);"><i class="fas fa-running"></i> Stampede Risk
+                                    </h3>
+                                </div>
+                                <div id="stampedeResult" class="detection-result"
+                                    style="display: none; margin-bottom: 15px; padding: 10px; border-radius: 6px; font-weight: 600;">
+                                </div>
+                                <div class="alert-actions">
+                                    <button id="monitorStampedeBtn" class="alert-btn"
+                                        style="background: var(--danger-color); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">
+                                        <i class="fas fa-eye"></i> Monitor
+                                    </button>
+                                    <button id="stopStampedeBtn" class="alert-btn"
+                                        style="background: #6b7280; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin-left: 8px; display: none;">
+                                        <i class="fas fa-stop"></i> Stop
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Alert History -->
+                        <div style="margin-top: 30px;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                <h3 style="margin: 0;">Alert History (Last 24 Hours)</h3>
+                                <button id="viewFullHistoryBtn" class="login-btn"
+                                    style="width: auto; padding: 8px 16px; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;">
+                                    <i class="fas fa-history"></i> View Full History
+                                </button>
+                            </div>
+                            <div id="alertHistoryContainer" class="history-container"
+                                style="background: var(--light-bg); border-radius: 12px; padding: 20px; border: 1px solid var(--border-light);">
+                                <div class="history-item"
+                                    style="padding: 15px; border-bottom: 1px solid var(--border-light); animation: historyFade 0.5s ease-out;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div>
+                                            <strong style="color: var(--success-color);">System Initialized</strong>
+                                            <p style="color: #6b7280; font-size: 0.9rem; margin-top: 5px;">All
+                                                monitoring
+                                                systems are now operational</p>
+                                        </div>
+                                        <span style="color: #6b7280; font-size: 0.8rem;">Just now</span>
+                                    </div>
+                                </div>
+                                <div style="text-align: center; color: #6b7280; padding: 20px;">
+                                    <p>Recent alerts will appear here. Click "View Full Database" to see all alerts.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analytics Page -->
+                    <div id="analytics" class="page">
+                        <div class="page-header">
+                            <h1 class="page-title">Analytics</h1>
+                            <p class="page-subtitle">Crowd density analytics and predictive insights</p>
+                        </div>
+
+                        <!-- New Analytics Layout -->
+                        <div class="analytics-layout">
+                            <div class="analytics-left-column">
+                                <div class="chart-container">
+                                    <h3 style="margin-bottom: 15px;">Hourly Crowd Patterns</h3>
+                                    <canvas id="hourlyChart"></canvas>
+                                </div>
+                                <div class="chart-container">
+                                    <h3 style="margin-bottom: 15px;">AI Prediction Models</h3>
+                                    <canvas id="predictionChart"></canvas>
+                                    <div style="margin-top: 15px; text-align: center; color: #6b7280;">
+                                        <small>Predictions based on historical data and current trends</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="analytics-right-column">
+                                <div class="chart-container">
+                                    <h3 style="margin-bottom: 15px;">Zone Distribution</h3>
+                                    <canvas id="zoneChart"></canvas>
+                                    <!-- This is the new container for zone details -->
+                                    <div id="zoneDistributionDetails" style="margin-top: 15px;">
+                                        <!-- Content will be dynamically inserted by script.js -->
+                                    </div>
+                                </div>
+                                <div class="chart-container" id="scanning-info-container" style="margin-top: 25px;">
+                                    <h3 style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                                        <i class="fas fa-database"></i> MySQL Database Scan
+                                    </h3>
+                                    <div class="scan-status">
+                                        <div class="scan-light"></div>
+                                        <span id="scanStatusText">Scanning for new data...</span>
+                                    </div>
+                                    <div class="scan-results">
+                                        <div class="scan-result-item">
+                                            <span>Tables Scanned:</span>
+                                            <strong id="tablesScanned">0</strong>
+                                        </div>
+                                        <div class="scan-result-item">
+                                            <span>New Alerts Found:</span>
+                                            <strong id="newAlertsFound">0</strong>
+                                        </div>
+                                        <div class="scan-result-item">
+                                            <span>Density Records Added:</span>
+                                            <strong id="densityRecordsAdded">0</strong>
+                                        </div>
+                                        <div class="scan-result-item">
+                                            <span>Last Scan:</span>
+                                            <strong id="lastScanTime">N/A</strong>
+                                        </div>
+                                    </div>
+                                    <div class="scan-progress-bar">
+                                        <div class="scan-progress" id="scanProgress"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Page -->
+                    <div id="settings" class="page">
+                        <div class="page-header">
+                            <h1 class="page-title">Settings</h1>
+                            <p class="page-subtitle">Configure system preferences and monitoring parameters</p>
+                        </div>
+
+                        <!-- General Settings -->
+                        <div class="settings-section">
+                            <h3 style="margin-bottom: 20px;">General Settings</h3>
+                            <div class="setting-item">
+                                <div>
+                                    <strong>Dark Mode</strong>
+                                    <p style="color: #6b7280; font-size: 0.9rem;">Toggle between light and dark theme
+                                    </p>
+                                </div>
+                                <div class="toggle-switch active" id="darkModeToggle">
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div>
+                                    <strong>Real-time Updates</strong>
+                                    <p style="color: #6b7280; font-size: 0.9rem;">Enable automatic data refresh every 5
+                                        seconds</p>
+                                </div>
+                                <div class="toggle-switch active" id="autoRefreshToggle">
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div>
+                                    <strong>Sound Alerts</strong>
+                                    <p style="color: #6b7280; font-size: 0.9rem;">Play sound notifications for critical
+                                        alerts</p>
+                                </div>
+                                <div class="toggle-switch active" id="soundAlertsToggle">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Monitoring Settings -->
+                        <div class="settings-section">
+                            <h3 style="margin-bottom: 20px;">Monitoring Configuration</h3>
+                            <div class="setting-item">
+                                <div>
+                                    <strong>Crowd Density Threshold</strong>
+                                    <p style="color: #6b7280; font-size: 0.9rem;">Set warning threshold (people per
+                                        square
+                                        meter)</p>
+                                </div>
+                                <input type="number" value="4" min="1" max="10"
+                                    style="padding: 8px; border: 1px solid var(--border-light); border-radius: 6px; width: 80px;">
+                            </div>
+                            <div class="setting-item">
+                                <div>
+                                    <strong>Update Frequency</strong>
+                                    <p style="color: #6b7280; font-size: 0.9rem;">Data refresh interval in seconds</p>
+                                </div>
+                                <select
+                                    style="padding: 8px; border: 1px solid var(--border-light); border-radius: 6px; width: 100px;">
+                                    <option value="3">3 seconds</option>
+                                    <option value="5" selected>5 seconds</option>
+                                    <option value="10">10 seconds</option>
+                                    <option value="30">30 seconds</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <div>
+                                    <strong>Alert Sensitivity</strong>
+                                    <p style="color: #6b7280; font-size: 0.9rem;">Adjust AI model sensitivity for threat
+                                        detection</p>
+                                </div>
+                                <select
+                                    style="padding: 8px; border: 1px solid var(--border-light); border-radius: 6px; width: 120px;">
+                                    <option value="low">Low</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- API Settings -->
+                        <div class="settings-section">
+                            <h3 style="margin-bottom: 20px;">API Configuration</h3>
+                            <div class="setting-item">
+                                <div>
+                                    <strong>API Endpoint</strong>
+                                    <p style="color: #6b7280; font-size: 0.9rem;">Backend API server URL</p>
+                                </div>
+                                <input type="url" value="http://localhost:8000/api"
+                                    style="padding: 8px; border: 1px solid var(--border-light); border-radius: 6px; width: 250px;">
+                            </div>
+                            <div class="setting-item">
+                                <div>
+                                    <strong>Connection Status</strong>
+                                    <p style="color: #6b7280; font-size: 0.9rem;">Current API connection status</p>
+                                </div>
+                                <span style="color: var(--warning-color); font-weight: 600;">
+                                    <i class="fas fa-circle" style="font-size: 0.8rem;"></i> Simulated Mode
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Save Button -->
+                        <div style="text-align: center; margin-top: 30px;">
+                            <button class="login-btn" style="width: auto; padding: 12px 30px;" onclick="saveSettings()">
+                                <i class="fas fa-save"></i> Save Settings
+                            </button>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- External Scripts -->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.8.0/dist/tf.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+        <script src="script.js"></script>
+
+        <!-- Mass Notification Modal -->
+        <div id="massNotificationModal" class="modal-overlay hidden">
+            <div class="modal"
+                style="max-width: 900px; width: 90vw; animation: modalSlideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                <div class="modal-header"
+                    style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border-radius: 15px 15px 0 0; padding: 25px;">
+                    <h3 style="margin:0; display:flex; align-items:center; gap:15px; font-size: 1.6rem;">
+                        <i class="fas fa-broadcast-tower" style="font-size: 2rem; animation: pulse 2s infinite;"></i>
+                        📢 Mass Emergency Alert
+                    </h3>
+                    <button id="mnClose" class="modal-close"
+                        style="background: rgba(255,255,255,0.2); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.4rem; cursor: pointer;"
+                        title="Close">&times;</button>
+                </div>
+                <div class="modal-body" style="display: flex; gap: 20px; padding: 25px;">
+                    <!-- Left Panel: Message Composition -->
+                    <div style="flex: 1;">
+                        <p style="color:#6b7280; margin-top:0;">Compose and send emergency alerts to multiple contacts.
+                        </p>
+                        <div style="margin-top:15px;">
+                            <label for="mnPhone"
+                                style="font-weight:600; display: block; margin-bottom: 8px;">Recipients</label>
+                            <div style="position: relative;">
+                                <input id="mnPhone" type="text" value=""
+                                    placeholder="Enter phone numbers separated by commas"
+                                    style="width:100%; padding:10px 40px 10px 10px; border-radius:6px; border:1px solid var(--border-light);">
+                                <button id="clearRecipientsBtn" onclick="clearRecipients()"
+                                    style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #6b7280; cursor: pointer; font-size: 16px;"
+                                    title="Clear all recipients">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div id="selectedContactsDisplay" style="margin-top: 8px; display: none;">
+                                <div style="font-size: 12px; color: #6b7280; margin-bottom: 4px;">Selected Contacts:
+                                </div>
+                                <div id="contactChips" style="display: flex; flex-wrap: wrap; gap: 4px;"></div>
+                            </div>
+                        </div>
+                        <div style="margin-top:15px;">
+                            <label for="mnMessage" style="font-weight:600;">Message</label>
+                            <div style="margin:6px 0; display:flex; gap:5px; flex-wrap:wrap;">
+                                <button type="button" onclick="setTemplate('fire')" class="template-btn fire-btn"
+                                    style="padding:4px 8px; font-size:11px; border:1px solid #ef4444; background:#fef2f2; color:#dc2626; border-radius:4px; cursor:pointer; transition:all 0.3s ease;">🔥
+                                    Fire Emergency</button>
+                                <button type="button" onclick="setTemplate('medical')" class="template-btn medical-btn"
+                                    style="padding:4px 8px; font-size:11px; border:1px solid #059669; background:#f0fdf4; color:#059669; border-radius:4px; cursor:pointer; transition:all 0.3s ease;">⚕️
+                                    Medical Emergency</button>
+                                <button type="button" onclick="setTemplate('overcrowding')"
+                                    class="template-btn crowd-btn"
+                                    style="padding:4px 8px; font-size:11px; border:1px solid #d97706; background:#fffbeb; color:#d97706; border-radius:4px; cursor:pointer; transition:all 0.3s ease;">👥
+                                    Overcrowding</button>
+                                <button type="button" onclick="setTemplate('stampede')"
+                                    class="template-btn stampede-btn"
+                                    style="padding:4px 8px; font-size:11px; border:1px solid #7c2d12; background:#fef7ed; color:#7c2d12; border-radius:4px; cursor:pointer; transition:all 0.3s ease;">🏃‍♂️
+                                    Stampede Risk</button>
+                            </div>
+                            <textarea id="mnMessage" rows="4" placeholder="Type your alert message here..."
+                                style="width:100%; padding:10px; margin-top:6px; border-radius:6px; border:1px solid var(--border-light);"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Contact List -->
+                    <div style="flex: 0 0 300px; border-left: 1px solid var(--border-light); padding-left: 20px;">
                         <div
                             style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                            <h3 style="margin: 0;">Real-Time Crowd Heatmap Summary</h3>
-                            <div
-                                style="display: flex; align-items: center; gap: 8px; color: var(--success-color); font-size: 0.9rem;">
-                                <i class="fas fa-database" style="animation: pulse 2s infinite;"></i>
-                                <span>MySQL Connected</span>
+                            <h4 style="margin: 0; font-size: 1.1rem;">📞 Emergency Contacts</h4>
+                            <button onclick="selectAllContacts()"
+                                style="background: #3b82f6; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">
+                                Select All
+                            </button>
+                        </div>
+
+                        <div id="contactsList"
+                            style="max-height: 300px; overflow-y: auto; border: 1px solid var(--border-light); border-radius: 8px; padding: 10px;">
+                            <!-- Emergency Contacts -->
+                            <div class="contact-item" data-phone="911" data-name="Emergency Services"
+                                onclick="toggleContact(this)"
+                                style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 6px; border: 1px solid transparent; transition: all 0.2s;">
+                                <input type="checkbox" class="contact-checkbox" style="margin: 0;">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; font-size: 13px;">🚨 Emergency Services</div>
+                                    <div style="font-size: 11px; color: #6b7280;">911</div>
+                                </div>
+                            </div>
+
+                            <div class="contact-item" data-phone="100" data-name="Police" onclick="toggleContact(this)"
+                                style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 6px; border: 1px solid transparent; transition: all 0.2s;">
+                                <input type="checkbox" class="contact-checkbox" style="margin: 0;">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; font-size: 13px;">👮 Police</div>
+                                    <div style="font-size: 11px; color: #6b7280;">100</div>
+                                </div>
+                            </div>
+
+                            <div class="contact-item" data-phone="101" data-name="Fire Department"
+                                onclick="toggleContact(this)"
+                                style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 6px; border: 1px solid transparent; transition: all 0.2s;">
+                                <input type="checkbox" class="contact-checkbox" style="margin: 0;">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; font-size: 13px;">🔥 Fire Department</div>
+                                    <div style="font-size: 11px; color: #6b7280;">101</div>
+                                </div>
+                            </div>
+
+                            <div class="contact-item" data-phone="108" data-name="Ambulance"
+                                onclick="toggleContact(this)"
+                                style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 6px; border: 1px solid transparent; transition: all 0.2s;">
+                                <input type="checkbox" class="contact-checkbox" style="margin: 0;">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; font-size: 13px;">🚑 Ambulance</div>
+                                    <div style="font-size: 11px; color: #6b7280;">108</div>
+                                </div>
+                            </div>
+
+                            <div class="contact-item" data-phone="8849826386" data-name="Admin"
+                                onclick="toggleContact(this)"
+                                style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 6px; border: 1px solid transparent; transition: all 0.2s;">
+                                <input type="checkbox" class="contact-checkbox" style="margin: 0;">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; font-size: 13px;">👤 Admin</div>
+                                    <div style="font-size: 11px; color: #6b7280;">8849826386</div>
+                                </div>
+                            </div>
+
+                            <div class="contact-item" data-phone="8767208015" data-name="Admin 2"
+                                onclick="toggleContact(this)"
+                                style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 6px; border: 1px solid transparent; transition: all 0.2s;">
+                                <input type="checkbox" class="contact-checkbox" style="margin: 0;">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; font-size: 13px;">👤 Admin 2</div>
+                                    <div style="font-size: 11px; color: #6b7280;">8767208015</div>
+                                </div>
+                            </div>
+
+                            <div class="contact-item" data-phone="9876543210" data-name="Security Team"
+                                onclick="toggleContact(this)"
+                                style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 6px; border: 1px solid transparent; transition: all 0.2s;">
+                                <input type="checkbox" class="contact-checkbox" style="margin: 0;">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; font-size: 13px;">🛡️ Security Team</div>
+                                    <div style="font-size: 11px; color: #6b7280;">9876543210</div>
+                                </div>
+                            </div>
+
+                            <div class="contact-item" data-phone="9123456789" data-name="Medical Team"
+                                onclick="toggleContact(this)"
+                                style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 6px; border: 1px solid transparent; transition: all 0.2s;">
+                                <input type="checkbox" class="contact-checkbox" style="margin: 0;">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; font-size: 13px;">⚕️ Medical Team</div>
+                                    <div style="font-size: 11px; color: #6b7280;">9123456789</div>
+                                </div>
                             </div>
                         </div>
 
-                        <hr style="color: green; background-color: green; height: 2px;">
-                        <div class="summary-grid"
-                            style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
-                            <div class="summary-item">
-                                <strong>Current Crowd Density:</strong> <span id="currentDensity"
-                                    data-source="mysql">Loading...</span>
-                            </div>
-                            <div class="summary-item">
-                                <strong>Safe Zones:</strong> <span id="safeZonesCount"
-                                    data-source="mysql">Loading...</span>
-                            </div>
-                            <div class="summary-item">
-                                <strong>Warning Zones:</strong> <span id="warningZonesCount"
-                                    data-source="mysql">Loading...</span>
-                            </div>
-                            <div class="summary-item">
-                                <strong>Critical Zones:</strong> <span id="criticalZonesCount"
-                                    data-source="mysql">Loading...</span>
-                            </div>
-                            <div class="summary-item">
-                                <strong>People Count:</strong> <span id="totalPeopleCount"
-                                    data-source="mysql">Loading...</span>
-                            </div>
-                            <div class="summary-item">
-                                <strong>Last Updated:</strong> <span id="lastUpdateTime"
-                                    data-source="mysql">Connecting...</span>
-                            </div>
-                        </div>
-                        <div
-                            style="margin-top: 12px; padding: 10px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; font-size: 0.85rem; color: var(--text-dark);">
-                            <i class="fas fa-info-circle" style="color: var(--success-color);"></i>
-                            <strong>Database Status:</strong> Real-time data synchronized from MySQL database every
-                            3
-                            seconds
-                        </div>
-                        <div class="heatmap-controls"
-                            style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end;">
-                            <button id="refreshDatabase" class="camera-btn primary" title="Refresh data from MySQL">
-                                <i class="fas fa-sync-alt"></i> Sync Database
-                            </button>
-                            <button id="exportHeatmap" class="camera-btn secondary">
-                                <i class="fas fa-download"></i> Export Data
-                            </button>
-                            <button id="resetHeatmap" class="camera-btn warning">
-                                <i class="fas fa-undo"></i> Reset View
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Charts Section -->
-                    <div class="charts-section">
-                        <div class="chart-container">
-                            <h3 style="margin-bottom: 15px;">Crowd Density Trends</h3>
-                            <canvas id="densityChart"></canvas>
-                        </div>
-                        <div class="chart-container">
-                            <h3 style="margin-bottom: 15px;">Predictions & Forecasts</h3>
-                            <canvas id="predictionsChart"></canvas>
+                        <div style="margin-top: 10px; font-size: 11px; color: #6b7280; text-align: center;">
+                            <span id="selectedCount">0</span> contacts selected
                         </div>
                     </div>
                 </div>
-
-                <!-- Alerts Page -->
-                <div id="alerts" class="page">
-                    <div class="page-header">
-                        <h1 class="page-title">Live Alerts</h1>
-                        <p class="page-subtitle">Real-time emergency and crowd management alerts</p>
-                    </div>
-
-                    <div class="alerts-grid">
-                        <div class="alert-card"
-                            style="background: var(--light-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-light); animation: alertSlide 0.6s ease-out;">
-                            <div class="alert-header"
-                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                                <h3 style="color: var(--danger-color);"><i class="fas fa-fire"></i> Fire Emergency
-                                </h3>
-                            </div>
-                            <div id="fireResult" class="detection-result"
-                                style="display: none; margin-bottom: 15px; padding: 10px; border-radius: 6px; font-weight: 600;">
-                            </div>
-                            <div class="alert-actions">
-                                <button id="monitorFireBtn" class="alert-btn"
-                                    style="background: var(--danger-color); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">
-                                    <i class="fas fa-eye"></i> Monitor
-                                </button>
-                                <button id="stopFireBtn" class="alert-btn"
-                                    style="background: #6b7280; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin-left: 8px; display: none;">
-                                    <i class="fas fa-stop"></i> Stop
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="alert-card"
-                            style="background: var(--light-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-light); animation: alertSlide 0.6s ease-out 0.2s both;">
-                            <div class="alert-header"
-                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                                <h3 style="color: var(--warning-color);"><i class="fas fa-users"></i> Overcrowding
-                                </h3>
-                            </div>
-                            <div id="overcrowdingResult" class="detection-result"
-                                style="display: none; margin-bottom: 15px; padding: 10px; border-radius: 6px; font-weight: 600;">
-                            </div>
-                            <div class="alert-actions">
-                                <button id="monitorOvercrowdingBtn" class="alert-btn"
-                                    style="background: var(--warning-color); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">
-                                    <i class="fas fa-eye"></i> Monitor
-                                </button>
-                                <button id="stopOvercrowdingBtn" class="alert-btn"
-                                    style="background: #6b7280; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin-left: 8px; display: none;">
-                                    <i class="fas fa-stop"></i> Stop
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="alert-card"
-                            style="background: var(--light-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-light); animation: alertSlide 0.6s ease-out 0.4s both;">
-                            <div class="alert-header"
-                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                                <h3 style="color: var(--primary-color);"><i class="fas fa-heartbeat"></i> Medical
-                                    Emergency</h3>
-                            </div>
-                            <div id="medicalResult" class="detection-result"
-                                style="display: none; margin-bottom: 15px; padding: 10px; border-radius: 6px; font-weight: 600;">
-                            </div>
-                            <div class="alert-actions">
-                                <button id="monitorMedicalBtn" class="alert-btn"
-                                    style="background: var(--primary-color); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">
-                                    <i class="fas fa-eye"></i> Monitor
-                                </button>
-                                <button id="stopMedicalBtn" class="alert-btn"
-                                    style="background: #6b7280; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin-left: 8px; display: none;">
-                                    <i class="fas fa-stop"></i> Stop
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="alert-card"
-                            style="background: var(--light-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-light); animation: alertSlide 0.6s ease-out 0.6s both;">
-                            <div class="alert-header"
-                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                                <h3 style="color: var(--danger-color);"><i class="fas fa-running"></i> Stampede Risk
-                                </h3>
-                            </div>
-                            <div id="stampedeResult" class="detection-result"
-                                style="display: none; margin-bottom: 15px; padding: 10px; border-radius: 6px; font-weight: 600;">
-                            </div>
-                            <div class="alert-actions">
-                                <button id="monitorStampedeBtn" class="alert-btn"
-                                    style="background: var(--danger-color); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">
-                                    <i class="fas fa-eye"></i> Monitor
-                                </button>
-                                <button id="stopStampedeBtn" class="alert-btn"
-                                    style="background: #6b7280; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin-left: 8px; display: none;">
-                                    <i class="fas fa-stop"></i> Stop
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Alert History -->
-                    <div style="margin-top: 30px;">
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                            <h3 style="margin: 0;">Alert History (Last 24 Hours)</h3>
-                            <button id="viewFullHistoryBtn" class="login-btn"
-                                style="width: auto; padding: 8px 16px; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;">
-                                <i class="fas fa-history"></i> View Full History
-                            </button>
-                        </div>
-                        <div id="alertHistoryContainer" class="history-container"
-                            style="background: var(--light-bg); border-radius: 12px; padding: 20px; border: 1px solid var(--border-light);">
-                            <div class="history-item"
-                                style="padding: 15px; border-bottom: 1px solid var(--border-light); animation: historyFade 0.5s ease-out;">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <strong style="color: var(--success-color);">System Initialized</strong>
-                                        <p style="color: #6b7280; font-size: 0.9rem; margin-top: 5px;">All
-                                            monitoring
-                                            systems are now operational</p>
-                                    </div>
-                                    <span style="color: #6b7280; font-size: 0.8rem;">Just now</span>
-                                </div>
-                            </div>
-                            <div style="text-align: center; color: #6b7280; padding: 20px;">
-                                <p>Recent alerts will appear here. Click "View Full Database" to see all alerts.</p>
-                            </div>
-                        </div>
+                <div class="modal-footer" style="padding: 20px 25px;">
+                    <div style="display:flex; gap:10px; justify-content:flex-end;">
+                        <button id="mnCancel" class="btn" style="padding:10px 18px;">Cancel</button>
+                        <button id="mnSend" class="btn primary" style="padding:10px 18px;"
+                            onclick="sendMassNotification()">Send
+                            Notification</button>
                     </div>
                 </div>
-
-                <!-- Analytics Page -->
-                <div id="analytics" class="page">
-                    <div class="page-header">
-                        <h1 class="page-title">Analytics</h1>
-                        <p class="page-subtitle">Crowd density analytics and predictive insights</p>
-                    </div>
-
-                    <!-- New Analytics Layout -->
-                    <div class="analytics-layout">
-                        <div class="analytics-left-column">
-                            <div class="chart-container">
-                                <h3 style="margin-bottom: 15px;">Hourly Crowd Patterns</h3>
-                                <canvas id="hourlyChart"></canvas>
-                            </div>
-                            <div class="chart-container">
-                                <h3 style="margin-bottom: 15px;">AI Prediction Models</h3>
-                                <canvas id="predictionChart"></canvas>
-                                <div style="margin-top: 15px; text-align: center; color: #6b7280;">
-                                    <small>Predictions based on historical data and current trends</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="analytics-right-column">
-                            <div class="chart-container">
-                                <h3 style="margin-bottom: 15px;">Zone Distribution</h3>
-                                <canvas id="zoneChart"></canvas>
-                                <!-- This is the new container for zone details -->
-                                <div id="zoneDistributionDetails" style="margin-top: 15px;">
-                                    <!-- Content will be dynamically inserted by script.js -->
-                                </div>
-                            </div>
-                            <div class="chart-container" id="scanning-info-container" style="margin-top: 25px;">
-                                <h3 style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-                                    <i class="fas fa-database"></i> MySQL Database Scan
-                                </h3>
-                                <div class="scan-status">
-                                    <div class="scan-light"></div>
-                                    <span id="scanStatusText">Scanning for new data...</span>
-                                </div>
-                                <div class="scan-results">
-                                    <div class="scan-result-item">
-                                        <span>Tables Scanned:</span>
-                                        <strong id="tablesScanned">0</strong>
-                                    </div>
-                                    <div class="scan-result-item">
-                                        <span>New Alerts Found:</span>
-                                        <strong id="newAlertsFound">0</strong>
-                                    </div>
-                                    <div class="scan-result-item">
-                                        <span>Density Records Added:</span>
-                                        <strong id="densityRecordsAdded">0</strong>
-                                    </div>
-                                    <div class="scan-result-item">
-                                        <span>Last Scan:</span>
-                                        <strong id="lastScanTime">N/A</strong>
-                                    </div>
-                                </div>
-                                <div class="scan-progress-bar">
-                                    <div class="scan-progress" id="scanProgress"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Settings Page -->
-                <div id="settings" class="page">
-                    <div class="page-header">
-                        <h1 class="page-title">Settings</h1>
-                        <p class="page-subtitle">Configure system preferences and monitoring parameters</p>
-                    </div>
-
-                    <!-- General Settings -->
-                    <div class="settings-section">
-                        <h3 style="margin-bottom: 20px;">General Settings</h3>
-                        <div class="setting-item">
-                            <div>
-                                <strong>Dark Mode</strong>
-                                <p style="color: #6b7280; font-size: 0.9rem;">Toggle between light and dark theme
-                                </p>
-                            </div>
-                            <div class="toggle-switch active" id="darkModeToggle">
-                            </div>
-                        </div>
-                        <div class="setting-item">
-                            <div>
-                                <strong>Real-time Updates</strong>
-                                <p style="color: #6b7280; font-size: 0.9rem;">Enable automatic data refresh every 5
-                                    seconds</p>
-                            </div>
-                            <div class="toggle-switch active" id="autoRefreshToggle">
-                            </div>
-                        </div>
-                        <div class="setting-item">
-                            <div>
-                                <strong>Sound Alerts</strong>
-                                <p style="color: #6b7280; font-size: 0.9rem;">Play sound notifications for critical
-                                    alerts</p>
-                            </div>
-                            <div class="toggle-switch active" id="soundAlertsToggle">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Monitoring Settings -->
-                    <div class="settings-section">
-                        <h3 style="margin-bottom: 20px;">Monitoring Configuration</h3>
-                        <div class="setting-item">
-                            <div>
-                                <strong>Crowd Density Threshold</strong>
-                                <p style="color: #6b7280; font-size: 0.9rem;">Set warning threshold (people per
-                                    square
-                                    meter)</p>
-                            </div>
-                            <input type="number" value="4" min="1" max="10"
-                                style="padding: 8px; border: 1px solid var(--border-light); border-radius: 6px; width: 80px;">
-                        </div>
-                        <div class="setting-item">
-                            <div>
-                                <strong>Update Frequency</strong>
-                                <p style="color: #6b7280; font-size: 0.9rem;">Data refresh interval in seconds</p>
-                            </div>
-                            <select
-                                style="padding: 8px; border: 1px solid var(--border-light); border-radius: 6px; width: 100px;">
-                                <option value="3">3 seconds</option>
-                                <option value="5" selected>5 seconds</option>
-                                <option value="10">10 seconds</option>
-                                <option value="30">30 seconds</option>
-                            </select>
-                        </div>
-                        <div class="setting-item">
-                            <div>
-                                <strong>Alert Sensitivity</strong>
-                                <p style="color: #6b7280; font-size: 0.9rem;">Adjust AI model sensitivity for threat
-                                    detection</p>
-                            </div>
-                            <select
-                                style="padding: 8px; border: 1px solid var(--border-light); border-radius: 6px; width: 120px;">
-                                <option value="low">Low</option>
-                                <option value="medium" selected>Medium</option>
-                                <option value="high">High</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- API Settings -->
-                    <div class="settings-section">
-                        <h3 style="margin-bottom: 20px;">API Configuration</h3>
-                        <div class="setting-item">
-                            <div>
-                                <strong>API Endpoint</strong>
-                                <p style="color: #6b7280; font-size: 0.9rem;">Backend API server URL</p>
-                            </div>
-                            <input type="url" value="http://localhost:8000/api"
-                                style="padding: 8px; border: 1px solid var(--border-light); border-radius: 6px; width: 250px;">
-                        </div>
-                        <div class="setting-item">
-                            <div>
-                                <strong>Connection Status</strong>
-                                <p style="color: #6b7280; font-size: 0.9rem;">Current API connection status</p>
-                            </div>
-                            <span style="color: var(--warning-color); font-weight: 600;">
-                                <i class="fas fa-circle" style="font-size: 0.8rem;"></i> Simulated Mode
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Save Button -->
-                    <div style="text-align: center; margin-top: 30px;">
-                        <button class="login-btn" style="width: auto; padding: 12px 30px;" onclick="saveSettings()">
-                            <i class="fas fa-save"></i> Save Settings
-                        </button>
-                    </div>
-                </div>
-            </main>
-        </div>
-    </div>
-
-    <!-- External Scripts -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.8.0/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
-    <script src="script.js"></script>
-
-    <!-- Mass Notification Modal -->
-    <div id="massNotificationModal" class="modal-overlay hidden">
-        <div class="modal"
-            style="max-width: 900px; width: 90vw; animation: modalSlideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);">
-            <div class="modal-header"
-                style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border-radius: 15px 15px 0 0; padding: 25px;">
-                <h3 style="margin:0; display:flex; align-items:center; gap:15px; font-size: 1.6rem;">
-                    <i class="fas fa-broadcast-tower" style="font-size: 2rem; animation: pulse 2s infinite;"></i>
-                    📢 Mass Emergency Alert
-                </h3>
-                <button id="mnClose" class="modal-close"
-                    style="background: rgba(255,255,255,0.2); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.4rem; cursor: pointer;"
-                    title="Close">&times;</button>
             </div>
-            <div class="modal-body" style="display: flex; gap: 20px; padding: 25px;">
-                <!-- Left Panel: Message Composition -->
-                <div style="flex: 1;">
-                    <p style="color:#6b7280; margin-top:0;">Compose and send emergency alerts to multiple contacts.
-                    </p>
-                    <div style="margin-top:15px;">
-                        <label for="mnPhone"
-                            style="font-weight:600; display: block; margin-bottom: 8px;">Recipients</label>
-                        <div style="position: relative;">
-                            <input id="mnPhone" type="text" value=""
-                                placeholder="Enter phone numbers separated by commas"
-                                style="width:100%; padding:10px 40px 10px 10px; border-radius:6px; border:1px solid var(--border-light);">
-                            <button id="clearRecipientsBtn" onclick="clearRecipients()"
-                                style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #6b7280; cursor: pointer; font-size: 16px;"
-                                title="Clear all recipients">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <div id="selectedContactsDisplay" style="margin-top: 8px; display: none;">
-                            <div style="font-size: 12px; color: #6b7280; margin-bottom: 4px;">Selected Contacts:
-                            </div>
-                            <div id="contactChips" style="display: flex; flex-wrap: wrap; gap: 4px;"></div>
-                        </div>
-                    </div>
-                    <div style="margin-top:15px;">
-                        <label for="mnMessage" style="font-weight:600;">Message</label>
-                        <div style="margin:6px 0; display:flex; gap:5px; flex-wrap:wrap;">
-                            <button type="button" onclick="setTemplate('fire')" class="template-btn fire-btn"
-                                style="padding:4px 8px; font-size:11px; border:1px solid #ef4444; background:#fef2f2; color:#dc2626; border-radius:4px; cursor:pointer; transition:all 0.3s ease;">🔥
-                                Fire Emergency</button>
-                            <button type="button" onclick="setTemplate('medical')" class="template-btn medical-btn"
-                                style="padding:4px 8px; font-size:11px; border:1px solid #059669; background:#f0fdf4; color:#059669; border-radius:4px; cursor:pointer; transition:all 0.3s ease;">⚕️
-                                Medical Emergency</button>
-                            <button type="button" onclick="setTemplate('overcrowding')" class="template-btn crowd-btn"
-                                style="padding:4px 8px; font-size:11px; border:1px solid #d97706; background:#fffbeb; color:#d97706; border-radius:4px; cursor:pointer; transition:all 0.3s ease;">👥
-                                Overcrowding</button>
-                            <button type="button" onclick="setTemplate('stampede')" class="template-btn stampede-btn"
-                                style="padding:4px 8px; font-size:11px; border:1px solid #7c2d12; background:#fef7ed; color:#7c2d12; border-radius:4px; cursor:pointer; transition:all 0.3s ease;">🏃‍♂️
-                                Stampede Risk</button>
-                        </div>
-                        <textarea id="mnMessage" rows="4" placeholder="Type your alert message here..."
-                            style="width:100%; padding:10px; margin-top:6px; border-radius:6px; border:1px solid var(--border-light);"></textarea>
-                    </div>
-                </div>
+        </div>
 
-                <!-- Right Panel: Contact List -->
-                <div style="flex: 0 0 300px; border-left: 1px solid var(--border-light); padding-left: 20px;">
+        <!-- Safe Routes Modal -->
+        <div id="safeRoutesModal" class="modal-overlay hidden">
+            <div class="modal"
+                style="max-width: 600px; animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                <div class="modal-header"
+                    style="background: linear-gradient(135deg, #10b981, #059669); color: white; border-radius: 12px 12px 0 0; padding: 25px;">
+                    <h3 style="margin:0; display:flex; align-items:center; gap:12px; font-size: 1.4rem;">
+                        <i class="fas fa-route" style="font-size: 1.6rem; animation: pulse 2s infinite;"></i>
+                        🛡️ Smart Safe Routes
+                    </h3>
+                    <button id="srClose" class="modal-close"
+                        style="background: rgba(255,255,255,0.2); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease;"
+                        title="Close">&times;</button>
+                </div>
+                <div class="modal-body"
+                    style="padding: 25px; background: var(--dark-secondary); max-height: 70vh; overflow: hidden;">
                     <div
-                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                        <h4 style="margin: 0; font-size: 1.1rem;">📞 Emergency Contacts</h4>
-                        <button onclick="selectAllContacts()"
-                            style="background: #3b82f6; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">
-                            Select All
+                        style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.1)); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 15px; margin-bottom: 20px;">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <i class="fas fa-route" style="color: #10b981; font-size: 1.2rem;"></i>
+                            <h4 style="margin: 0; color: #10b981; font-size: 1rem;">Smart Route Planning</h4>
+                        </div>
+                        <p style="margin: 0; color: #f8fafc; font-size: 0.9rem; line-height: 1.4;">Find the best routes
+                            between any locations using real roads and highways. Search for any place, address, or
+                            landmark
+                            worldwide.</p>
+                    </div>
+
+                    <div class="form-row" style="margin-bottom: 20px; position: relative;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <label for="srStart" style="font-weight: 600; color: #f8fafc; font-size: 0.95rem;">📍
+                                Starting
+                                Location</label>
+                            <button type="button" id="useGpsBtn"
+                                style="background: #10b981; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; cursor: pointer;">📱
+                                Use GPS</button>
+                        </div>
+                        <input type="text" id="srStart" placeholder="🎯 Type starting location..."
+                            style="width: 100%; padding: 10px 12px; border: 2px solid #4b5563; border-radius: 8px; font-size: 0.95rem; background: #374151; color: #f8fafc; transition: all 0.3s ease;"
+                            autocomplete="off">
+                        <div id="startSuggestions" class="suggestions-dropdown"
+                            style="position: absolute; top: 100%; left: 0; right: 0; background: #374151; border: 1px solid #4b5563; border-radius: 8px; max-height: 150px; overflow-y: auto; z-index: 1000; display: none;">
+                        </div>
+                    </div>
+
+                    <div class="form-row" style="margin-bottom: 20px; position: relative;">
+                        <label for="srDest"
+                            style="display: block; font-weight: 600; margin-bottom: 6px; color: #f8fafc; font-size: 0.95rem;">🎯
+                            Destination</label>
+                        <input type="text" id="srDest" placeholder="🏁 Type destination..."
+                            style="width: 100%; padding: 10px 12px; border: 2px solid #4b5563; border-radius: 8px; font-size: 0.95rem; background: #374151; color: #f8fafc; transition: all 0.3s ease;"
+                            autocomplete="off">
+                        <div id="destSuggestions" class="suggestions-dropdown"
+                            style="position: absolute; top: 100%; left: 0; right: 0; background: #374151; border: 1px solid #4b5563; border-radius: 8px; max-height: 150px; overflow-y: auto; z-index: 1000; display: none;">
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 15px;">
+                        <button id="srClear" class="btn"
+                            style="padding: 8px 16px; background: #f59e0b; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.9rem;">
+                            <i class="fas fa-eraser"></i> Clear
+                        </button>
+                        <button id="srCancel" class="btn"
+                            style="padding: 8px 16px; background: #6b7280; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.9rem;">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                        <button id="srFind" class="btn primary"
+                            style="padding: 8px 20px; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);">
+                            <i class="fas fa-route"></i> Find Routes
                         </button>
                     </div>
-
-                    <div id="contactsList"
-                        style="max-height: 300px; overflow-y: auto; border: 1px solid var(--border-light); border-radius: 8px; padding: 10px;">
-                        <!-- Emergency Contacts -->
-                        <div class="contact-item" data-phone="911" data-name="Emergency Services"
-                            onclick="toggleContact(this)"
-                            style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 6px; border: 1px solid transparent; transition: all 0.2s;">
-                            <input type="checkbox" class="contact-checkbox" style="margin: 0;">
-                            <div style="flex: 1;">
-                                <div style="font-weight: 600; font-size: 13px;">🚨 Emergency Services</div>
-                                <div style="font-size: 11px; color: #6b7280;">911</div>
-                            </div>
-                        </div>
-
-                        <div class="contact-item" data-phone="100" data-name="Police" onclick="toggleContact(this)"
-                            style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 6px; border: 1px solid transparent; transition: all 0.2s;">
-                            <input type="checkbox" class="contact-checkbox" style="margin: 0;">
-                            <div style="flex: 1;">
-                                <div style="font-weight: 600; font-size: 13px;">👮 Police</div>
-                                <div style="font-size: 11px; color: #6b7280;">100</div>
-                            </div>
-                        </div>
-
-                        <div class="contact-item" data-phone="101" data-name="Fire Department"
-                            onclick="toggleContact(this)"
-                            style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 6px; border: 1px solid transparent; transition: all 0.2s;">
-                            <input type="checkbox" class="contact-checkbox" style="margin: 0;">
-                            <div style="flex: 1;">
-                                <div style="font-weight: 600; font-size: 13px;">🔥 Fire Department</div>
-                                <div style="font-size: 11px; color: #6b7280;">101</div>
-                            </div>
-                        </div>
-
-                        <div class="contact-item" data-phone="108" data-name="Ambulance" onclick="toggleContact(this)"
-                            style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 6px; border: 1px solid transparent; transition: all 0.2s;">
-                            <input type="checkbox" class="contact-checkbox" style="margin: 0;">
-                            <div style="flex: 1;">
-                                <div style="font-weight: 600; font-size: 13px;">🚑 Ambulance</div>
-                                <div style="font-size: 11px; color: #6b7280;">108</div>
-                            </div>
-                        </div>
-
-                        <div class="contact-item" data-phone="8849826386" data-name="Admin"
-                            onclick="toggleContact(this)"
-                            style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 6px; border: 1px solid transparent; transition: all 0.2s;">
-                            <input type="checkbox" class="contact-checkbox" style="margin: 0;">
-                            <div style="flex: 1;">
-                                <div style="font-weight: 600; font-size: 13px;">👤 Admin</div>
-                                <div style="font-size: 11px; color: #6b7280;">8849826386</div>
-                            </div>
-                        </div>
-
-                        <div class="contact-item" data-phone="8767208015" data-name="Admin 2"
-                            onclick="toggleContact(this)"
-                            style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 6px; border: 1px solid transparent; transition: all 0.2s;">
-                            <input type="checkbox" class="contact-checkbox" style="margin: 0;">
-                            <div style="flex: 1;">
-                                <div style="font-weight: 600; font-size: 13px;">👤 Admin 2</div>
-                                <div style="font-size: 11px; color: #6b7280;">8767208015</div>
-                            </div>
-                        </div>
-
-                        <div class="contact-item" data-phone="9876543210" data-name="Security Team"
-                            onclick="toggleContact(this)"
-                            style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 6px; border: 1px solid transparent; transition: all 0.2s;">
-                            <input type="checkbox" class="contact-checkbox" style="margin: 0;">
-                            <div style="flex: 1;">
-                                <div style="font-weight: 600; font-size: 13px;">🛡️ Security Team</div>
-                                <div style="font-size: 11px; color: #6b7280;">9876543210</div>
-                            </div>
-                        </div>
-
-                        <div class="contact-item" data-phone="9123456789" data-name="Medical Team"
-                            onclick="toggleContact(this)"
-                            style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 6px; border: 1px solid transparent; transition: all 0.2s;">
-                            <input type="checkbox" class="contact-checkbox" style="margin: 0;">
-                            <div style="flex: 1;">
-                                <div style="font-weight: 600; font-size: 13px;">⚕️ Medical Team</div>
-                                <div style="font-size: 11px; color: #6b7280;">9123456789</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="margin-top: 10px; font-size: 11px; color: #6b7280; text-align: center;">
-                        <span id="selectedCount">0</span> contacts selected
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer" style="padding: 20px 25px;">
-                <div style="display:flex; gap:10px; justify-content:flex-end;">
-                    <button id="mnCancel" class="btn" style="padding:10px 18px;">Cancel</button>
-                    <button id="mnSend" class="btn primary" style="padding:10px 18px;"
-                        onclick="sendMassNotification()">Send
-                        Notification</button>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Safe Routes Modal -->
-    <div id="safeRoutesModal" class="modal-overlay hidden">
-        <div class="modal" style="max-width: 600px; animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);">
-            <div class="modal-header"
-                style="background: linear-gradient(135deg, #10b981, #059669); color: white; border-radius: 12px 12px 0 0; padding: 25px;">
-                <h3 style="margin:0; display:flex; align-items:center; gap:12px; font-size: 1.4rem;">
-                    <i class="fas fa-route" style="font-size: 1.6rem; animation: pulse 2s infinite;"></i>
-                    🛡️ Smart Safe Routes
-                </h3>
-                <button id="srClose" class="modal-close"
-                    style="background: rgba(255,255,255,0.2); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease;"
-                    title="Close">&times;</button>
+        <!-- Full History Modal -->
+        <div id="fullHistoryModal" class="modal-overlay"
+            style="display: none; z-index: 99999; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);">
+            <div class="modal"
+                style="max-width: 90vw; max-height: 90vh; width: 800px; animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                <div class="modal-header"
+                    style="background: linear-gradient(135deg, var(--primary-color), var(--success-color)); color: white; border-radius: 12px 12px 0 0; padding: 20px;">
+                    <h3 style="margin: 0; display: flex; align-items: center; gap: 12px; font-size: 1.3rem;">
+                        <i class="fas fa-history" style="font-size: 1.5rem; animation: pulse 2s infinite;"></i>
+                        Complete Alert History
+                    </h3>
+                    <button id="fullHistoryClose" class="modal-close"
+                        style="background: rgba(255,255,255,0.2); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease;"
+                        title="Close">&times;</button>
+                </div>
+                <div class="modal-body"
+                    style="padding: 0; max-height: 60vh; overflow-y: auto; background: var(--light-bg);">
+                    <div id="fullHistoryContent" style="padding: 20px;">
+                        <div style="text-align: center; padding: 40px; color: #6b7280;">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 15px;"></i>
+                            <p>Loading complete alert history...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"
+                    style="padding: 20px; background: var(--light-bg); border-radius: 0 0 12px 12px; border-top: 1px solid var(--border-light);">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="color: #6b7280; font-size: 0.9rem;">
+                            <i class="fas fa-database"></i> Data from MySQL Database
+                        </div>
+                        <button id="refreshHistoryBtn" class="login-btn"
+                            style="width: auto; padding: 8px 16px; font-size: 14px;">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body"
-                style="padding: 25px; background: var(--dark-secondary); max-height: 70vh; overflow: hidden;">
+        </div>
+        <!-- Footer -->
+        <footer class="footer-theme"
+            style="padding: 50px 20px; border-top: 3px solid #10b981; position: relative; overflow: hidden; cursor: pointer;"
+            onmouseover="this.querySelector('.footer-dot-effects').style.opacity='1'"
+            onmouseout="this.querySelector('.footer-dot-effects').style.opacity='0'"
+            onclick="this.querySelector('.footer-dot-effects').style.opacity=this.querySelector('.footer-dot-effects').style.opacity==='1'?'0':'1'">
+            <div
+                style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.15) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 60%), radial-gradient(circle at 50% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%); animation: footerGlow 4s ease-in-out infinite alternate;">
+            </div>
+            <div
+                style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(16, 185, 129, 0.03) 2px, rgba(16, 185, 129, 0.03) 4px); animation: patternMove 20s linear infinite;">
+            </div>
+            <div
+                style="position: absolute; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%); top: -100px; left: -100px; animation: floatingOrb1 8s ease-in-out infinite;">
+            </div>
+            <div
+                style="position: absolute; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%); bottom: -75px; right: -75px; animation: floatingOrb2 6s ease-in-out infinite reverse;">
+            </div>
+
+            <div class="footer-dot-effects"
+                style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; opacity: 0; transition: opacity 0.5s ease;">
+            </div>
+
+            <div style="max-width: 1200px; margin: 0 auto; text-align: center; position: relative; z-index: 2;">
+                <div style="margin-bottom: 40px; animation: footerSlideUp 1s ease-out;">
+                    <h3
+                        style="margin: 0 0 15px 0; font-size: 2rem; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <i class="fas fa-shield-alt"
+                            style="color: #10b981; font-size: 2rem; animation: iconRotate 4s linear infinite; display: inline-block;"></i><span
+                            style="background: linear-gradient(45deg, #10b981, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: titleShimmer 3s ease-in-out infinite;">CrowdShield</span>
+                    </h3>
+                    <p
+                        style="margin: 0; color: #cbd5e1; font-size: 1rem; animation: subtitleFade 2s ease-in-out infinite alternate;">
+                        AI-Powered Crowd & Disaster Management System</p>
+                </div>
+
                 <div
-                    style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.1)); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 15px; margin-bottom: 20px;">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                        <i class="fas fa-route" style="color: #10b981; font-size: 1.2rem;"></i>
-                        <h4 style="margin: 0; color: #10b981; font-size: 1rem;">Smart Route Planning</h4>
+                    style="display: flex; justify-content: center; gap: 30px; margin-bottom: 40px; animation: socialFloat 1.5s ease-out 0.3s both;">
+                    <a href="javascript:void(0)" onclick="showSocialModal('github')" data-platform="github"
+                        style="color: white; font-size: 2.2rem; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); text-decoration: none; position: relative; display: inline-block;"
+                        onmouseover="this.style.color='#10b981'; this.style.transform='scale(1.3) rotate(360deg) translateY(-10px)'; this.style.textShadow='0 0 20px #10b981'"
+                        onmouseout="this.style.color='white'; this.style.transform='scale(1) rotate(0deg) translateY(0px)'; this.style.textShadow='none'">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="javascript:void(0)" onclick="showSocialModal('linkedin')" data-platform="linkedin"
+                        style="color: white; font-size: 2.2rem; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); text-decoration: none; position: relative; display: inline-block;"
+                        onmouseover="this.style.color='#0077b5'; this.style.transform='scale(1.3) rotate(-360deg) translateY(-10px)'; this.style.textShadow='0 0 20px #0077b5'"
+                        onmouseout="this.style.color='white'; this.style.transform='scale(1) rotate(0deg) translateY(0px)'; this.style.textShadow='none'">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="javascript:void(0)" onclick="showSocialModal('instagram')" data-platform="instagram"
+                        style="color: white; font-size: 2.2rem; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); text-decoration: none; position: relative; display: inline-block;"
+                        onmouseover="this.style.color='#e4405f'; this.style.transform='scale(1.3) rotate(360deg) translateY(-10px)'; this.style.textShadow='0 0 20px #e4405f'"
+                        onmouseout="this.style.color='white'; this.style.transform='scale(1) rotate(0deg) translateY(0px)'; this.style.textShadow='none'">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="javascript:void(0)" onclick="showSocialModal('whatsapp')" data-platform="whatsapp"
+                        style="color: white; font-size: 2.2rem; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); text-decoration: none; position: relative; display: inline-block;"
+                        onmouseover="this.style.color='#25d366'; this.style.transform='scale(1.3) rotate(-360deg) translateY(-10px)'; this.style.textShadow='0 0 20px #25d366'"
+                        onmouseout="this.style.color='white'; this.style.transform='scale(1) rotate(0deg) translateY(0px)'; this.style.textShadow='none'">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+
+                <div
+                    style="border-top: 2px solid rgba(16, 185, 129, 0.3); padding-top: 25px; animation: copyrightSlide 1s ease-out 0.6s both; position: relative;">
+                    <div class="dot-effects"
+                        style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; opacity: 0; transition: opacity 0.5s ease;">
                     </div>
-                    <p style="margin: 0; color: #f8fafc; font-size: 0.9rem; line-height: 1.4;">Find the best routes
-                        between any locations using real roads and highways. Search for any place, address, or
-                        landmark
-                        worldwide.</p>
+                    <p style="margin: 0; font-size: 1rem; font-weight: 600; position: relative; z-index: 2;"
+                        onmouseover="document.querySelector('.dot-effects').style.opacity='1'"
+                        onmouseout="document.querySelector('.dot-effects').style.opacity='0'">&copy; 2025 <span
+                            style="position: relative; cursor: pointer; background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; transition: all 0.4s ease; display: inline-block;"
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.textShadow='0 0 15px rgba(16,185,129,0.8)'; this.querySelector('.underline-effect').style.width='100%'"
+                            onmouseout="this.style.transform='scale(1)'; this.style.textShadow='none'; this.querySelector('.underline-effect').style.width='0%'">Tech
+                            Nova<span class="underline-effect"
+                                style="position: absolute; bottom: -3px; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6); transition: width 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); border-radius: 2px; box-shadow: 0 0 10px rgba(16,185,129,0.6);"></span></span>
+                        | <span
+                            style="background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-size: 200% 100%; animation: copyrightGlow 3s linear infinite;">All
+                            Rights Reserved</span></p>
                 </div>
+            </div>
 
-                <div class="form-row" style="margin-bottom: 20px; position: relative;">
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                        <label for="srStart" style="font-weight: 600; color: #f8fafc; font-size: 0.95rem;">📍
-                            Starting
-                            Location</label>
-                        <button type="button" id="useGpsBtn"
-                            style="background: #10b981; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; cursor: pointer;">📱
-                            Use GPS</button>
-                    </div>
-                    <input type="text" id="srStart" placeholder="🎯 Type starting location..."
-                        style="width: 100%; padding: 10px 12px; border: 2px solid #4b5563; border-radius: 8px; font-size: 0.95rem; background: #374151; color: #f8fafc; transition: all 0.3s ease;"
-                        autocomplete="off">
-                    <div id="startSuggestions" class="suggestions-dropdown"
-                        style="position: absolute; top: 100%; left: 0; right: 0; background: #374151; border: 1px solid #4b5563; border-radius: 8px; max-height: 150px; overflow-y: auto; z-index: 1000; display: none;">
-                    </div>
+        </footer>
+
+        <!-- Social Accounts Modal -->
+        <div id="socialModal" class="modal-overlay hidden">
+            <div class="modal social-modal">
+                <div class="modal-header social-modal-header">
+                    <h3 id="socialModalTitle" class="modal-title">Platform Accounts</h3>
+                    <button id="socialModalClose" class="modal-close" title="Close">&times;</button>
                 </div>
-
-                <div class="form-row" style="margin-bottom: 20px; position: relative;">
-                    <label for="srDest"
-                        style="display: block; font-weight: 600; margin-bottom: 6px; color: #f8fafc; font-size: 0.95rem;">🎯
-                        Destination</label>
-                    <input type="text" id="srDest" placeholder="🏁 Type destination..."
-                        style="width: 100%; padding: 10px 12px; border: 2px solid #4b5563; border-radius: 8px; font-size: 0.95rem; background: #374151; color: #f8fafc; transition: all 0.3s ease;"
-                        autocomplete="off">
-                    <div id="destSuggestions" class="suggestions-dropdown"
-                        style="position: absolute; top: 100%; left: 0; right: 0; background: #374151; border: 1px solid #4b5563; border-radius: 8px; max-height: 150px; overflow-y: auto; z-index: 1000; display: none;">
-                    </div>
-                </div>
-
-                <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 15px;">
-                    <button id="srClear" class="btn"
-                        style="padding: 8px 16px; background: #f59e0b; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.9rem;">
-                        <i class="fas fa-eraser"></i> Clear
-                    </button>
-                    <button id="srCancel" class="btn"
-                        style="padding: 8px 16px; background: #6b7280; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.9rem;">
-                        <i class="fas fa-times"></i> Cancel
-                    </button>
-                    <button id="srFind" class="btn primary"
-                        style="padding: 8px 20px; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);">
-                        <i class="fas fa-route"></i> Find Routes
-                    </button>
+                <div id="socialModalBody" class="modal-body">
+                    <!-- Account info will be injected here -->
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Full History Modal -->
-    <div id="fullHistoryModal" class="modal-overlay"
-        style="display: none; z-index: 99999; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);">
-        <div class="modal"
-            style="max-width: 90vw; max-height: 90vh; width: 800px; animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);">
-            <div class="modal-header"
-                style="background: linear-gradient(135deg, var(--primary-color), var(--success-color)); color: white; border-radius: 12px 12px 0 0; padding: 20px;">
-                <h3 style="margin: 0; display: flex; align-items: center; gap: 12px; font-size: 1.3rem;">
-                    <i class="fas fa-history" style="font-size: 1.5rem; animation: pulse 2s infinite;"></i>
-                    Complete Alert History
-                </h3>
-                <button id="fullHistoryClose" class="modal-close"
-                    style="background: rgba(255,255,255,0.2); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease;"
-                    title="Close">&times;</button>
-            </div>
-            <div class="modal-body"
-                style="padding: 0; max-height: 60vh; overflow-y: auto; background: var(--light-bg);">
-                <div id="fullHistoryContent" style="padding: 20px;">
-                    <div style="text-align: center; padding: 40px; color: #6b7280;">
-                        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 15px;"></i>
-                        <p>Loading complete alert history...</p>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer"
-                style="padding: 20px; background: var(--light-bg); border-radius: 0 0 12px 12px; border-top: 1px solid var(--border-light);">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="color: #6b7280; font-size: 0.9rem;">
-                        <i class="fas fa-database"></i> Data from MySQL Database
-                    </div>
-                    <button id="refreshHistoryBtn" class="login-btn"
-                        style="width: auto; padding: 8px 16px; font-size: 14px;">
-                        <i class="fas fa-sync-alt"></i> Refresh
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer -->
-    <footer class="footer-theme"
-        style="padding: 50px 20px; border-top: 3px solid #10b981; position: relative; overflow: hidden; cursor: pointer;"
-        onmouseover="this.querySelector('.footer-dot-effects').style.opacity='1'"
-        onmouseout="this.querySelector('.footer-dot-effects').style.opacity='0'"
-        onclick="this.querySelector('.footer-dot-effects').style.opacity=this.querySelector('.footer-dot-effects').style.opacity==='1'?'0':'1'">
-        <div
-            style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.15) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 60%), radial-gradient(circle at 50% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%); animation: footerGlow 4s ease-in-out infinite alternate;">
-        </div>
-        <div
-            style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(16, 185, 129, 0.03) 2px, rgba(16, 185, 129, 0.03) 4px); animation: patternMove 20s linear infinite;">
-        </div>
-        <div
-            style="position: absolute; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%); top: -100px; left: -100px; animation: floatingOrb1 8s ease-in-out infinite;">
-        </div>
-        <div
-            style="position: absolute; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%); bottom: -75px; right: -75px; animation: floatingOrb2 6s ease-in-out infinite reverse;">
-        </div>
-
-        <div class="footer-dot-effects"
-            style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; opacity: 0; transition: opacity 0.5s ease;">
-        </div>
-
-        <div style="max-width: 1200px; margin: 0 auto; text-align: center; position: relative; z-index: 2;">
-            <div style="margin-bottom: 40px; animation: footerSlideUp 1s ease-out;">
-                <h3
-                    style="margin: 0 0 15px 0; font-size: 2rem; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <i class="fas fa-shield-alt"
-                        style="color: #10b981; font-size: 2rem; animation: iconRotate 4s linear infinite; display: inline-block;"></i><span
-                        style="background: linear-gradient(45deg, #10b981, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: titleShimmer 3s ease-in-out infinite;">CrowdShield</span>
-                </h3>
-                <p
-                    style="margin: 0; color: #cbd5e1; font-size: 1rem; animation: subtitleFade 2s ease-in-out infinite alternate;">
-                    AI-Powered Crowd & Disaster Management System</p>
-            </div>
-
-            <div
-                style="display: flex; justify-content: center; gap: 30px; margin-bottom: 40px; animation: socialFloat 1.5s ease-out 0.3s both;">
-                <a href="javascript:void(0)" onclick="showSocialModal('github')" data-platform="github"
-                    style="color: white; font-size: 2.2rem; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); text-decoration: none; position: relative; display: inline-block;"
-                    onmouseover="this.style.color='#10b981'; this.style.transform='scale(1.3) rotate(360deg) translateY(-10px)'; this.style.textShadow='0 0 20px #10b981'"
-                    onmouseout="this.style.color='white'; this.style.transform='scale(1) rotate(0deg) translateY(0px)'; this.style.textShadow='none'">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="javascript:void(0)" onclick="showSocialModal('linkedin')" data-platform="linkedin"
-                    style="color: white; font-size: 2.2rem; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); text-decoration: none; position: relative; display: inline-block;"
-                    onmouseover="this.style.color='#0077b5'; this.style.transform='scale(1.3) rotate(-360deg) translateY(-10px)'; this.style.textShadow='0 0 20px #0077b5'"
-                    onmouseout="this.style.color='white'; this.style.transform='scale(1) rotate(0deg) translateY(0px)'; this.style.textShadow='none'">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="javascript:void(0)" onclick="showSocialModal('instagram')" data-platform="instagram"
-                    style="color: white; font-size: 2.2rem; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); text-decoration: none; position: relative; display: inline-block;"
-                    onmouseover="this.style.color='#e4405f'; this.style.transform='scale(1.3) rotate(360deg) translateY(-10px)'; this.style.textShadow='0 0 20px #e4405f'"
-                    onmouseout="this.style.color='white'; this.style.transform='scale(1) rotate(0deg) translateY(0px)'; this.style.textShadow='none'">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="javascript:void(0)" onclick="showSocialModal('whatsapp')" data-platform="whatsapp"
-                    style="color: white; font-size: 2.2rem; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); text-decoration: none; position: relative; display: inline-block;"
-                    onmouseover="this.style.color='#25d366'; this.style.transform='scale(1.3) rotate(-360deg) translateY(-10px)'; this.style.textShadow='0 0 20px #25d366'"
-                    onmouseout="this.style.color='white'; this.style.transform='scale(1) rotate(0deg) translateY(0px)'; this.style.textShadow='none'">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-            </div>
-
-            <div
-                style="border-top: 2px solid rgba(16, 185, 129, 0.3); padding-top: 25px; animation: copyrightSlide 1s ease-out 0.6s both; position: relative;">
-                <div class="dot-effects"
-                    style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; opacity: 0; transition: opacity 0.5s ease;">
-                </div>
-                <p style="margin: 0; font-size: 1rem; font-weight: 600; position: relative; z-index: 2;"
-                    onmouseover="document.querySelector('.dot-effects').style.opacity='1'"
-                    onmouseout="document.querySelector('.dot-effects').style.opacity='0'">&copy; 2025 <span
-                        style="position: relative; cursor: pointer; background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; transition: all 0.4s ease; display: inline-block;"
-                        onmouseover="this.style.transform='scale(1.1)'; this.style.textShadow='0 0 15px rgba(16,185,129,0.8)'; this.querySelector('.underline-effect').style.width='100%'"
-                        onmouseout="this.style.transform='scale(1)'; this.style.textShadow='none'; this.querySelector('.underline-effect').style.width='0%'">Tech
-                        Nova<span class="underline-effect"
-                            style="position: absolute; bottom: -3px; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6); transition: width 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); border-radius: 2px; box-shadow: 0 0 10px rgba(16,185,129,0.6);"></span></span>
-                    | <span
-                        style="background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-size: 200% 100%; animation: copyrightGlow 3s linear infinite;">All
-                        Rights Reserved</span></p>
-            </div>
-        </div>
-
-    </footer>
-
-    <!-- Social Accounts Modal -->
-    <div id="socialModal" class="modal-overlay hidden">
-        <div class="modal social-modal">
-            <div class="modal-header social-modal-header">
-                <h3 id="socialModalTitle" class="modal-title">Platform Accounts</h3>
-                <button id="socialModalClose" class="modal-close" title="Close">&times;</button>
-            </div>
-            <div id="socialModalBody" class="modal-body">
-                <!-- Account info will be injected here -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Cursor Trail Effect -->
-    <div id="cursorTrail"></div>
+        <!-- Cursor Trail Effect -->
+        <div id="cursorTrail"></div>
 
 
-</body>
+    </body>
 
 </html>
