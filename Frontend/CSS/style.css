@@ -1369,30 +1369,32 @@
 
   /* =============== ANALYTICS LAYOUT =============== */
   .analytics-layout {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      grid-template-columns: repeat(3, 1fr);
+      display: grid;      
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 20px;
       align-items: start;
   }
 
   .analytics-left-column {
+      grid-column: span 2;
       display: flex;
       flex-direction: column;
-      grid-column: span 2;
-      display: grid;
-      grid-template-rows: 1fr 1fr;
       gap: 20px;
   }
 
   .analytics-right-column .chart-container {
-      height: 100%;
+      /* height: 100%; */ /* This can cause layout issues, better to let content define height */
   }
 
   @media (max-width: 1024px) {
       .analytics-layout {
           grid-template-columns: 1fr;
       }
+  }
+  .analytics-right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
   /* =============== SETTINGS PAGE =============== */
