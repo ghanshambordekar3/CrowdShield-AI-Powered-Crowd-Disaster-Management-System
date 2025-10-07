@@ -816,6 +816,11 @@
           font-size: 1.1rem;
       }
 
+      /* Hide the duplicate menu toggle that might appear in the content area on mobile */
+      #menu-toggle {
+          display: none !important;
+      }
+
       /* Sidebar Mobile */
       .sidebar {
           width: 280px;
