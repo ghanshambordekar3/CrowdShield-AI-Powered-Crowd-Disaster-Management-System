@@ -160,6 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // By default, the login page will now always show first.
 });
 
+
 function initializeApp() {
     // Daily reset check for analytics values
     try { checkDailyResetAnalytics(); } catch (_) {}
@@ -419,67 +420,51 @@ function initializeNavbarButtons() {
 }
 
 function setupEventListeners() {
-    // Login form
-    document.getElementById('loginForm').addEventListener('submit', handleLogin);
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) loginForm.addEventListener('submit', handleLogin);
 
-    // Begin System Access button
-    document.getElementById('startButton').addEventListener('click', showLoginPage);
+    const startButton = document.getElementById('startButton');
+    if (startButton) startButton.addEventListener('click', showLoginPage);
 
-    // Navigation with auto-hide for mobile
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            const page = item.getAttribute('data-page');
-            showPage(page);
-            
-            // Auto-hide sidebar on mobile/tablet after navigation
-            if (window.innerWidth <= 1024) {
-                const sidebar = document.getElementById('sidebar');
-                const overlay = document.getElementById('sidebarOverlay');
-                if (sidebar && sidebar.classList.contains('open')) {
-                    setTimeout(() => {
-                        sidebar.classList.remove('open');
-                        if (overlay) {
-                            overlay.classList.remove('active');
-                        }
-                    }, 200);
-                }
-            }
-        });
-    });
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
 
-    // Theme toggle with null check
-    const themeToggleBtn = document.getElementById('themeToggle');
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', toggleTheme);
-    }
-
-    // Logout with null check
     const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', handleLogout);
-    }
+    if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
 
-    // Sidebar toggle (mobile)
     const sidebarToggleBtn = document.getElementById('sidebarToggle');
     if (sidebarToggleBtn) {
         sidebarToggleBtn.addEventListener('click', toggleSidebar);
     }
 
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', toggleSidebar);
+    }
+
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const page = item.getAttribute('data-page');
+            showPage(page);
+
+            // Close sidebar on mobile/tablet after navigation
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth <= 1024 && sidebar && sidebar.classList.contains('open')) {
+                toggleSidebar();
+            }
+        });
+    });
+
     // Close sidebar when clicking outside on mobile
     document.addEventListener('click', function(e) {
-        if (window.innerWidth <= 1024) {
-            const sidebar = document.getElementById('sidebar');
-            const sidebarToggle = document.getElementById('sidebarToggle');
-            const overlay = document.getElementById('sidebarOverlay');
-            
-            if (sidebar && sidebar.classList.contains('open') && 
-                !sidebar.contains(e.target) && 
-                !sidebarToggle.contains(e.target)) {
-                sidebar.classList.remove('open');
-                if (overlay) {
-                    overlay.classList.remove('active');
-                }
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        if (window.innerWidth <= 1024 && sidebar && sidebar.classList.contains('open')) {
+            if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+                toggleSidebar();
             }
         }
     });
@@ -885,29 +870,19 @@ function showPage(pageName) {
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
-    
-    sidebar.classList.toggle('open');
-    
-    // Toggle overlay for mobile
-    if (window.innerWidth <= 1024) {
-        if (!overlay) {
-            // Create overlay if it doesn't exist
-            const newOverlay = document.createElement('div');
-            newOverlay.id = 'sidebarOverlay';
-            newOverlay.className = 'sidebar-overlay';
-            document.body.appendChild(newOverlay);
-            
-            // Add click handler to close sidebar
-            newOverlay.addEventListener('click', function() {
-                sidebar.classList.remove('open');
-                newOverlay.classList.remove('active');
-            });
-            
-            // Activate overlay
-            setTimeout(() => newOverlay.classList.add('active'), 10);
-        } else {
-            overlay.classList.toggle('active');
-        }
+    const isOpen = sidebar.classList.contains('open');
+
+    if (isOpen) {
+        sidebar.classList.remove('open');
+        sidebar.classList.add('menu-close');
+        sidebar.addEventListener('animationend', () => sidebar.classList.remove('menu-close'), { once: true });
+        if (overlay) overlay.classList.remove('active');
+    } else {
+        sidebar.classList.add('open');
+        sidebar.classList.remove('menu-close'); // Ensure close animation class is removed
+        sidebar.classList.add('menu-open');
+        sidebar.addEventListener('animationend', () => sidebar.classList.remove('menu-open'), { once: true });
+        if (overlay) overlay.classList.add('active');
     }
 }
 

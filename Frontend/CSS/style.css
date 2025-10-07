@@ -751,31 +751,26 @@
 
   /* Mobile and Tablet Dashboard Optimizations */
   @media (max-width: 1024px) {
-    /* Tablet-specific styles */
-    .main-container {
-      grid-template-columns: 1fr;
-    }
-
-    .sidebar {
-      width: 280px;
-      transform: translateX(-280px);
-      position: fixed;
-      top: 70px;
-      left: 0;
-      height: calc(100vh - 70px);
-      z-index: 999;
-      transition: transform 0.3s ease;
-      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      /* Tablet-specific styles */
+      .main-container {
+          grid-template-columns: 1fr;
+      }
+  
+      .sidebar {
+          width: 280px;
+          transform: translateX(-100%);
+          position: fixed;
+          top: 70px;
+          left: 0;
+          height: calc(100vh - 70px);
+          z-index: 1001; /* Ensure sidebar is above content */
+          transition: transform 0.3s ease-in-out;
+          box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
     }
 
     .sidebar.open {
       transform: translateX(0);
       box-shadow: 2px 0 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .content {
-      margin-left: 0;
-      width: 100%;
     }
 
     .analytics-layout {
@@ -792,9 +787,14 @@
 
     /* Show sidebar toggle on tablet */
     #sidebarToggle {
-      display: flex !important;
+        display: block !important; /* Use block or flex as appropriate */
     }
-  }
+
+    .content {
+        margin-left: 0;
+        width: 100%;
+    }
+}
 
   /* Mobile-specific optimizations */
   @media (max-width: 768px) {
@@ -819,13 +819,14 @@
       /* Sidebar Mobile */
       .sidebar {
           width: 280px;
-          transform: translateX(-280px);
+          transform: translateX(-100%);
           position: fixed;
           top: 60px;
           left: 0;
           height: calc(100vh - 60px);
-          z-index: 999;
+          z-index: 1001;
       }
+
 
       .sidebar.open {
           transform: translateX(0);
@@ -833,11 +834,11 @@
 
       /* Content Mobile */
       .content {
-          margin-top: 60px;
           padding: 15px;
       }
 
       .main-container {
+          grid-template-columns: 1fr;
           margin-top: 60px;
       }
 
@@ -1510,13 +1511,13 @@
       .sidebar {
           position: fixed;
           left: -280px;
-          top: 60px;
-          height: calc(100vh - 60px);
+          top: 70px; /* Match navbar height */
+          height: calc(100vh - 70px);
           width: 280px;
           z-index: 999;
           transition: left 0.3s ease;
           box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-          overflow-y: auto;
+          overflow-y: auto; /* Allow scrolling on smaller screens */
           -webkit-overflow-scrolling: touch;
       }
 
@@ -2166,7 +2167,7 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
+      width: 100vw;
       height: 100%;
       background: rgba(0, 0, 0, 0.5);
       z-index: 998;
@@ -2174,15 +2175,15 @@
       transition: opacity 0.3s ease;
   }
 
-  @media (max-width: 1024px) {
-      .sidebar-overlay.active {
-          display: block;
-          opacity: 1;
-      }
+  .sidebar-overlay.active {
+      display: block;
+      opacity: 1;
+  }
 
-      /* Ensure sidebar is above overlay */
+  @media (max-width: 1024px) {
+      /* Ensure sidebar is above overlay on mobile/tablet */
       .sidebar {
-          z-index: 999;
+          z-index: 1001;
       }
   }
 
