@@ -266,10 +266,6 @@
       pointer-events: none;
   }
 
-  #testReviewPopup.visible {
-      position: relative; /* Use relative when visible to occupy space initially */
-  }
-
   @media (max-width: 768px) {
       .login-container {
           padding: 15px;
