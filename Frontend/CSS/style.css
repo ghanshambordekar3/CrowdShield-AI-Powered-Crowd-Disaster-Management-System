@@ -15,6 +15,7 @@
   /* Mobile Menu Button Fixes */
   #sidebarToggle {
       display: flex !important;
+      /* Ensure it's a flex container */
       align-items: center;
       justify-content: center;
       width: 40px;
@@ -29,16 +30,13 @@
 
   /* Hamburger to X animation */
   #sidebarToggle .icon-bar {
+      /* Add this block for hamburger icon styling */
       display: block;
       width: 22px;
       height: 2px;
       background-color: var(--text-dark);
       border-radius: 1px;
       transition: all 0.3s ease-in-out;
-  }
-
-  .dark-mode #sidebarToggle .icon-bar {
-      background-color: var(--text-light);
   }
 
   #sidebarToggle .icon-bar+.icon-bar {
@@ -55,6 +53,10 @@
 
   .sidebar.open~.navbar #sidebarToggle .icon-bar:nth-child(3) {
       transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .dark-mode #sidebarToggle .icon-bar {
+      background-color: var(--text-light);
   }
 
 
