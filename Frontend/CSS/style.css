@@ -55,6 +55,7 @@
   }
 
   :root {
+      --sidebar-width: 280px;
       --primary-color: #2563eb;
       --secondary-color: #1e40af;
       --success-color: #10b981;
@@ -671,7 +672,7 @@
 
   .main-container {
       display: grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: var(--sidebar-width) 1fr;
       min-height: calc(100vh - 70px);
       margin-top: 70px;
   }
@@ -860,14 +861,14 @@
       }
 
       .sidebar {
-          width: 280px;
+          width: var(--sidebar-width);
           transform: translateX(-100%);
           position: fixed;
           top: 70px;
           left: 0;
           height: calc(100vh - 70px);
           z-index: 1001;
-          /* Ensure sidebar is above content */
+          /* Ensure sidebar is above content*/
           transition: transform 0.3s ease-in-out;
           box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
       }
@@ -918,12 +919,13 @@
 
       /* Sidebar Mobile */
       .sidebar {
-          width: 280px;
+          width: var(--sidebar-width);
           transform: translateX(-100%);
           position: fixed;
           top: 60px;
           left: 0;
           height: calc(100vh - 60px);
+          transition: transform 0.3s ease-in-out;
           z-index: 1001;
       }
 
@@ -1624,14 +1626,14 @@
       /* Sidebar Mobile Optimization */
       .sidebar {
           position: fixed;
-          left: -280px;
+          left: calc(-1 * var(--sidebar-width));
           top: 70px;
           /* Match navbar height */
           height: calc(100vh - 70px);
-          width: 280px;
+          width: var(--sidebar-width);
           z-index: 999;
           transition: left 0.3s ease;
-          box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
           overflow-y: auto;
           /* Allow scrolling on smaller screens */
           -webkit-overflow-scrolling: touch;
@@ -1639,7 +1641,6 @@
 
       .sidebar.open {
           left: 0;
-          box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
       }
 
       /* Navbar Mobile Optimization - Remove duplicate */
@@ -2305,6 +2306,12 @@
       .step-text p {
           font-size: 0.85rem;
       }
+
+      .input-wrapper input {
+          font-size: 16px;
+          padding: 12px 12px 12px 40px;
+      }
+
   }
 
   /* Sidebar Overlay for Mobile */
@@ -8058,10 +8065,10 @@
       }
 
       .sidebar {
-          position: fixed !important;
-          left: -280px !important;
+          position: fixed !important; /* Ensure it's fixed */
+          left: calc(-1 * var(--sidebar-width)) !important; /* Use variable and ensure it's off-screen */
           top: 70px !important;
-          height: calc(100vh - 70px) !important;
+          height: calc(100vh - 70px) !important; /* Full height minus navbar */
           width: 280px !important;
           z-index: 1000 !important;
           transition: left 0.3s ease !important;
@@ -8069,7 +8076,7 @@
       }
 
       .sidebar.open {
-          left: 0 !important;
+          left: 0 !important; /* Slide in */
       }
 
       .dashboard-grid {
