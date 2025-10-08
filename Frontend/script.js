@@ -879,19 +879,24 @@ function showPage(pageName) {
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
-    const isOpen = sidebar.classList.contains('open');
+    if (!sidebar || !overlay) return;
 
-    if (isOpen) {
-        sidebar.classList.remove('open');
-        sidebar.classList.add('menu-close');
-        sidebar.addEventListener('animationend', () => sidebar.classList.remove('menu-close'), { once: true });
-        if (overlay) overlay.classList.remove('active');
+    sidebar.classList.toggle('open');
+
+    // The overlay's visibility is now controlled by the .sidebar.open selector in CSS
+    // so we just need to toggle its active state for the transition.
+    // We use a timeout to ensure the display:block is applied before the opacity transition.
+    if (sidebar.classList.contains('open')) {
+        overlay.style.display = 'block';
+        setTimeout(() => overlay.classList.add('active'), 10);
     } else {
-        sidebar.classList.add('open');
-        sidebar.classList.remove('menu-close'); // Ensure close animation class is removed
-        sidebar.classList.add('menu-open');
-        sidebar.addEventListener('animationend', () => sidebar.classList.remove('menu-open'), { once: true });
-        if (overlay) overlay.classList.add('active');
+        overlay.classList.remove('active');
+        setTimeout(() => {
+            // Only hide it after the transition is complete
+            if (!sidebar.classList.contains('open')) {
+                overlay.style.display = 'none';
+            }
+        }, 350); // Matches CSS transition duration
     }
 }
 
