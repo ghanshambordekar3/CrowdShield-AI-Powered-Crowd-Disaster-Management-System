@@ -228,7 +228,7 @@
       }
 
       .input-wrapper input {
-          font-size: 16px;
+          font-size: 1rem;
           padding: 12px 12px 12px 40px;
       }
 
@@ -315,7 +315,7 @@
       }
 
        .input-wrapper input {
-          font-size: 16px;
+          font-size: 1rem;
           padding: 12px 12px 12px 50px;
       }
 
@@ -733,17 +733,19 @@
   }
 
   .nav-item:hover {
-      background: rgba(37, 99, 235, 0.1);
-      color: var(--primary-color);
-      border-left-color: var(--primary-color);
-      transform: translateX(8px);
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary-color);
+    border-left-width: 8px;
+    border-left-color: var(--primary-color);
+    padding-left: 21px; /* 25px - 4px */
   }
 
   .nav-item.active {
       background: var(--primary-color);
       color: white;
+      border-left-width: 8px;
       border-left-color: var(--secondary-color);
-      transform: translateX(8px);
+      padding-left: 21px; /* 25px - 4px */
       box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
   }
 
@@ -1841,7 +1843,7 @@
       .form-group input,
       .form-group select,
       .form-group textarea {
-          font-size: 16px;
+          font-size: 1rem;
           /* Prevents zoom on iOS */
       }
   }
@@ -1882,7 +1884,7 @@
       }
 
       .form-group input {
-          padding: 12px 16px;
+          padding: 12px 16px 12px 45px;
           font-size: 16px;
       }
 
@@ -2313,7 +2315,7 @@
       }
 
       .input-wrapper input {
-          font-size: 16px;
+          font-size: 1rem;
           padding: 12px 12px 12px 40px;
       }
 
@@ -6869,7 +6871,7 @@
       }
 
       .input-wrapper input {
-          width: 100% !important;
+          width: 100%;
           padding: 15px 15px 15px 45px !important;
           font-size: 16px !important;
           min-height: 50px !important;
