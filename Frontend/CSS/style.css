@@ -294,111 +294,6 @@
       }
   }
 
-  @media (max-width: 480px) {
-      .login-container {
-          padding: 10px;
-          justify-content: flex-start;
-          padding-top: 5vh;
-      }
-
-      .mission-title {
-          font-size: 1.3rem;
-      }
-
-      .mission-subtitle {
-          font-size: 0.8rem;
-      }
-
-      .login-panel {
-          padding: 25px 15px;
-          margin: 0;
-      }
-
-       .input-wrapper input {
-          font-size: 1rem;
-          padding: 12px 12px 12px 40px;
-      }
-
-  }
-
-  .login-card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 20px;
-      padding: 40px;
-      width: 100%;
-      max-width: 400px;
-      animation: slideUpFade 1s ease-out;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-      position: relative;
-      overflow: hidden;
-  }
-
-  .login-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-      animation: shimmer 3s linear infinite;
-  }
-
-  @keyframes slideUpFade {
-      from {
-          opacity: 0;
-          transform: translateY(50px) scale(0.9);
-      }
-
-      to {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-      }
-  }
-
-  @keyframes shimmer {
-      0% {
-          transform: translateX(-100%) translateY(-100%) rotate(45deg);
-      }
-
-      100% {
-          transform: translateX(100%) translateY(100%) rotate(45deg);
-      }
-  }
-
-  .login-header {
-      text-align: center;
-      margin-bottom: 30px;
-      position: relative;
-      z-index: 1;
-  }
-
-  .login-header h1 {
-      color: white;
-      font-size: 2.2rem;
-      margin-bottom: 10px;
-      animation: glow 2s ease-in-out infinite alternate;
-      font-weight: 700;
-  }
-
-  @keyframes glow {
-      from {
-          text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-      }
-
-      to {
-          text-shadow: 0 0 25px rgba(37, 99, 235, 0.8), 0 0 35px rgba(37, 99, 235, 0.6);
-      }
-  }
-
-  .login-header p {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 1rem;
-      animation: fadeInUp 1s ease-out 0.5s both;
-  }
-
   @keyframes fadeInUp {
       from {
           opacity: 0;
@@ -862,29 +757,6 @@
   /* Mobile and Tablet Dashboard Optimizations */
   @media (max-width: 1024px) {
 
-      /* Tablet-specific styles */
-      .main-container {
-          grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-          width: var(--sidebar-width);
-          transform: translateX(-100%);
-          position: fixed;
-          top: 70px;
-          left: 0;
-          height: calc(100vh - 70px);
-          z-index: 1001;
-          /* Ensure sidebar is above content*/
-          transition: transform 0.3s ease-in-out;
-          box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
-      }
-
-      .sidebar.open {
-          transform: translateX(0);
-          box-shadow: 2px 0 20px rgba(0, 0, 0, 0.2);
-      }
-
       .analytics-layout {
           grid-template-columns: 1fr;
       }
@@ -917,12 +789,12 @@
       }
 
       .navbar-right {
-          gap: 8px;
+          width: 100%;
       }
+  }
 
-      .logo {
-          font-size: 1.1rem;
-      }
+  /* Mobile-specific optimizations */
+  @media (max-width: 768px) {
 
       /* Sidebar Mobile */
       .sidebar {
@@ -939,6 +811,18 @@
 
       .sidebar.open {
           transform: translateX(0);
+      }
+
+      .navbar-left {
+          gap: 10px;
+      }
+
+      .navbar-right {
+          gap: 8px;
+      }
+
+      .logo {
+          font-size: 1.1rem;
       }
 
       /* Content Mobile */
@@ -1633,7 +1517,7 @@
       /* Sidebar Mobile Optimization */
       .sidebar {
           position: fixed;
-          left: calc(-1 * var(--sidebar-width));
+          left: -100%;
           top: 70px;
           /* Match navbar height */
           height: calc(100vh - 70px);
@@ -1849,6 +1733,29 @@
   }
 
   @media (max-width: 480px) {
+      .login-container {
+          padding: 10px;
+          justify-content: flex-start;
+          padding-top: 5vh;
+      }
+
+      .mission-title {
+          font-size: 1.3rem;
+      }
+
+      .mission-subtitle {
+          font-size: 0.8rem;
+      }
+
+      .login-panel {
+          padding: 25px 15px;
+          margin: 0;
+      }
+
+       .input-wrapper input {
+          font-size: 1rem;
+          padding: 12px 12px 12px 40px;
+      }
 
       /* Extra small mobile fixes */
       .navbar {
@@ -1867,25 +1774,6 @@
 
       .main-container {
           margin-top: 56px;
-      }
-
-      /* Login Page Mobile */
-      .login-card {
-          padding: 25px 15px;
-          width: 95%;
-      }
-
-      .login-header h1 {
-          font-size: 1.8rem;
-      }
-
-      .login-header p {
-          font-size: 0.9rem;
-      }
-
-      .form-group input {
-          padding: 12px 16px 12px 45px;
-          font-size: 16px;
       }
 
       .login-btn {
@@ -5246,6 +5134,96 @@
       }
   }
 
+  .login-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      animation: slideUpFade 1s ease-out;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+  }
+
+  .login-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      animation: shimmer 3s linear infinite;
+  }
+
+  @keyframes slideUpFade {
+      from {
+          opacity: 0;
+          transform: translateY(50px) scale(0.9);
+      }
+
+      to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+      }
+  }
+
+  @keyframes shimmer {
+      0% {
+          transform: translateX(-100%) translateY(-100%) rotate(45deg);
+      }
+
+      100% {
+          transform: translateX(100%) translateY(100%) rotate(45deg);
+      }
+  }
+
+  .login-header {
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
+  }
+
+  .login-header h1 {
+      color: white;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      animation: glow 2s ease-in-out infinite alternate;
+      font-weight: 700;
+  }
+
+  @keyframes glow {
+      from {
+          text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+      }
+
+      to {
+          text-shadow: 0 0 25px rgba(37, 99, 235, 0.8), 0 0 35px rgba(37, 99, 235, 0.6);
+      }
+  }
+
+  .login-header p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1rem;
+      animation: fadeInUp 1s ease-out 0.5s both;
+  }
+
+  @keyframes fadeInUp {
+      from {
+          opacity: 0;
+          transform: translateY(20px);
+      }
+
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+
   /* Panic Dispatch Button */
   .panic-dispatch-btn {
       width: 60px;
@@ -7195,20 +7173,6 @@
           transform: translateY(-2px) !important;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
       }
-
-      .status-dot {
-          width: 12px !important;
-          height: 12px !important;
-          border-radius: 50% !important;
-          flex-shrink: 0 !important;
-      }
-
-      .status-indicator span {
-          font-weight: 600 !important;
-          font-size: 1rem !important;
-          color: var(--text-dark) !important;
-      }
-
       /* Charts Mobile - Enhanced */
       .charts-section {
           display: flex !important;
@@ -7234,6 +7198,19 @@
           margin-bottom: 15px !important;
           text-align: center !important;
           font-weight: 600 !important;
+          color: var(--text-dark) !important;
+      }
+
+      .status-dot {
+          width: 12px !important;
+          height: 12px !important;
+          border-radius: 50% !important;
+          flex-shrink: 0 !important;
+      }
+
+      .status-indicator span {
+          font-weight: 600 !important;
+          font-size: 1rem !important;
           color: var(--text-dark) !important;
       }
 
@@ -8063,136 +8040,6 @@
 
       .summary-grid {
           grid-template-columns: repeat(2, 1fr) !important;
-      }
-  }
-
-  /* Tablet styles */
-  @media (min-width: 481px) and (max-width: 768px) {
-      .main-container {
-          grid-template-columns: 1fr !important;
-      }
-
-      .sidebar {
-          position: fixed !important; /* Ensure it's fixed */
-          left: calc(-1 * var(--sidebar-width)) !important; /* Use variable and ensure it's off-screen */
-          top: 70px !important;
-          height: calc(100vh - 70px) !important; /* Full height minus navbar */
-          width: 280px !important;
-          z-index: 1000 !important;
-          transition: left 0.3s ease !important;
-          box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2) !important;
-      }
-
-      .sidebar.open {
-          left: 0 !important; /* Slide in */
-      }
-
-      .dashboard-grid {
-          display: flex !important;
-          flex-direction: column !important;
-          gap: 20px !important;
-          width: 100% !important;
-      }
-
-      .charts-section {
-          display: flex !important;
-          flex-direction: column !important;
-          gap: 20px !important;
-          width: 100% !important;
-      }
-
-      .alerts-grid {
-          display: flex !important;
-          flex-direction: column !important;
-          gap: 20px !important;
-          width: 100% !important;
-      }
-
-      .analytics-grid {
-          display: flex !important;
-          flex-direction: column !important;
-          gap: 20px !important;
-          width: 100% !important;
-      }
-
-      #map {
-          height: 350px !important;
-      }
-
-      .status-indicators {
-          display: flex !important;
-          flex-direction: column !important;
-          gap: 15px !important;
-          width: 100% !important;
-      }
-
-      .feature-grid {
-          display: flex !important;
-          flex-direction: column !important;
-          gap: 20px !important;
-          width: 100% !important;
-      }
-
-      .steps-grid {
-          flex-direction: column !important;
-          gap: 15px !important;
-      }
-
-      .modal {
-          margin: 20px !important;
-          max-width: calc(100vw - 40px) !important;
-      }
-
-      .summary-grid {
-          display: flex !important;
-          flex-direction: column !important;
-          gap: 10px !important;
-          width: 100% !important;
-      }
-  }
-
-  /* Landscape mobile orientation - Enhanced */
-  @media (max-width: 768px) and (orientation: landscape) {
-      .welcome-panel {
-          max-height: calc(100vh - 10px) !important;
-          overflow-y: auto !important;
-          padding: 15px !important;
-      }
-
-      .login-panel {
-          max-height: calc(100vh - 20px) !important;
-          overflow-y: auto !important;
-          padding: 20px !important;
-      }
-
-      .navbar {
-          height: 50px !important;
-      }
-
-      .sidebar {
-          top: 50px !important;
-          height: calc(100vh - 50px) !important;
-      }
-
-      .main-container {
-          margin-top: 50px !important;
-      }
-
-      #map {
-          height: 200px !important;
-      }
-
-      .navbar {
-          height: 50px !important;
-      }
-
-      .main-container {
-          margin-top: 50px !important;
-      }
-
-      .sidebar {
-          top: 50px !important;
-          height: calc(100vh - 50px) !important;
       }
   }
 
