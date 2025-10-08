@@ -883,20 +883,35 @@ function toggleSidebar() {
 
     sidebar.classList.toggle('open');
 
+    // Keep a body-level flag so CSS can reliably style the toggle and other elements
+    document.body.classList.toggle('sidebar-open', sidebar.classList.contains('open'));
+
+    // Update hamburger button icon to an X when open for clearer UX on mobile
+    const sidebarBtn = document.getElementById('sidebarToggle');
+    if (sidebarBtn) {
+        if (sidebar.classList.contains('open')) {
+            sidebarBtn.classList.add('open');
+            sidebarBtn.innerHTML = '<i class="fas fa-times"></i>';
+        } else {
+            sidebarBtn.classList.remove('open');
+            sidebarBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    }
+
     // The overlay's visibility is now controlled by the .sidebar.open selector in CSS
     // so we just need to toggle its active state for the transition.
     // We use a timeout to ensure the display:block is applied before the opacity transition.
     if (sidebar.classList.contains('open')) {
-        overlay.style.display = 'block';
-        setTimeout(() => overlay.classList.add('active'), 10);
+        // show overlay by adding the active class (CSS controls visibility)
+        overlay.classList.add('active');
     } else {
         overlay.classList.remove('active');
+        // remove body flag as well
         setTimeout(() => {
-            // Only hide it after the transition is complete
             if (!sidebar.classList.contains('open')) {
-                overlay.style.display = 'none';
+                document.body.classList.remove('sidebar-open');
             }
-        }, 350); // Matches CSS transition duration
+        }, 350);
     }
 }
 
@@ -2696,48 +2711,42 @@ function setupAutoSuggest() {
         gpsBtn.onclick = function () {
             const startInput = document.getElementById('srStart');
 
-            if (!navigator.geolocation) {
-                showNotification('Geolocation is not supported by your browser.', 'error');
-                return;
-            }
-
             gpsBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Getting...';
             gpsBtn.disabled = true;
 
-            navigator.geolocation.getCurrentPosition(
-                position => {
-                    if (startInput) {
-                        // Format as "Current Location (lat, lng)" for display but store actual coordinates
-                        const lat = position.coords.latitude.toFixed(4);
-                        const lng = position.coords.longitude.toFixed(4);
-                        startInput.value = `Current Location (${lat}, ${lng})`;
-                        startInput.dataset.coords = `${position.coords.latitude},${position.coords.longitude}`; // Store coords for later use
-                    }
-                    gpsBtn.innerHTML = '📱 Location Set';
-                    gpsBtn.disabled = false;
-                    showNotification('Current location detected and set as starting point!', 'success');
-                },
-                error => {
-                    gpsBtn.innerHTML = '📱 Use GPS';
-                    gpsBtn.disabled = false;
-                    let message = 'An error occurred while getting your location.';
-                    switch (error.code) {
-                        case error.PERMISSION_DENIED:
+            // Use shared promise-based helper to get current location
+            getCurrentLocation().then(coords => {
+                if (startInput) {
+                    const lat = coords[0].toFixed(4);
+                    const lng = coords[1].toFixed(4);
+                    startInput.value = `Current Location (${lat}, ${lng})`;
+                    startInput.dataset.coords = `${coords[0]},${coords[1]}`;
+                }
+                gpsBtn.innerHTML = '📱 Location Set';
+                gpsBtn.disabled = false;
+                showNotification('Current location detected and set as starting point!', 'success');
+            }).catch(err => {
+                gpsBtn.innerHTML = '📱 Use GPS';
+                gpsBtn.disabled = false;
+                let message = 'An error occurred while getting your location.';
+                if (err && err.code) {
+                    switch (err.code) {
+                        case 1:
                             message = 'You denied the request for Geolocation. Please enable it in your browser settings.';
                             break;
-                        case error.POSITION_UNAVAILABLE:
+                        case 2:
                             message = 'Location information is unavailable.';
                             break;
-                        case error.TIMEOUT:
+                        case 3:
                             message = 'The request to get user location timed out.';
                             break;
-                        case error.UNKNOWN_ERROR:
+                        default:
                             message = 'An unknown error occurred.';
                             break;
                     }
-                    showNotification(message, 'error');
                 }
-            );
+                showNotification(message, 'error');
+            });
         };
     }
 }

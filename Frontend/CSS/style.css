@@ -72,6 +72,25 @@
       background: rgba(255, 255, 255, 0.1);
   }
 
+  /* Sidebar toggle open state (mobile) */
+  #sidebarToggle.open {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-light);
+  }
+
+  /* Ensure overlay active shows above content on mobile */
+  .sidebar-overlay.active {
+      display: block !important;
+      opacity: 1 !important;
+      transition: opacity 0.25s ease-in-out !important;
+  }
+
+  /* Support overlay when overlay is placed before sidebar in DOM: use body flag */
+  body.sidebar-open .sidebar-overlay {
+      display: block !important;
+      opacity: 1 !important;
+  }
+
   body {
       overflow-x: hidden;
       width: 100%;
