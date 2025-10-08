@@ -40,36 +40,37 @@ public class ApiController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new java.util.ArrayList<>());
         }
     }
-    
+
     // Forecast based on recent density data per zone
     @GetMapping("/forecast")
     public ResponseEntity<Object> getForecast() {
-    try {
-    List<Integer> zones = densityDataRepository.findDistinctZoneIds();
-    java.util.Map<String, Object> payload = new java.util.HashMap<>();
-    java.util.List<java.util.Map<String, Object>> zoneForecasts = new java.util.ArrayList<>();
-    for (Integer zoneId : zones) {
-    List<DensityData> recent = densityDataRepository.findByZoneId(zoneId,
-    PageRequest.of(0, 5, Sort.by(Sort.Direction.DESC, "timestamp")));
-    if (recent == null || recent.isEmpty()) continue;
-    double avg = recent.stream().mapToInt(d -> d.getCount() != null ? d.getCount() : 0).average().orElse(0);
-    // Simple extrapolation
-    double next1 = avg * 1.05;
-    double next2 = avg * 1.10;
-    double next3 = avg * 0.95;
-    java.util.Map<String, Object> z = new java.util.HashMap<>();
-    z.put("zoneId", zoneId);
-    z.put("history", recent);
-    z.put("forecast", new double[]{next1, next2, next3});
-    zoneForecasts.add(z);
-    }
-    payload.put("generatedAt", java.time.LocalDateTime.now().toString());
-    payload.put("zones", zoneForecasts);
-    return ResponseEntity.ok(payload);
-    } catch (Exception e) {
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-    .body(java.util.Map.of("error", e.getMessage()));
-    }
+        try {
+            List<Integer> zones = densityDataRepository.findDistinctZoneIds();
+            java.util.Map<String, Object> payload = new java.util.HashMap<>();
+            java.util.List<java.util.Map<String, Object>> zoneForecasts = new java.util.ArrayList<>();
+            for (Integer zoneId : zones) {
+                List<DensityData> recent = densityDataRepository.findByZoneId(zoneId,
+                        PageRequest.of(0, 5, Sort.by(Sort.Direction.DESC, "timestamp")));
+                if (recent == null || recent.isEmpty())
+                    continue;
+                double avg = recent.stream().mapToInt(d -> d.getCount() != null ? d.getCount() : 0).average().orElse(0);
+                // Simple extrapolation
+                double next1 = avg * 1.05;
+                double next2 = avg * 1.10;
+                double next3 = avg * 0.95;
+                java.util.Map<String, Object> z = new java.util.HashMap<>();
+                z.put("zoneId", zoneId);
+                z.put("history", recent);
+                z.put("forecast", new double[] { next1, next2, next3 });
+                zoneForecasts.add(z);
+            }
+            payload.put("generatedAt", java.time.LocalDateTime.now().toString());
+            payload.put("zones", zoneForecasts);
+            return ResponseEntity.ok(payload);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(java.util.Map.of("error", e.getMessage()));
+        }
     }
 
     // Post new density data
@@ -153,7 +154,8 @@ public class ApiController {
             java.util.Map<String, Object> dest = (java.util.Map<String, Object>) request.get("destination");
 
             if (start == null || dest == null) {
-                return ResponseEntity.badRequest().body(java.util.Map.of("error", "Start and destination coordinates required"));
+                return ResponseEntity.badRequest()
+                        .body(java.util.Map.of("error", "Start and destination coordinates required"));
             }
 
             Double startLat = Double.valueOf(start.get("lat").toString());
@@ -166,7 +168,7 @@ public class ApiController {
 
             // Calculate safe route waypoints
             java.util.List<java.util.Map<String, Object>> waypoints = calculateSafeWaypoints(
-                startLat, startLng, destLat, destLng, recentDensity);
+                    startLat, startLng, destLat, destLng, recentDensity);
 
             // Calculate route metrics
             double distance = calculateHaversineDistance(startLat, startLng, destLat, destLng);
@@ -214,11 +216,10 @@ public class ApiController {
             // Try alternative routes by offsetting the midpoint
             double offset = 0.005; // ~500m offset
             java.util.List<double[]> alternatives = java.util.Arrays.asList(
-                new double[]{midLat + offset, midLng},
-                new double[]{midLat - offset, midLng},
-                new double[]{midLat, midLng + offset},
-                new double[]{midLat, midLng - offset}
-            );
+                    new double[] { midLat + offset, midLng },
+                    new double[] { midLat - offset, midLng },
+                    new double[] { midLat, midLng + offset },
+                    new double[] { midLat, midLng - offset });
 
             for (double[] alt : alternatives) {
                 if (isPointSafe(alt[0], alt[1], densityData)) {
@@ -263,7 +264,7 @@ public class ApiController {
     }
 
     private String calculateSafetyLevel(java.util.List<java.util.Map<String, Object>> waypoints,
-                                       List<DensityData> densityData) {
+            List<DensityData> densityData) {
         int safePoints = 0;
         for (java.util.Map<String, Object> point : waypoints) {
             double lat = Double.valueOf(point.get("lat").toString());
@@ -274,9 +275,12 @@ public class ApiController {
         }
 
         double safetyRatio = (double) safePoints / waypoints.size();
-        if (safetyRatio >= 0.8) return "High";
-        else if (safetyRatio >= 0.6) return "Medium";
-        else return "Low";
+        if (safetyRatio >= 0.8)
+            return "High";
+        else if (safetyRatio >= 0.6)
+            return "Medium";
+        else
+            return "Low";
     }
 
     private double calculateHaversineDistance(double lat1, double lng1, double lat2, double lng2) {
@@ -286,34 +290,46 @@ public class ApiController {
         double dLng = Math.toRadians(lng2 - lng1);
 
         double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                   Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
-                   Math.sin(dLng / 2) * Math.sin(dLng / 2);
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                        Math.sin(dLng / 2) * Math.sin(dLng / 2);
 
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         return EARTH_RADIUS * c;
     }
-    
+
     // Zone-based coordinate mapping for Nashik areas
     private double getZoneLatitude(Integer zoneId) {
         switch (zoneId != null ? zoneId : 1) {
-            case 1: return 19.9975; // Nashik Central
-            case 2: return 20.0059; // Nashik Road
-            case 3: return 19.9923; // College Road
-            case 4: return 20.0104; // Gangapur Road
-            case 5: return 19.9844; // Panchavati
-            default: return 19.9975; // Default to center
+            case 1:
+                return 19.9975; // Nashik Central
+            case 2:
+                return 20.0059; // Nashik Road
+            case 3:
+                return 19.9923; // College Road
+            case 4:
+                return 20.0104; // Gangapur Road
+            case 5:
+                return 19.9844; // Panchavati
+            default:
+                return 19.9975; // Default to center
         }
     }
-    
+
     private double getZoneLongitude(Integer zoneId) {
         switch (zoneId != null ? zoneId : 1) {
-            case 1: return 73.7898; // Nashik Central
-            case 2: return 73.7749; // Nashik Road
-            case 3: return 73.7749; // College Road
-            case 4: return 73.7749; // Gangapur Road
-            case 5: return 73.7749; // Panchavati
-            default: return 73.7898; // Default to center
+            case 1:
+                return 73.7898; // Nashik Central
+            case 2:
+                return 73.7749; // Nashik Road
+            case 3:
+                return 73.7749; // College Road
+            case 4:
+                return 73.7749; // Gangapur Road
+            case 5:
+                return 73.7749; // Panchavati
+            default:
+                return 73.7898; // Default to center
         }
     }
 }
