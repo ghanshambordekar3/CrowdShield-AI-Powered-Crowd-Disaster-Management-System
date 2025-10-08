@@ -74,7 +74,7 @@ function showSocialModal(platform) {
 
     // Set dynamic color for the modal based on the platform
     const platformColor = SOCIAL_ACCOUNTS.platformColors[platform] || SOCIAL_ACCOUNTS.platformColors.default;
-    const platformColorRGB = platformColor.startsWith('#') 
+    const platformColorRGB = platformColor.startsWith('#')
         ? `${parseInt(platformColor.slice(1, 3), 16)}, ${parseInt(platformColor.slice(3, 5), 16)}, ${parseInt(platformColor.slice(5, 7), 16)}`
         : '0, 255, 136'; // Default green
 
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function initializeApp() {
     // Daily reset check for analytics values
-    try { checkDailyResetAnalytics(); } catch (_) {}
+    try { checkDailyResetAnalytics(); } catch (_) { }
 
     // Initialize theme - default to dark mode
     const savedTheme = localStorage.getItem('crowdshield_theme') || 'dark';
@@ -172,10 +172,10 @@ function initializeApp() {
 
     // Generate initial simulated data
     generateSimulatedData();
-    
+
     // Initialize mobile-specific features
     initializeMobileFeatures();
-    
+
     // Initialize navbar buttons with retry
     setTimeout(initializeNavbarButtons, 500);
 }
@@ -184,26 +184,26 @@ function initializeMobileFeatures() {
     // Detect mobile device
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    
+
     if (isMobile || isTouch) {
         document.body.classList.add('mobile-device');
-        
+
         // Add mobile-specific meta tags
         addMobileMetaTags();
-        
+
         // Initialize touch gestures
         initializeTouchGestures();
-        
+
         // Optimize for mobile performance
         optimizeForMobile();
-        
+
         // Handle orientation changes
         handleOrientationChange();
-        
+
         // Prevent zoom on input focus (iOS)
         preventInputZoom();
     }
-    
+
     // Handle viewport changes
     handleViewportChanges();
 }
@@ -214,7 +214,7 @@ function addMobileMetaTags() {
     textSizeAdjust.name = 'format-detection';
     textSizeAdjust.content = 'telephone=no';
     document.head.appendChild(textSizeAdjust);
-    
+
     // Add PWA capabilities
     const appleMobileCapable = document.createElement('meta');
     appleMobileCapable.name = 'apple-mobile-web-app-capable';
@@ -227,24 +227,24 @@ function initializeTouchGestures() {
     let touchStartY = 0;
     let touchEndX = 0;
     let touchEndY = 0;
-    
+
     // Swipe gestures for sidebar
-    document.addEventListener('touchstart', function(e) {
+    document.addEventListener('touchstart', function (e) {
         touchStartX = e.changedTouches[0].screenX;
         touchStartY = e.changedTouches[0].screenY;
     }, { passive: true });
-    
-    document.addEventListener('touchend', function(e) {
+
+    document.addEventListener('touchend', function (e) {
         touchEndX = e.changedTouches[0].screenX;
         touchEndY = e.changedTouches[0].screenY;
         handleSwipeGesture();
     }, { passive: true });
-    
+
     function handleSwipeGesture() {
         const deltaX = touchEndX - touchStartX;
         const deltaY = touchEndY - touchStartY;
         const minSwipeDistance = 50;
-        
+
         // Horizontal swipe (sidebar toggle)
         if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
             const sidebar = document.getElementById('sidebar');
@@ -259,15 +259,15 @@ function initializeTouchGestures() {
             }
         }
     }
-    
+
     // Close sidebar when tapping outside
-    document.addEventListener('touchstart', function(e) {
+    document.addEventListener('touchstart', function (e) {
         const sidebar = document.getElementById('sidebar');
         if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && !e.target.closest('#sidebarToggle')) {
             sidebar.classList.remove('open');
         }
     }, { passive: true });
-    
+
     // Enhanced mobile navigation with auto-hide
     setupMobileNavigation();
 }
@@ -276,7 +276,7 @@ function setupMobileNavigation() {
     // Auto-hide sidebar after navigation on mobile
     const navItems = document.querySelectorAll('.nav-item');
     navItems.forEach(item => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function () {
             if (window.innerWidth <= 768) {
                 const sidebar = document.getElementById('sidebar');
                 if (sidebar && sidebar.classList.contains('open')) {
@@ -290,27 +290,27 @@ function setupMobileNavigation() {
             }
         });
     });
-    
+
     // Add touch feedback for better UX
     navItems.forEach(item => {
-        item.addEventListener('touchstart', function() {
+        item.addEventListener('touchstart', function () {
             this.style.backgroundColor = 'rgba(37, 99, 235, 0.3)';
         }, { passive: true });
-        
-        item.addEventListener('touchend', function() {
+
+        item.addEventListener('touchend', function () {
             setTimeout(() => {
                 this.style.backgroundColor = '';
             }, 150);
         }, { passive: true });
     });
-    
+
     // Hamburger menu enhancement for mobile
     const sidebarToggle = document.getElementById('sidebarToggle');
     if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', function() {
+        sidebarToggle.addEventListener('click', function () {
             const sidebar = document.getElementById('sidebar');
             const isOpen = sidebar.classList.contains('open');
-            
+
             if (isOpen) {
                 sidebar.classList.remove('open');
                 showNotification('Menu closed', 'info');
@@ -326,7 +326,7 @@ function optimizeForMobile() {
     // Reduce animation complexity on mobile
     if (window.innerWidth <= 768) {
         document.documentElement.style.setProperty('--animation-duration', '0.2s');
-        
+
         // Disable complex animations
         const style = document.createElement('style');
         style.textContent = `
@@ -347,17 +347,17 @@ function optimizeForMobile() {
 }
 
 function handleOrientationChange() {
-    window.addEventListener('orientationchange', function() {
-        setTimeout(function() {
+    window.addEventListener('orientationchange', function () {
+        setTimeout(function () {
             // Recalculate viewport height
             const vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
-            
+
             // Refresh map if it exists
             if (map) {
                 setTimeout(() => map.invalidateSize(), 300);
             }
-            
+
             // Close sidebar on orientation change
             const sidebar = document.getElementById('sidebar');
             if (sidebar) {
@@ -371,7 +371,7 @@ function preventInputZoom() {
     // Prevent zoom on input focus for iOS
     const inputs = document.querySelectorAll('input, select, textarea');
     inputs.forEach(input => {
-        input.addEventListener('focus', function() {
+        input.addEventListener('focus', function () {
             if (this.style.fontSize !== '16px') {
                 this.style.fontSize = '16px';
             }
@@ -385,7 +385,7 @@ function handleViewportChanges() {
         const vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
     };
-    
+
     setVH();
     window.addEventListener('resize', setVH);
     window.addEventListener('orientationchange', () => setTimeout(setVH, 100));
@@ -398,21 +398,21 @@ function initializeNavbarButtons() {
         themeBtn.addEventListener('click', toggleTheme);
         themeBtn.setAttribute('data-initialized', 'true');
     }
-    
+
     // Logout button
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn && !logoutBtn.hasAttribute('data-initialized')) {
         logoutBtn.addEventListener('click', handleLogout);
         logoutBtn.setAttribute('data-initialized', 'true');
     }
-    
+
     // Sidebar toggle button
     const sidebarBtn = document.getElementById('sidebarToggle');
     if (sidebarBtn && !sidebarBtn.hasAttribute('data-initialized')) {
         sidebarBtn.addEventListener('click', toggleSidebar);
         sidebarBtn.setAttribute('data-initialized', 'true');
     }
-    
+
     // Retry if buttons not found
     if (!themeBtn || !logoutBtn || !sidebarBtn) {
         setTimeout(initializeNavbarButtons, 200);
@@ -452,7 +452,7 @@ function setupEventListeners() {
     });
 
     // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         const sidebar = document.getElementById('sidebar');
         const sidebarToggle = document.getElementById('sidebarToggle');
         const overlay = document.getElementById('sidebarOverlay');
@@ -469,10 +469,10 @@ function setupEventListeners() {
 
     // Camera view controls
     setupCameraViewControls();
-    
+
     // Mobile camera gestures
     setupMobileCameraGestures();
-    
+
     // Alert monitoring system
     setupAlertMonitoring();
 
@@ -480,96 +480,96 @@ function setupEventListeners() {
     document.getElementById('refreshMap').addEventListener('click', refreshMap);
     document.getElementById('safeRoutes').addEventListener('click', toggleSafeRoutes);
 
-// Safe Routes Modal controls - use setTimeout to ensure elements exist
-setTimeout(() => {
-    const srClose = document.getElementById('srClose');
-    const srCancel = document.getElementById('srCancel');
-    const srFind = document.getElementById('srFind');
-    const srClear = document.getElementById('srClear');
-    
-    if (srClose) {
-        srClose.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            hideSafeRoutesModal();
-        });
-    }
-    
-    if (srCancel) {
-        srCancel.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            hideSafeRoutesModal();
-        });
-    }
-    
-    // Setup auto-suggest immediately
-    setupAutoSuggest();
-    
-    if (srFind) {
-        srFind.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const startInput = document.getElementById('srStart');
-            const destInput = document.getElementById('srDest');
-            
-            if (!startInput || !destInput) {
-                showNotification('Modal elements not found', 'error');
-                return;
-            }
-            
-            const startValue = startInput.value.trim();
-            const destValue = destInput.value.trim();
+    // Safe Routes Modal controls - use setTimeout to ensure elements exist
+    setTimeout(() => {
+        const srClose = document.getElementById('srClose');
+        const srCancel = document.getElementById('srCancel');
+        const srFind = document.getElementById('srFind');
+        const srClear = document.getElementById('srClear');
 
-            if (!startValue || !destValue) {
-                showNotification('Please enter both start and destination locations', 'warning');
-                return;
-            }
-
-            // Show processing state
-            const originalText = srFind.innerHTML;
-            srFind.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Finding Routes...';
-            srFind.disabled = true;
-
-            // Get coordinates from location names
-            let startCoords = getLocationCoords(startValue);
-            let destCoords = getLocationCoords(destValue);
-
-            // If no exact match, try to parse as coordinates or use defaults
-            if (!startCoords) {
-                startCoords = parseCoordinatesFromInput(startValue) || [19.9975, 73.7898];
-            }
-            if (!destCoords) {
-                destCoords = parseCoordinatesFromInput(destValue) || [19.0760, 72.8777];
-            }
-
-            // Process route calculation with delay
-            setTimeout(() => {
+        if (srClose) {
+            srClose.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
                 hideSafeRoutesModal();
-                displayRoutes(startCoords, destCoords);
-                showNotification('Route calculated successfully via roads!', 'success');
-                // Reset button state
-                srFind.innerHTML = originalText;
-                srFind.disabled = false;
-            }, 1000);
-        });
-    }
-    
-    if (srClear) {
-        srClear.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            clearSafeRoutesDropdowns();
-        });
-    }
-}, 1000);
+            });
+        }
+
+        if (srCancel) {
+            srCancel.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                hideSafeRoutesModal();
+            });
+        }
+
+        // Setup auto-suggest immediately
+        setupAutoSuggest();
+
+        if (srFind) {
+            srFind.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const startInput = document.getElementById('srStart');
+                const destInput = document.getElementById('srDest');
+
+                if (!startInput || !destInput) {
+                    showNotification('Modal elements not found', 'error');
+                    return;
+                }
+
+                const startValue = startInput.value.trim();
+                const destValue = destInput.value.trim();
+
+                if (!startValue || !destValue) {
+                    showNotification('Please enter both start and destination locations', 'warning');
+                    return;
+                }
+
+                // Show processing state
+                const originalText = srFind.innerHTML;
+                srFind.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Finding Routes...';
+                srFind.disabled = true;
+
+                // Get coordinates from location names
+                let startCoords = getLocationCoords(startValue);
+                let destCoords = getLocationCoords(destValue);
+
+                // If no exact match, try to parse as coordinates or use defaults
+                if (!startCoords) {
+                    startCoords = parseCoordinatesFromInput(startValue) || [19.9975, 73.7898];
+                }
+                if (!destCoords) {
+                    destCoords = parseCoordinatesFromInput(destValue) || [19.0760, 72.8777];
+                }
+
+                // Process route calculation with delay
+                setTimeout(() => {
+                    hideSafeRoutesModal();
+                    displayRoutes(startCoords, destCoords);
+                    showNotification('Route calculated successfully via roads!', 'success');
+                    // Reset button state
+                    srFind.innerHTML = originalText;
+                    srFind.disabled = false;
+                }, 1000);
+            });
+        }
+
+        if (srClear) {
+            srClear.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                clearSafeRoutesDropdowns();
+            });
+        }
+    }, 1000);
 
     // Heatmap summary controls
     document.getElementById('exportHeatmap').addEventListener('click', exportHeatmapData);
     document.getElementById('resetHeatmap').addEventListener('click', resetHeatmapView);
     document.getElementById('refreshDatabase').addEventListener('click', refreshDatabaseData);
-    
+
     // Initialize Google Maps-style features after DOM is ready
     setTimeout(() => {
         if (map) {
@@ -656,7 +656,7 @@ function checkOvercrowdingStatus() {
             }
 
             // Update the alert card message with systematic format
-            const latestData = data && data.length > 0 ?    data[0] : null;
+            const latestData = data && data.length > 0 ? data[0] : null;
             updateOvercrowdingAlertMessage(overcrowdingMessage, latestData);
 
             // Start camera if not active
@@ -751,7 +751,7 @@ async function handleLogin(e) {
     const loginLoading = document.getElementById('loginLoading');
     loginText.classList.add('hidden');
     loginLoading.classList.remove('hidden');
-    
+
     const radarSweep = loginLoading.querySelector('.radar-sweep');
     if (radarSweep) {
         radarSweep.style.animation = 'sweep 2s linear infinite';
@@ -790,7 +790,7 @@ function showLoginStatus(type, message) {
     loginStatus.textContent = message;
     loginStatus.className = `login-status ${type}`;
     loginStatus.style.display = 'block';
-    
+
     if (type === 'success') {
         loginStatus.style.animation = 'pulse 2s infinite';
     } else {
@@ -826,8 +826,8 @@ function showDashboard() {
         initializeCharts();
         startDataUpdates();
         // Fetch alerts and history immediately so history shows after refresh
-        try { fetchAlerts(); } catch (_) {}
-        try { fetchDensityData(); } catch (_) {} 
+        try { fetchAlerts(); } catch (_) { }
+        try { fetchDensityData(); } catch (_) { }
     }, 500);
 }
 
@@ -908,7 +908,7 @@ function toggleTheme() {
     body.className = isDark ? 'light-mode' : 'dark-mode';
     localStorage.setItem('crowdshield_theme', isDark ? 'light' : 'dark');
     updateThemeIcon();
-    
+
     // Sync settings toggle
     const darkModeToggle = document.getElementById('darkModeToggle');
     if (darkModeToggle) {
@@ -940,25 +940,25 @@ function initializeMap() {
 
     // Initialize map layers
     initializeMapLayers();
-    
+
     // Initialize Google Maps-style controls
     initializeMapControls();
-    
+
     // Initialize search with clear button
     setTimeout(() => {
         const searchInput = document.getElementById('mapSearch');
         const clearBtn = document.getElementById('clearSearch');
-        
+
         if (searchInput && clearBtn) {
-            searchInput.addEventListener('input', function() {
+            searchInput.addEventListener('input', function () {
                 if (this.value.length > 0) {
                     clearBtn.style.display = 'block';
                 } else {
                     clearBtn.style.display = 'none';
                 }
             });
-            
-            clearBtn.addEventListener('click', function() {
+
+            clearBtn.addEventListener('click', function () {
                 searchInput.value = '';
                 clearBtn.style.display = 'none';
                 document.getElementById('searchResults').style.display = 'none';
@@ -970,7 +970,7 @@ function initializeMap() {
     addSampleMarkers();
 
     // Legend removed
-    
+
     // Add all location names like Google Maps
     addAllLocationNames();
 }
@@ -991,7 +991,7 @@ function initializeMapLayers() {
             attribution: '© Esri, Maxar, Earthstar Geographics'
         })
     };
-    
+
     // Set default layer to street map
     window.mapLayers.street.addTo(map);
     window.currentLayer = 'street';
@@ -1000,53 +1000,53 @@ function initializeMapLayers() {
 function initializeMapControls() {
     // Search functionality
     setupMapSearch();
-    
+
     // Zoom controls
     document.getElementById('zoomIn').addEventListener('click', () => {
         map.zoomIn();
         showNotification('Zoomed in', 'info');
     });
-    
+
     document.getElementById('zoomOut').addEventListener('click', () => {
         map.zoomOut();
         showNotification('Zoomed out', 'info');
     });
-    
+
     // Layer controls
     document.getElementById('layerToggle').addEventListener('click', () => {
         const menu = document.getElementById('layerMenu');
         menu.classList.toggle('hidden');
     });
-    
+
     // Layer switching
     document.querySelectorAll('.layer-option').forEach(option => {
         option.addEventListener('click', () => {
             const layerType = option.dataset.layer;
             switchMapLayer(layerType);
-            
+
             // Update active state
             document.querySelectorAll('.layer-option').forEach(opt => opt.classList.remove('active'));
             option.classList.add('active');
-            
+
             // Hide menu
             document.getElementById('layerMenu').classList.add('hidden');
         });
     });
-    
+
     // My location
     document.getElementById('myLocation').addEventListener('click', getCurrentLocationOnMap);
-    
+
     // Fullscreen
     document.getElementById('fullscreenMap').addEventListener('click', toggleMapFullscreen);
-    
+
     // Street View (simulated)
     document.getElementById('streetView').addEventListener('click', activateStreetView);
-    
 
-    
+
+
     // Nearby places
     document.getElementById('nearbyPlaces').addEventListener('click', showNearbyPlaces);
-    
+
     // Close layer menu when clicking outside
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.layer-controls')) {
@@ -1064,7 +1064,7 @@ function addSampleMarkers() {
         radius: 500
     }).addTo(map);
     safeZone.bindPopup('<b>Safe Zone</b><br>Density: Low<br>Status: Normal', { closeButton: false });
-    
+
     L.marker([19.9975, 73.7898], {
         icon: L.divIcon({
             className: 'location-label',
@@ -1092,7 +1092,7 @@ function addSampleMarkers() {
         radius: 300
     }).addTo(map);
     warningZone.bindPopup('<b>Warning Zone</b><br>Density: Medium<br>Status: Monitor', { closeButton: false });
-    
+
     L.marker([20.0025, 73.7950], {
         icon: L.divIcon({
             className: 'location-label',
@@ -1125,7 +1125,7 @@ function addSampleMarkers() {
 function addAllLocationNames() {
     // Hide location names on map by default - only show in route search
     return;
-    
+
     const locations = [
         // North America - Major Cities
         { coords: [40.7128, -74.0060], name: 'NEW YORK', type: 'city' },
@@ -1148,7 +1148,7 @@ function addAllLocationNames() {
         { coords: [19.4326, -99.1332], name: 'MEXICO CITY', type: 'city' },
         { coords: [25.6866, -100.3161], name: 'MONTERREY', type: 'city' },
         { coords: [20.6597, -103.3496], name: 'GUADALAJARA', type: 'city' },
-        
+
         // Europe - Major Cities
         { coords: [51.5074, -0.1278], name: 'LONDON', type: 'city' },
         { coords: [48.8566, 2.3522], name: 'PARIS', type: 'city' },
@@ -1170,7 +1170,7 @@ function addAllLocationNames() {
         { coords: [52.2297, 21.0122], name: 'WARSAW', type: 'city' },
         { coords: [55.7558, 37.6176], name: 'MOSCOW', type: 'city' },
         { coords: [59.9311, 30.3609], name: 'ST PETERSBURG', type: 'city' },
-        
+
         // Asia - Major Cities
         { coords: [35.6762, 139.6503], name: 'TOKYO', type: 'city' },
         { coords: [39.9042, 116.4074], name: 'BEIJING', type: 'city' },
@@ -1202,7 +1202,7 @@ function addAllLocationNames() {
         { coords: [33.6844, 73.0479], name: 'ISLAMABAD', type: 'city' },
         { coords: [27.7172, 85.3240], name: 'KATHMANDU', type: 'city' },
         { coords: [6.9271, 79.8612], name: 'COLOMBO', type: 'city' },
-        
+
         // Middle East & Central Asia
         { coords: [25.2048, 55.2708], name: 'DUBAI', type: 'city' },
         { coords: [24.4539, 54.3773], name: 'ABU DHABI', type: 'city' },
@@ -1228,7 +1228,7 @@ function addAllLocationNames() {
         { coords: [38.5598, 68.7870], name: 'DUSHANBE', type: 'city' },
         { coords: [37.9601, 58.3261], name: 'ASHGABAT', type: 'city' },
         { coords: [34.5553, 69.2075], name: 'KABUL', type: 'city' },
-        
+
         // Africa - Major Cities
         { coords: [30.0444, 31.2357], name: 'CAIRO', type: 'city' },
         { coords: [30.0626, 31.2497], name: 'GIZA', type: 'city' },
@@ -1263,7 +1263,7 @@ function addAllLocationNames() {
         { coords: [36.7538, 3.0588], name: 'ALGIERS', type: 'city' },
         { coords: [36.8065, 10.1815], name: 'TUNIS', type: 'city' },
         { coords: [32.6851, 13.1849], name: 'TRIPOLI', type: 'city' },
-        
+
         // Oceania - Major Cities
         { coords: [-33.8688, 151.2093], name: 'SYDNEY', type: 'city' },
         { coords: [-37.8136, 144.9631], name: 'MELBOURNE', type: 'city' },
@@ -1279,7 +1279,7 @@ function addAllLocationNames() {
         { coords: [-17.7134, 168.3273], name: 'PORT VILA', type: 'city' },
         { coords: [-18.1416, 178.4419], name: 'SUVA', type: 'city' },
         { coords: [-13.8333, -171.7500], name: 'APIA', type: 'city' },
-        
+
         // South America - Major Cities
         { coords: [-23.5558, -46.6396], name: 'SAO PAULO', type: 'city' },
         { coords: [-22.9068, -43.1729], name: 'RIO DE JANEIRO', type: 'city' },
@@ -1313,12 +1313,12 @@ function addAllLocationNames() {
         { coords: [8.5380, -71.1394], name: 'MARACAIBO', type: 'city' },
         { coords: [5.5301, -73.3350], name: 'TUNJA', type: 'city' },
 
-        
+
         // Real-time Data Layers - Only Crowd Density
         { coords: [19.9975, 73.7898], name: '🔴 High Density Zone', type: 'crowd-data', density: 'high' },
         { coords: [20.0123, 73.7456], name: '🟡 Medium Density Zone', type: 'crowd-data', density: 'medium' },
         { coords: [19.9615, 73.7926], name: '🟢 Low Density Zone', type: 'crowd-data', density: 'low' },
-        
+
         // Indian Cities & Areas - Comprehensive Coverage
         { coords: [19.9615, 73.7926], name: 'Nashik Road', type: 'area' },
         { coords: [19.9307, 73.7314], name: 'Cidco', type: 'area' },
@@ -1411,7 +1411,7 @@ function addAllLocationNames() {
         { coords: [26.9124, 75.7873], name: 'Pink City', type: 'area' },
         { coords: [26.8467, 75.8061], name: 'Malviya Nagar', type: 'area' },
         { coords: [26.9260, 75.8235], name: 'C Scheme', type: 'area' },
-        
+
         // Major Roads & Highways with Real-time Traffic Data
         { coords: [19.9500, 73.7500], name: 'NH-50 (Nashik-Pune)', type: 'road', traffic: 'moderate' },
         { coords: [19.9700, 73.7700], name: 'NH-60 (Mumbai Highway)', type: 'road', traffic: 'heavy' },
@@ -1426,7 +1426,7 @@ function addAllLocationNames() {
         { coords: [17.3850, 78.4867], name: 'ORR Hyderabad', type: 'road', traffic: 'moderate' },
         { coords: [23.0225, 72.5714], name: 'SG Highway Ahmedabad', type: 'road', traffic: 'moderate' },
         { coords: [26.9124, 75.7873], name: 'Tonk Road Jaipur', type: 'road', traffic: 'light' },
-        
+
         // Transit Hubs with Real-time Data
         { coords: [19.9615, 73.7926], name: '🚂 Nashik Road Station', type: 'transit', status: 'active' },
         { coords: [18.9398, 72.8355], name: '🚂 CST Mumbai', type: 'transit', status: 'busy' },
@@ -1438,11 +1438,11 @@ function addAllLocationNames() {
         { coords: [23.0225, 72.5714], name: '🚌 Ahmedabad BRTS', type: 'transit', status: 'active' },
         { coords: [18.5204, 73.8567], name: '🚌 Pune BRT', type: 'transit', status: 'moderate' }
     ];
-    
+
     locations.forEach(location => {
         let className, fontSize, fontWeight, color, borderColor;
-        
-        switch(location.type) {
+
+        switch (location.type) {
             case 'city':
                 className = 'city-label';
                 fontSize = '14px';
@@ -1461,16 +1461,16 @@ function addAllLocationNames() {
                 className = 'road-label';
                 fontSize = '10px';
                 fontWeight = 'normal';
-                color = location.traffic === 'heavy' ? '#ef4444' : 
-                       location.traffic === 'moderate' ? '#f59e0b' : '#10b981';
+                color = location.traffic === 'heavy' ? '#ef4444' :
+                    location.traffic === 'moderate' ? '#f59e0b' : '#10b981';
                 borderColor = color;
                 break;
             case 'crowd-data':
                 className = 'crowd-data-label';
                 fontSize = '12px';
                 fontWeight = 'bold';
-                color = location.density === 'high' ? '#ef4444' : 
-                       location.density === 'medium' ? '#f59e0b' : '#10b981';
+                color = location.density === 'high' ? '#ef4444' :
+                    location.density === 'medium' ? '#f59e0b' : '#10b981';
                 borderColor = color;
                 break;
 
@@ -1478,8 +1478,8 @@ function addAllLocationNames() {
                 className = 'transit-label';
                 fontSize = '10px';
                 fontWeight = 'bold';
-                color = location.status === 'busy' ? '#ef4444' : 
-                       location.status === 'moderate' ? '#f59e0b' : '#10b981';
+                color = location.status === 'busy' ? '#ef4444' :
+                    location.status === 'moderate' ? '#f59e0b' : '#10b981';
                 borderColor = color;
                 break;
             default:
@@ -1489,7 +1489,7 @@ function addAllLocationNames() {
                 color = '#cccccc';
                 borderColor = '#6b7280';
         }
-        
+
         const marker = L.marker(location.coords, {
             icon: L.divIcon({
                 className: className,
@@ -1510,7 +1510,7 @@ function addAllLocationNames() {
                 iconAnchor: [0, 0]
             })
         }).addTo(map);
-        
+
         // Add real-time data popups without close button
         if (location.type === 'crowd-data') {
             marker.bindPopup(`
@@ -1545,7 +1545,7 @@ function addAllLocationNames() {
             `, { closeButton: false });
         }
     });
-    
+
     // Add CSS for real-time data animations
     const style = document.createElement('style');
     style.textContent = `
@@ -1602,7 +1602,7 @@ function refreshMap() {
         });
 
         addRefreshedHeatmapData();
-        
+
         button.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh';
         generateSimulatedData();
         updateStatusIndicators();
@@ -1624,7 +1624,7 @@ function addRefreshedHeatmapData() {
 
     zones.forEach((zone, index) => {
         const color = zone.density === 'high' ? '#ff0000' : zone.density === 'medium' ? '#ff8800' : '#00ff00';
-        
+
         // Enhanced heatmap circles for satellite view
         const circle = L.circle(zone.coords, {
             color: '#ffffff',
@@ -1634,7 +1634,7 @@ function addRefreshedHeatmapData() {
             weight: 3,
             opacity: 0.9
         }).addTo(map);
-        
+
         // Add location name label on map
         const label = L.marker(zone.coords, {
             icon: L.divIcon({
@@ -1654,11 +1654,11 @@ function addRefreshedHeatmapData() {
                 iconAnchor: [0, 0]
             })
         }).addTo(map);
-        
-        const peopleCount = zone.density === 'high' ? Math.floor(Math.random() * 50 + 30) : 
-                           zone.density === 'medium' ? Math.floor(Math.random() * 30 + 10) : 
-                           Math.floor(Math.random() * 15 + 1);
-        
+
+        const peopleCount = zone.density === 'high' ? Math.floor(Math.random() * 50 + 30) :
+            zone.density === 'medium' ? Math.floor(Math.random() * 30 + 10) :
+                Math.floor(Math.random() * 15 + 1);
+
         circle.bindPopup(`
             <div style="background: rgba(0,0,0,0.8); color: white; padding: 10px; border-radius: 6px; font-size: 0.9rem;">
                 <b style="color: ${color};">${zone.name}</b><br>
@@ -1669,7 +1669,7 @@ function addRefreshedHeatmapData() {
             </div>
         `, { closeButton: false });
     });
-    
+
     // Update heatmap summary
     updateHeatmapSummary(zones);
 }
@@ -1685,9 +1685,9 @@ function updateHeatmapSummary(zones) {
     const safe = zones.filter(z => z.density === 'low').length;
     const warning = zones.filter(z => z.density === 'medium').length;
     const critical = zones.filter(z => z.density === 'high').length;
-    
+
     const currentDensity = critical > 0 ? 'High' : warning > 0 ? 'Medium' : 'Low';
-    
+
     // Update summary elements if they exist
     const elements = {
         currentDensity: document.getElementById('currentDensity'),
@@ -1697,7 +1697,7 @@ function updateHeatmapSummary(zones) {
         totalPeopleCount: document.getElementById('totalPeopleCount'),
         lastUpdateTime: document.getElementById('lastUpdateTime')
     };
-    
+
     if (elements.currentDensity) elements.currentDensity.textContent = currentDensity;
     if (elements.safeZonesCount) elements.safeZonesCount.textContent = safe;
     if (elements.warningZonesCount) elements.warningZonesCount.textContent = warning;
@@ -1738,33 +1738,33 @@ function refreshDatabaseData() {
     ]).then(async ([densityRes, alertsRes]) => {
         const densityData = await densityRes.json().catch(() => []);
         const alertsData = await alertsRes.json().catch(() => []);
-        
+
         // Process and update UI with fresh MySQL data
         updateHeatmapSummaryFromDatabase(densityData, alertsData);
-        
+
         // Update charts with fresh data
         if (densityData.length > 0) {
             updateDensityUI(densityData);
             updateHourlyChartFromDensity(densityData);
             updateAnalyticsFromDensity(densityData);
         }
-        
+
         // Update alerts display
         if (alertsData.length > 0) {
             updateAlertsUI(alertsData);
         }
-        
+
         button.innerHTML = '<i class="fas fa-check"></i> Synced!';
         showNotification('Database synchronized successfully! All data updated from MySQL.', 'success');
-        
+
         setTimeout(() => {
             button.innerHTML = originalText;
             button.disabled = false;
         }, 2000);
-        
+
     }).catch(error => {
         console.error('Database sync error:', error);
-        
+
         // Reset to previous values or defaults on error
         if (elements.currentDensity) elements.currentDensity.textContent = 'Low';
         if (elements.safeZonesCount) elements.safeZonesCount.textContent = '0';
@@ -1772,10 +1772,10 @@ function refreshDatabaseData() {
         if (elements.criticalZonesCount) elements.criticalZonesCount.textContent = '0';
         if (elements.totalPeopleCount) elements.totalPeopleCount.textContent = '0';
         if (elements.lastUpdateTime) elements.lastUpdateTime.textContent = 'Sync failed';
-        
+
         button.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Sync Failed';
         showNotification('Database sync failed. Please check connection and try again.', 'error');
-        
+
         setTimeout(() => {
             button.innerHTML = originalText;
             button.disabled = false;
@@ -1786,7 +1786,7 @@ function refreshDatabaseData() {
 function updateHeatmapSummaryFromDatabase(densityData, alertsData) {
     // Process density data to get zone statistics
     const zoneStats = processZoneStatistics(densityData);
-    
+
     // Update summary elements with real database data
     const elements = {
         currentDensity: document.getElementById('currentDensity'),
@@ -1796,7 +1796,7 @@ function updateHeatmapSummaryFromDatabase(densityData, alertsData) {
         totalPeopleCount: document.getElementById('totalPeopleCount'),
         lastUpdateTime: document.getElementById('lastUpdateTime')
     };
-    
+
     if (elements.currentDensity) {
         elements.currentDensity.textContent = zoneStats.overallDensity;
     }
@@ -1827,7 +1827,7 @@ function processZoneStatistics(densityData) {
             totalPeople: 0
         };
     }
-    
+
     // Get latest data per zone
     const latestByZone = new Map();
     densityData.forEach(item => {
@@ -1838,18 +1838,18 @@ function processZoneStatistics(densityData) {
             latestByZone.set(item.zoneId, Object.assign({}, item, { _ts: ts }));
         }
     });
-    
+
     let safeZones = 0;
     let warningZones = 0;
     let criticalZones = 0;
     let totalPeople = 0;
-    
+
     latestByZone.forEach(zone => {
         const density = (zone.density || '').toString().toLowerCase();
         const count = parseInt(zone.count) || 0;
-        
+
         totalPeople += count;
-        
+
         if (density === 'high') {
             criticalZones++;
         } else if (density === 'medium') {
@@ -1858,7 +1858,7 @@ function processZoneStatistics(densityData) {
             safeZones++;
         }
     });
-    
+
     // Determine overall density
     let overallDensity = 'Low';
     if (criticalZones > 0) {
@@ -1866,7 +1866,7 @@ function processZoneStatistics(densityData) {
     } else if (warningZones > 0) {
         overallDensity = 'Medium';
     }
-    
+
     return {
         overallDensity,
         safeZones,
@@ -1898,7 +1898,7 @@ function showSafeRoutesModal() {
         const destInput = document.getElementById('srDest');
         if (startInput) startInput.value = '';
         if (destInput) destInput.value = '';
-        
+
         // Setup auto-suggest functionality with multiple attempts
         let attempts = 0;
         const setupWithRetry = () => {
@@ -1906,7 +1906,7 @@ function showSafeRoutesModal() {
             const startInput = document.getElementById('srStart');
             const destInput = document.getElementById('srDest');
             const gpsBtn = document.getElementById('useGpsBtn');
-            
+
             if (startInput && destInput && gpsBtn) {
                 setupAutoSuggest();
             } else if (attempts < 5) {
@@ -1938,7 +1938,7 @@ function searchLocation(input, type) {
     // Auto-suggest multiple locations immediately
     const suggestions = getLocationSuggestions(query);
     displaySuggestions(suggestions, type);
-    
+
     // Show popular suggestions even for single character
     if (query.length === 1) {
         const popularSuggestions = getPopularLocations(query);
@@ -1953,7 +1953,7 @@ function getLocationSuggestions(query) {
         { name: 'NH-60 Mumbai-Nashik Highway', coords: '19.9615,73.7926', type: 'highway' },
         { name: 'Nashik-Aurangabad Highway (NH-222)', coords: '19.8762,75.3433', type: 'highway' },
         { name: 'Nashik-Shirdi Highway', coords: '19.7645,74.4769', type: 'highway' },
-        
+
         // Missing Major Cities
         { name: 'Surat, Gujarat', coords: '21.1702,72.8311', type: 'city' },
         { name: 'Kanpur, Uttar Pradesh', coords: '26.4499,80.3319', type: 'city' },
@@ -2044,7 +2044,7 @@ function getLocationSuggestions(query) {
         { name: 'Jalgaon, Maharashtra', coords: '21.0077,75.5626', type: 'city' },
         { name: 'Udaipur, Rajasthan', coords: '24.5854,73.7125', type: 'city' },
         { name: 'Maheshtala, West Bengal', coords: '22.5093,88.2482', type: 'city' },
-        
+
         // Nashik Major Locations
         { name: 'Nashik Road Railway Station', coords: '19.9615,73.7926', type: 'transport' },
         { name: 'Sandip University, Nashik', coords: '19.9307,73.7314', type: 'education' },
@@ -2058,20 +2058,20 @@ function getLocationSuggestions(query) {
         { name: 'Ambad Nashik', coords: '20.0234,73.7567', type: 'area' },
         { name: 'Deolali Camp, Nashik', coords: '19.9456,73.8234', type: 'military' },
         { name: 'Nashik Airport (Ozar)', coords: '20.1117,73.9131', type: 'transport' },
-        
+
         // Mumbai Major Locations
         { name: 'Mumbai Central Railway Station', coords: '18.9690,72.8205', type: 'transport' },
         { name: 'Chhatrapati Shivaji Terminus (CST)', coords: '18.9398,72.8355', type: 'transport' },
         { name: 'Bandra West, Mumbai', coords: '19.0596,72.8295', type: 'area' },
         { name: 'Andheri East, Mumbai', coords: '19.1136,72.8697', type: 'area' },
         { name: 'Mumbai Airport (BOM)', coords: '19.0896,72.8656', type: 'transport' },
-        
+
         // Pune Major Locations
         { name: 'Pune Railway Station', coords: '18.5314,73.8447', type: 'transport' },
         { name: 'Shivajinagar, Pune', coords: '18.5304,73.8567', type: 'area' },
         { name: 'Koregaon Park, Pune', coords: '18.5362,73.8980', type: 'area' },
         { name: 'Pune Airport', coords: '18.5821,73.9197', type: 'transport' },
-        
+
         // Other Major Cities
         { name: 'Aurangabad Railway Station', coords: '19.8762,75.3433', type: 'transport' },
         { name: 'Nagpur Railway Station', coords: '21.1458,79.0882', type: 'transport' },
@@ -2080,7 +2080,7 @@ function getLocationSuggestions(query) {
         { name: 'Mahabaleshwar Hill Station', coords: '17.9220,73.6581', type: 'tourist' }
     ];
 
-    return allLocations.filter(loc => 
+    return allLocations.filter(loc =>
         loc.name.toLowerCase().includes(query.toLowerCase())
     ).slice(0, 10);
 }
@@ -2093,15 +2093,15 @@ function getPopularLocations(query) {
         { name: '🏔️ Shirdi Temple → Spiritual Journey', coords: '19.7645,74.4769', type: 'popular' },
         { name: '✈️ Mumbai Airport → International', coords: '19.0896,72.8656', type: 'popular' }
     ];
-    
-    return popular.filter(loc => 
+
+    return popular.filter(loc =>
         loc.name.toLowerCase().includes(query.toLowerCase())
     ).slice(0, 3);
 }
 
 function displaySuggestions(suggestions, type) {
     const container = document.getElementById(type === 'start' ? 'startSuggestions' : 'destSuggestions');
-    
+
     if (suggestions.length === 0) {
         container.innerHTML = '';
         return;
@@ -2173,7 +2173,7 @@ function useCurrentLocationStart() {
 function showSafeRoutes() {
     const startInput = document.getElementById('startLocation');
     const destInput = document.getElementById('destination');
-    
+
     const startCoords = startInput.dataset.coords || parseLocationInput(startInput.value);
     const destCoords = destInput.dataset.coords || parseLocationInput(destInput.value);
 
@@ -2212,16 +2212,16 @@ function displayRoutes(start, dest) {
     button.classList.add('active');
     button.innerHTML = '<i class="fas fa-route"></i> Hide Routes';
 
-    const distance = calculateDistance({lat: start[0], lng: start[1]}, {lat: dest[0], lng: dest[1]});
+    const distance = calculateDistance({ lat: start[0], lng: start[1] }, { lat: dest[0], lng: dest[1] });
     const routeCoords = generateRoadBasedRoute(start, dest);
     const routeName = getRouteName(start, dest);
-    
+
     clearAllRoutes();
     window.currentRoutes = [];
-    
+
     // Draw road-based route with proper waypoints
     drawRoadRoute(routeCoords, routeName, distance);
-    
+
     showNotification(`Route found via roads: ${routeName}`, 'success');
 }
 
@@ -2234,7 +2234,7 @@ function drawRoadRoute(routeCoords, routeName, distance) {
         ],
         routeWhileDragging: false,
         addWaypoints: false,
-        createMarker: function() { return null; }, // Don't create default markers
+        createMarker: function () { return null; }, // Don't create default markers
         lineOptions: {
             styles: [{
                 color: '#2563eb',
@@ -2247,21 +2247,21 @@ function drawRoadRoute(routeCoords, routeName, distance) {
             serviceUrl: 'https://router.project-osrm.org/route/v1'
         })
     }).addTo(map);
-    
+
     // Add custom markers
     addRoadMarkers([routeCoords[0], routeCoords[routeCoords.length - 1]], routeName);
-    
+
     // Calculate realistic travel time
     const travelTime = calculateRoadTravelTime(distance, routeCoords);
     const highwayName = getBestHighwayName(routeCoords[0], routeCoords[routeCoords.length - 1]);
-    
+
     // Add popup to the route when it's created
-    routingControl.on('routesfound', function(e) {
+    routingControl.on('routesfound', function (e) {
         const routes = e.routes;
         const summary = routes[0].summary;
         const actualDistance = (summary.totalDistance / 1000).toFixed(1);
         const actualTime = Math.round(summary.totalTime / 60);
-        
+
         // Create popup for the route - no close button
         const popup = L.popup({
             closeButton: false,
@@ -2273,12 +2273,12 @@ function drawRoadRoute(routeCoords, routeName, distance) {
                 🛣️ Via: <b>Roads & Highways</b>
             </div>
         `);
-        
+
         // Show popup at the midpoint of the route
         const midpoint = routes[0].coordinates[Math.floor(routes[0].coordinates.length / 2)];
         popup.setLatLng([midpoint.lat, midpoint.lng]).openOn(map);
     });
-    
+
     window.currentRoutes.push(routingControl);
 }
 
@@ -2292,7 +2292,7 @@ function addRoadMarkers(routeCoords, routeName) {
             iconAnchor: [25, 10]
         })
     }).addTo(map);
-    
+
     // Add end marker
     const endMarker = L.marker(routeCoords[routeCoords.length - 1], {
         icon: L.divIcon({
@@ -2302,7 +2302,7 @@ function addRoadMarkers(routeCoords, routeName) {
             iconAnchor: [20, 10]
         })
     }).addTo(map);
-    
+
     // Add waypoint markers for major junctions
     const waypoints = routeCoords.slice(1, -1);
     waypoints.forEach((point, index) => {
@@ -2315,25 +2315,25 @@ function addRoadMarkers(routeCoords, routeName) {
                     iconAnchor: [10, 10]
                 })
             }).addTo(map);
-            
+
             window.currentRoutes.push(waypointMarker);
         }
     });
-    
+
     window.currentRoutes.push(startMarker, endMarker);
 }
 
 function calculateRoadTravelTime(distance, routeCoords) {
     // Calculate realistic travel time based on road type and distance
     let avgSpeed = 50; // km/h default
-    
+
     // Adjust speed based on route characteristics
     if (distance > 100) avgSpeed = 70; // Highway speeds for long distance
     else if (distance < 20) avgSpeed = 35; // City speeds for short distance
-    
+
     const timeHours = distance / avgSpeed;
     const timeMinutes = Math.ceil(timeHours * 60);
-    
+
     if (timeMinutes < 60) {
         return `${timeMinutes} min`;
     } else {
@@ -2351,21 +2351,21 @@ function getRouteName(start, dest) {
 
 function getLocationName(coords) {
     const lat = coords[0], lng = coords[1];
-    
+
     // Match coordinates to location names
     if (Math.abs(lat - 19.9615) < 0.01 && Math.abs(lng - 73.7926) < 0.01) return 'Nashik Road';
     if (Math.abs(lat - 19.9307) < 0.01 && Math.abs(lng - 73.7314) < 0.01) return 'Sandip University';
     if (Math.abs(lat - 19.9975) < 0.01 && Math.abs(lng - 73.7898) < 0.01) return 'Nashik Central';
     if (Math.abs(lat - 18.9690) < 0.01 && Math.abs(lng - 72.8205) < 0.01) return 'Mumbai Central';
     if (Math.abs(lat - 18.5314) < 0.01 && Math.abs(lng - 73.8447) < 0.01) return 'Pune Station';
-    
+
     return 'Selected Location';
 }
 
 function getBestHighwayName(start, dest) {
     const startLat = start[0], startLng = start[1];
     const destLat = dest[0], destLng = dest[1];
-    
+
     // Determine highway based on coordinates
     if (destLat < 19.5) return 'NH-50 (Nashik-Pune Highway)';
     if (destLng < 73.5) return 'NH-60 (Mumbai-Nashik Highway)';
@@ -2382,28 +2382,28 @@ function generateRoadBasedRoute(start, dest) {
 function calculateRoadWaypoints(start, dest) {
     const startLat = start[0], startLng = start[1];
     const destLat = dest[0], destLng = dest[1];
-    
+
     // Find best highway/road route between points
     const bestRoute = findBestRoadRoute(start, dest);
-    
+
     if (bestRoute.length > 0) {
         return bestRoute;
     }
-    
+
     // Fallback: generate road-following waypoints
     const roadPoints = [start];
     const steps = 8; // More waypoints for smoother roads
-    
+
     for (let i = 1; i < steps; i++) {
         const ratio = i / steps;
         let lat = startLat + (destLat - startLat) * ratio;
         let lng = startLng + (destLng - startLng) * ratio;
-        
+
         // Apply road curvature and snap to road network
         const roadPoint = snapToNearestRoad(lat, lng, start, dest, ratio);
         roadPoints.push(roadPoint);
     }
-    
+
     roadPoints.push(dest);
     return roadPoints;
 }
@@ -2422,13 +2422,13 @@ function snapToNearestRoad(lat, lng, start, dest, ratio) {
         [18.5314, 73.8447], // Pune Station
         [19.8762, 75.3433], // Aurangabad
         [19.7645, 74.4769], // Shirdi
-        
+
         // Highway Junctions
         [19.5000, 73.2000], // NH-50 Junction
         [19.2000, 72.9000], // Mumbai-Nashik Highway
         [20.2000, 74.0000], // Aurangabad Highway
         [19.0000, 73.5000], // Pune-Nashik Route
-        
+
         // International Routes (for long distance)
         [28.6139, 77.2090], // Delhi
         [22.5726, 88.3639], // Kolkata
@@ -2436,11 +2436,11 @@ function snapToNearestRoad(lat, lng, start, dest, ratio) {
         [12.9716, 77.5946], // Bangalore
         [23.0225, 72.5714], // Ahmedabad
     ];
-    
+
     // Find nearest road point with distance weighting
     let nearest = [lat, lng];
     let minDistance = Infinity;
-    
+
     roadNetwork.forEach(road => {
         const distance = Math.sqrt(Math.pow(lat - road[0], 2) + Math.pow(lng - road[1], 2));
         if (distance < minDistance) {
@@ -2453,7 +2453,7 @@ function snapToNearestRoad(lat, lng, start, dest, ratio) {
             ];
         }
     });
-    
+
     return nearest;
 }
 
@@ -2488,20 +2488,20 @@ function findBestRoadRoute(start, dest) {
             [18.5314, 73.8447]  // Pune
         ]
     };
-    
+
     // Determine which highway route to use based on start/dest proximity
     const routeKey = determineHighwayRoute(start, dest);
     if (routeKey && highways[routeKey]) {
         return highways[routeKey];
     }
-    
+
     return [];
 }
 
 function determineHighwayRoute(start, dest) {
     const startLat = start[0], startLng = start[1];
     const destLat = dest[0], destLng = dest[1];
-    
+
     // Check for common routes
     if (isNearLocation(start, [19.9975, 73.7898]) && isNearLocation(dest, [18.9690, 72.8205])) {
         return 'nashik-mumbai';
@@ -2515,7 +2515,7 @@ function determineHighwayRoute(start, dest) {
     if (isNearLocation(start, [18.9690, 72.8205]) && isNearLocation(dest, [18.5314, 73.8447])) {
         return 'mumbai-pune';
     }
-    
+
     return null;
 }
 
@@ -2528,7 +2528,7 @@ function findBestHighway(start, dest, highways) {
     // Find highway that best connects start and destination
     let bestRoute = [];
     let minTotalDistance = Infinity;
-    
+
     Object.values(highways).forEach(highway => {
         const totalDistance = calculateHighwayDistance(start, dest, highway);
         if (totalDistance < minTotalDistance) {
@@ -2536,7 +2536,7 @@ function findBestHighway(start, dest, highways) {
             bestRoute = highway;
         }
     });
-    
+
     return bestRoute;
 }
 
@@ -2545,47 +2545,47 @@ function findSafestHighway(start, dest, highways) {
     const nationalHighways = Object.entries(highways)
         .filter(([name]) => name.startsWith('NH'))
         .map(([, route]) => route);
-    
+
     return findBestHighway(start, dest, Object.fromEntries(
         Object.entries(highways).filter(([name]) => name.startsWith('NH'))
     )) || Object.values(highways)[0];
 }
 
 function calculateHighwayDistance(start, dest, highway) {
-    let totalDistance = calculateDistance({lat: start[0], lng: start[1]}, {lat: highway[0][0], lng: highway[0][1]});
-    
+    let totalDistance = calculateDistance({ lat: start[0], lng: start[1] }, { lat: highway[0][0], lng: highway[0][1] });
+
     for (let i = 0; i < highway.length - 1; i++) {
         totalDistance += calculateDistance(
-            {lat: highway[i][0], lng: highway[i][1]}, 
-            {lat: highway[i+1][0], lng: highway[i+1][1]}
+            { lat: highway[i][0], lng: highway[i][1] },
+            { lat: highway[i + 1][0], lng: highway[i + 1][1] }
         );
     }
-    
+
     totalDistance += calculateDistance(
-        {lat: highway[highway.length-1][0], lng: highway[highway.length-1][1]}, 
-        {lat: dest[0], lng: dest[1]}
+        { lat: highway[highway.length - 1][0], lng: highway[highway.length - 1][1] },
+        { lat: dest[0], lng: dest[1] }
     );
-    
+
     return totalDistance;
 }
 
 function findNearestRoad(point, roads) {
     let nearest = roads[0];
-    let minDistance = calculateDistance({lat: point[0], lng: point[1]}, {lat: nearest[0], lng: nearest[1]});
-    
+    let minDistance = calculateDistance({ lat: point[0], lng: point[1] }, { lat: nearest[0], lng: nearest[1] });
+
     roads.forEach(road => {
-        const distance = calculateDistance({lat: point[0], lng: point[1]}, {lat: road[0], lng: road[1]});
+        const distance = calculateDistance({ lat: point[0], lng: point[1] }, { lat: road[0], lng: road[1] });
         if (distance < minDistance) {
             minDistance = distance;
             nearest = road;
         }
     });
-    
+
     return nearest;
 }
 
 function getRouteDescription(type) {
-    switch(type) {
+    switch (type) {
         case 'fastest': return '🏁 Express highways with minimal stops - Perfect for time-sensitive travel';
         case 'scenic': return '🌲 Beautiful landscapes and tourist attractions - Enjoy the journey';
         case 'safe': return '🛡️ Well-maintained roads with excellent safety records';
@@ -2651,59 +2651,59 @@ function hideSafeRoutesModal() {
 function clearSafeRoutesDropdowns() {
     const startInput = document.getElementById('srStart');
     const destInput = document.getElementById('srDest');
-    
+
     if (startInput) startInput.value = '';
     if (destInput) destInput.value = '';
-    
+
     // Hide suggestions
     document.getElementById('startSuggestions').style.display = 'none';
     document.getElementById('destSuggestions').style.display = 'none';
-    
+
     showNotification('Safe routes form cleared!', 'info');
 }
 
 // Auto-suggest functionality
 function setupAutoSuggest() {
     console.log('Setting up auto-suggest...');
-    
+
     const startInput = document.getElementById('srStart');
     const destInput = document.getElementById('srDest');
     const gpsBtn = document.getElementById('useGpsBtn');
-    
+
     console.log('Elements found:', { startInput: !!startInput, destInput: !!destInput, gpsBtn: !!gpsBtn });
 
     if (startInput) {
         // Remove existing listeners
         startInput.removeEventListener('input', handleStartInput);
         startInput.removeEventListener('focus', handleStartFocus); // This was a typo, should be handleStartFocus
-        
+
         // Add new listeners
         startInput.addEventListener('input', handleStartInput);
         startInput.addEventListener('focus', handleStartFocus);
     }
-    
+
     if (destInput) {
         // Remove existing listeners
         destInput.removeEventListener('input', handleDestInput); // This was a typo, should be handleDestInput
         destInput.removeEventListener('focus', handleDestFocus);
-        
+
         // Add new listeners
         destInput.addEventListener('input', handleDestInput);
         destInput.addEventListener('focus', handleDestFocus);
     }
-    
+
     if (gpsBtn) {
-        gpsBtn.onclick = function() {
+        gpsBtn.onclick = function () {
             const startInput = document.getElementById('srStart');
-            
+
             if (!navigator.geolocation) {
                 showNotification('Geolocation is not supported by your browser.', 'error');
                 return;
             }
-            
+
             gpsBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Getting...';
             gpsBtn.disabled = true;
-            
+
             navigator.geolocation.getCurrentPosition(
                 position => {
                     if (startInput) {
@@ -2739,7 +2739,7 @@ function setupAutoSuggest() {
                 }
             );
         };
-    } 
+    }
 }
 
 function handleStartInput() {
@@ -2762,43 +2762,43 @@ function handleDestFocus() {
 
 function showSuggestions(query, type) {
     console.log('Showing suggestions for:', query, type);
-    
+
     const container = document.getElementById(type + 'Suggestions');
     console.log('Container found:', !!container);
-    
+
     if (!container) return;
-    
+
     if (!query || query.length < 1) {
         container.style.display = 'none';
         return;
     }
-    
+
     const locations = getLocationSuggestions(query);
     console.log('Locations found:', locations.length);
-    
+
     if (locations.length === 0) {
         container.style.display = 'none';
         return;
     }
-    
-    container.innerHTML = locations.map(loc => 
+
+    container.innerHTML = locations.map(loc =>
         `<div class="suggestion-item" onclick="selectSuggestion('${loc.name}', '${type}')" style="padding: 8px 12px; cursor: pointer; border-bottom: 1px solid #4b5563; color: #f8fafc; font-size: 0.9rem;">
             ${loc.icon} ${loc.name}
         </div>`
     ).join('');
-    
+
     container.style.display = 'block';
     console.log('Suggestions displayed');
 }
 
 function selectSuggestion(locationName, type) {
     console.log('Selecting suggestion:', locationName, type);
-    
+
     const input = document.getElementById(type === 'start' ? 'srStart' : 'srDest');
     if (input) {
         input.value = locationName;
     }
-    
+
     const container = document.getElementById(type + 'Suggestions');
     if (container) {
         container.style.display = 'none';
@@ -2908,7 +2908,7 @@ function getLocationSuggestions(query) {
         { name: 'Jalgaon, Maharashtra', icon: '🏛️', coords: [21.0077, 75.5626] },
         { name: 'Udaipur, Rajasthan', icon: '🏰', coords: [24.5854, 73.7125] },
         { name: 'Maheshtala, West Bengal', icon: '🏙️', coords: [22.5093, 88.2482] },
-        
+
         // Nashik Area (Comprehensive)
         { name: 'Nashik Central', icon: '🏛️', coords: [19.9975, 73.7898] },
         { name: 'Nashik Road Railway Station', icon: '🚂', coords: [19.9615, 73.7926] },
@@ -2930,7 +2930,7 @@ function getLocationSuggestions(query) {
         { name: 'Manmad, Nashik', icon: '🚂', coords: [20.2522, 74.4394] },
         { name: 'Kalwan, Nashik', icon: '🏛️', coords: [20.4833, 74.0167] },
         { name: 'Malegaon, Nashik', icon: '🏛️', coords: [20.5579, 74.5287] },
-        
+
         // International Cities (Major)
         { name: 'New York, USA', icon: '🗽', coords: [40.7128, -74.0060] },
         { name: 'London, UK', icon: '🇬🇧', coords: [51.5074, -0.1278] },
@@ -2957,7 +2957,7 @@ function getLocationSuggestions(query) {
         { name: 'São Paulo, Brazil', icon: '🇧🇷', coords: [-23.5558, -46.6396] },
         { name: 'Mexico City, Mexico', icon: '🇲🇽', coords: [19.4326, -99.1332] },
         { name: 'Buenos Aires, Argentina', icon: '🇦🇷', coords: [-34.6118, -58.3960] },
-        
+
         // Popular Tourist Destinations
         { name: 'Shirdi Sai Baba Temple', icon: '🛕', coords: [19.7645, 74.4769] },
         { name: 'Lonavala Hill Station', icon: '🏔️', coords: [18.7537, 73.4068] },
@@ -2979,7 +2979,7 @@ function getLocationSuggestions(query) {
         { name: 'Khajuraho', icon: '🏛️', coords: [24.8318, 79.9199] },
         { name: 'Konark', icon: '🏛️', coords: [19.8876, 86.0943] },
         { name: 'Puri', icon: '🛕', coords: [19.8135, 85.8312] },
-        
+
         // Additional Towns and Cities (End-to-End Coverage)
         { name: 'Satara, Maharashtra', icon: '🏛️', coords: [17.6805, 74.0183] },
         { name: 'Sangli, Maharashtra', icon: '🏛️', coords: [16.8524, 74.5815] },
@@ -3000,7 +3000,7 @@ function getLocationSuggestions(query) {
         { name: 'Ratnagiri, Maharashtra', icon: '🏖️', coords: [16.9902, 73.3120] },
         { name: 'Sindhudurg, Maharashtra', icon: '🏖️', coords: [16.0000, 73.5000] },
         { name: 'Raigad, Maharashtra', icon: '🏛️', coords: [18.2367, 73.1840] },
-        
+
         // Gujarat Cities and Towns
         { name: 'Gandhinagar, Gujarat', icon: '🏛️', coords: [23.2156, 72.6369] },
         { name: 'Anand, Gujarat', icon: '🏛️', coords: [22.5645, 72.9289] },
@@ -3019,7 +3019,7 @@ function getLocationSuggestions(query) {
         { name: 'Godhra, Gujarat', icon: '🏛️', coords: [22.7756, 73.6135] },
         { name: 'Dahod, Gujarat', icon: '🏛️', coords: [22.8396, 74.2663] },
         { name: 'Vapi, Gujarat', icon: '🏭', coords: [20.3712, 72.9051] },
-        
+
         // Rajasthan Cities and Towns
         { name: 'Alwar, Rajasthan', icon: '🏰', coords: [27.5530, 76.6346] },
         { name: 'Bharatpur, Rajasthan', icon: '🏛️', coords: [27.2152, 77.4977] },
@@ -3046,7 +3046,7 @@ function getLocationSuggestions(query) {
         { name: 'Nagaur, Rajasthan', icon: '🏛️', coords: [27.1956, 73.7367] },
         { name: 'Barmer, Rajasthan', icon: '🏜️', coords: [25.7521, 71.3962] },
         { name: 'Jaisalmer, Rajasthan', icon: '🏜️', coords: [26.9157, 70.9083] },
-        
+
         // Uttar Pradesh Cities and Towns
         { name: 'Gorakhpur, Uttar Pradesh', icon: '🏛️', coords: [26.7606, 83.3732] },
         { name: 'Varanasi, Uttar Pradesh', icon: '🛕', coords: [25.3176, 82.9739] },
@@ -3083,7 +3083,7 @@ function getLocationSuggestions(query) {
         { name: 'Bahraich, Uttar Pradesh', icon: '🏛️', coords: [27.5742, 81.5947] },
         { name: 'Shravasti, Uttar Pradesh', icon: '🛕', coords: [27.5167, 82.0167] },
         { name: 'Balrampur, Uttar Pradesh', icon: '🏛️', coords: [27.4333, 82.1833] },
-        
+
         // Madhya Pradesh Cities and Towns
         { name: 'Gwalior, Madhya Pradesh', icon: '🏰', coords: [26.2183, 78.1828] },
         { name: 'Ujjain, Madhya Pradesh', icon: '🛕', coords: [23.1765, 75.7885] },
@@ -3110,7 +3110,7 @@ function getLocationSuggestions(query) {
         { name: 'Betul, Madhya Pradesh', icon: '🏛️', coords: [21.9017, 77.8986] },
         { name: 'Harda, Madhya Pradesh', icon: '🏛️', coords: [22.3442, 77.0953] },
         { name: 'Hoshangabad, Madhya Pradesh', icon: '🏛️', coords: [22.7542, 77.7281] },
-        
+
         // Karnataka Cities and Towns
         { name: 'Mysore, Karnataka', icon: '🏰', coords: [12.2958, 76.6394] },
         { name: 'Mangalore, Karnataka', icon: '🏖️', coords: [12.9141, 74.8560] },
@@ -3132,7 +3132,7 @@ function getLocationSuggestions(query) {
         { name: 'Chikmagalur, Karnataka', icon: '🏔️', coords: [13.3161, 75.7720] },
         { name: 'Udupi, Karnataka', icon: '🏖️', coords: [13.3409, 74.7421] },
         { name: 'Karwar, Karnataka', icon: '🏖️', coords: [14.8167, 74.1167] },
-        
+
         // Tamil Nadu Cities and Towns
         { name: 'Madurai, Tamil Nadu', icon: '🛕', coords: [9.9252, 78.1198] },
         { name: 'Coimbatore, Tamil Nadu', icon: '🏭', coords: [11.0168, 76.9558] },
@@ -3166,7 +3166,7 @@ function getLocationSuggestions(query) {
         { name: 'Virudhunagar, Tamil Nadu', icon: '🏛️', coords: [9.5810, 77.9624] },
         { name: 'Theni, Tamil Nadu', icon: '🏔️', coords: [10.0104, 77.4977] },
         { name: 'The Nilgiris, Tamil Nadu', icon: '🏔️', coords: [11.4064, 76.6932] },
-        
+
         // Kerala Cities and Towns
         { name: 'Kochi, Kerala', icon: '🏖️', coords: [9.9312, 76.2673] },
         { name: 'Thiruvananthapuram, Kerala', icon: '🏛️', coords: [8.5241, 76.9366] },
@@ -3182,7 +3182,7 @@ function getLocationSuggestions(query) {
         { name: 'Idukki, Kerala', icon: '🏔️', coords: [9.9181, 76.9672] },
         { name: 'Pathanamthitta, Kerala', icon: '🏛️', coords: [9.2648, 76.7870] },
         { name: 'Malappuram, Kerala', icon: '🏛️', coords: [11.0510, 76.0711] },
-        
+
         // Andhra Pradesh and Telangana Cities
         { name: 'Visakhapatnam, Andhra Pradesh', icon: '🏖️', coords: [17.6868, 83.2185] },
         { name: 'Vijayawada, Andhra Pradesh', icon: '🏛️', coords: [16.5062, 80.6480] },
@@ -3207,7 +3207,7 @@ function getLocationSuggestions(query) {
         { name: 'Medak, Telangana', icon: '🏛️', coords: [18.0487, 78.2747] },
         { name: 'Sangareddy, Telangana', icon: '🏛️', coords: [17.6186, 78.0831] },
         { name: 'Siddipet, Telangana', icon: '🏛️', coords: [18.1018, 78.8492] },
-        
+
         // West Bengal Cities and Towns
         { name: 'Howrah, West Bengal', icon: '🏭', coords: [22.5958, 88.2636] },
         { name: 'Durgapur, West Bengal', icon: '🏭', coords: [23.5204, 87.3119] },
@@ -3229,7 +3229,7 @@ function getLocationSuggestions(query) {
         { name: 'South 24 Parganas, West Bengal', icon: '🏛️', coords: [22.1667, 88.4167] },
         { name: 'Hooghly, West Bengal', icon: '🏛️', coords: [22.9000, 88.4000] },
         { name: 'Medinipur, West Bengal', icon: '🏛️', coords: [22.4333, 87.3167] },
-        
+
         // Odisha Cities and Towns
         { name: 'Bhubaneswar, Odisha', icon: '🏛️', coords: [20.2961, 85.8245] },
         { name: 'Cuttack, Odisha', icon: '🏛️', coords: [20.4625, 85.8828] },
@@ -3263,8 +3263,8 @@ function getLocationSuggestions(query) {
         { name: 'Koraput, Odisha', icon: '🏛️', coords: [18.8167, 82.7167] },
         { name: 'Malkangiri, Odisha', icon: '🏛️', coords: [18.3500, 81.9000] }
     ];
-    
-    return locations.filter(loc => 
+
+    return locations.filter(loc =>
         loc.name.toLowerCase().includes(query.toLowerCase())
     ).slice(0, 15);
 }
@@ -3275,11 +3275,11 @@ function getLocationCoords(locationName) {
     if (locationName.includes('Current Location') && startInput && startInput.dataset.coords) {
         return startInput.dataset.coords.split(',').map(Number);
     }
-    
+
     const locations = {
         // Major Indian Cities (Comprehensive)
         'Mumbai, Maharashtra': [19.0760, 72.8777], 'Mumbai': [19.0760, 72.8777],
-        "Dhule, Maharashtra": [20.9000, 74.7833], "Nandurbar, Maharashtra": [21.3667, 74.2500], 
+        "Dhule, Maharashtra": [20.9000, 74.7833], "Nandurbar, Maharashtra": [21.3667, 74.2500],
         'New Delhi, Delhi': [28.6139, 77.2090], 'New Delhi': [28.6139, 77.2090], 'Delhi': [28.6139, 77.2090],
         'Bangalore, Karnataka': [12.9716, 77.5946], 'Bangalore': [12.9716, 77.5946],
         'Chennai, Tamil Nadu': [13.0827, 80.2707], 'Chennai': [13.0827, 80.2707],
@@ -3467,7 +3467,7 @@ function getLocationCoords(locationName) {
         'Jalgaon, Maharashtra': [21.0077, 75.5626], 'Jalgaon': [21.0077, 75.5626],
         'Udaipur, Rajasthan': [24.5854, 73.7125], 'Udaipur': [24.5854, 73.7125],
         'Maheshtala, West Bengal': [22.5093, 88.2482], 'Maheshtala': [22.5093, 88.2482],
-        
+
         // Nashik Area (Comprehensive)
         'Nashik Central': [19.9975, 73.7898],
         'Nashik Road Railway Station': [19.9615, 73.7926], 'Nashik Road Station': [19.9615, 73.7926],
@@ -3483,7 +3483,7 @@ function getLocationCoords(locationName) {
         'Igatpuri, Nashik': [19.6917, 73.5667], 'Sinnar, Nashik': [19.8500, 74.0000],
         'Yeola, Nashik': [20.0424, 74.4894], 'Manmad, Nashik': [20.2522, 74.4394],
         'Kalwan, Nashik': [20.4833, 74.0167],
-        
+
         // International Cities (Major)
         'New York, USA': [40.7128, -74.0060], 'New York': [40.7128, -74.0060],
         'London, UK': [51.5074, -0.1278], 'London': [51.5074, -0.1278],
@@ -3510,7 +3510,7 @@ function getLocationCoords(locationName) {
         'São Paulo, Brazil': [-23.5558, -46.6396], 'São Paulo': [-23.5558, -46.6396],
         'Mexico City, Mexico': [19.4326, -99.1332], 'Mexico City': [19.4326, -99.1332],
         'Buenos Aires, Argentina': [-34.6118, -58.3960], 'Buenos Aires': [-34.6118, -58.3960],
-        
+
         // Popular Tourist Destinations
         'Shirdi Sai Baba Temple': [19.7645, 74.4769], 'Shirdi': [19.7645, 74.4769],
         'Lonavala Hill Station': [18.7537, 73.4068], 'Lonavala': [18.7537, 73.4068],
@@ -3524,12 +3524,12 @@ function getLocationCoords(locationName) {
         'Hampi': [15.3350, 76.4600], 'Khajuraho': [24.8318, 79.9199],
         'Konark': [19.8876, 86.0943], 'Puri': [19.8135, 85.8312]
     };
-    
+
     // Try exact match first
     if (locations[locationName]) {
         return locations[locationName];
     }
-    
+
     // Try partial match
     const lowerName = locationName.toLowerCase();
     for (const [key, coords] of Object.entries(locations)) {
@@ -3537,7 +3537,7 @@ function getLocationCoords(locationName) {
             return coords;
         }
     }
-    
+
     return null;
 }
 
@@ -3580,7 +3580,7 @@ function useCurrentLocation() {
         button.disabled = true;
 
         navigator.geolocation.getCurrentPosition(
-            function(position) {
+            function (position) {
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
                 document.getElementById('srStart').value = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
@@ -3596,7 +3596,7 @@ function useCurrentLocation() {
                 button.disabled = false;
                 showNotification('Current location set as start point!', 'success');
             },
-            function(error) {
+            function (error) {
                 console.error('Error getting location:', error);
                 button.innerHTML = originalText;
                 button.disabled = false;
@@ -3718,50 +3718,50 @@ function fetchSafeRoutes(startCoords, destCoords) {
         },
         body: JSON.stringify(requestData)
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Failed to calculate route');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.route) {
-            // Convert backend response to frontend format
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to calculate route');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.route) {
+                // Convert backend response to frontend format
+                const route = {
+                    waypoints: data.route.waypoints.map(point => [point.lat, point.lng]),
+                    distance: data.route.distance,
+                    safety: data.route.safety,
+                    estimatedTime: data.route.estimatedTime
+                };
+                return [route];
+            } else {
+                throw new Error('Invalid route response');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching safe routes:', error);
+            // Fallback to simple route calculation
             const route = {
-                waypoints: data.route.waypoints.map(point => [point.lat, point.lng]),
-                distance: data.route.distance,
-                safety: data.route.safety,
-                estimatedTime: data.route.estimatedTime
+                waypoints: [
+                    [startCoords.lat, startCoords.lng],
+                    [(startCoords.lat + destCoords.lat) / 2, (startCoords.lng + destCoords.lng) / 2],
+                    [destCoords.lat, destCoords.lng]
+                ],
+                distance: calculateDistance(startCoords, destCoords),
+                safety: 'Medium'
             };
             return [route];
-        } else {
-            throw new Error('Invalid route response');
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching safe routes:', error);
-        // Fallback to simple route calculation
-        const route = {
-            waypoints: [
-                [startCoords.lat, startCoords.lng],
-                [(startCoords.lat + destCoords.lat) / 2, (startCoords.lng + destCoords.lng) / 2],
-                [destCoords.lat, destCoords.lng]
-            ],
-            distance: calculateDistance(startCoords, destCoords),
-            safety: 'Medium'
-        };
-        return [route];
-    });
+        });
 }
 
 function calculateDistance(coord1, coord2) {
     // Simple distance calculation (Haversine formula approximation)
     const dLat = (coord2.lat - coord1.lat) * Math.PI / 180;
     const dLng = (coord2.lng - coord1.lng) * Math.PI / 180;
-    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-              Math.cos(coord1.lat * Math.PI / 180) * Math.cos(coord2.lat * Math.PI / 180) *
-              Math.sin(dLng/2) * Math.sin(dLng/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(coord1.lat * Math.PI / 180) * Math.cos(coord2.lat * Math.PI / 180) *
+        Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return 6371 * c; // Distance in km
 }
 
@@ -4325,7 +4325,7 @@ function addNewAlert(alertData) {
 
     // Show alert as a pop-up/side notification, not inside camera feed
     const notifType = type === 'critical' ? 'error' : (type === 'warning' ? 'warning' : 'info');
-    try { showNotification(message, notifType); } catch (_) {}
+    try { showNotification(message, notifType); } catch (_) { }
 
     // Persist to backend/MySQL for sequential storage with duplicate prevention
     try {
@@ -4333,17 +4333,17 @@ function addNewAlert(alertData) {
         const normalizedType = typeRaw.charAt(0).toUpperCase() + typeRaw.slice(1).toLowerCase();
         const alertKey = `${normalizedType}_${zoneId}`;
         const now = Date.now();
-        
+
         // Check if we recently saved this same alert (within 30 seconds)
         const lastSaved = lastSavedAlerts.get(alertKey);
         if (lastSaved && (now - lastSaved) < 30000) {
             console.log('Skipping duplicate alert save via addNewAlert:', alertKey);
             return;
         }
-        
+
         // Update last saved time
         lastSavedAlerts.set(alertKey, now);
-        
+
         const timestamp = new Date().toISOString();
         fetch(`${API_BASE_URL}/api/alerts`, {
             method: 'POST',
@@ -4352,7 +4352,7 @@ function addNewAlert(alertData) {
         }).then(response => {
             if (response.ok) {
                 console.log('Alert saved to database via addNewAlert:', { zoneId, type: normalizedType, message });
-                try { fetchAlerts(); } catch (_) {}
+                try { fetchAlerts(); } catch (_) { }
             }
         }).catch(err => console.error('Error saving alert:', err));
     } catch (e) {
@@ -4382,7 +4382,7 @@ function setupSettingsToggles() {
             }, 300);
         });
     });
-    
+
     // Sync dark mode toggle with current theme
     const darkModeToggle = document.getElementById('darkModeToggle');
     if (darkModeToggle) {
@@ -4473,7 +4473,7 @@ function resetHeatmapView() {
             document.getElementById('criticalZonesCount').textContent = '0';
             document.getElementById('totalPeopleCount').textContent = '0';
             document.getElementById('lastUpdateTime').textContent = 'Just now';
-            
+
             // Reset status indicators people count
             document.querySelector('.status-indicator:last-child span').textContent = 'People Count: 0';
 
@@ -4671,9 +4671,9 @@ function renderForecastTable(zones) {
 
 function updateDensityUI(densityData) {
     if (!densityData || densityData.length === 0) return;
-    
+
     console.log("Updating UI with density data:", densityData);
-    
+
     // Update charts with real data
     if (charts.density) {
         const latestData = densityData.slice(0, 12); // Get latest 12 data points
@@ -4686,17 +4686,17 @@ function updateDensityUI(densityData) {
                 hour12: false
             });
         });
-        
+
         charts.density.data.labels = labels;
         charts.density.data.datasets[0].data = counts;
         charts.density.update('none');
     }
-    
+
     // Update predictions chart with simple moving average forecast
     if (charts.predictions && densityData.length >= 3) {
         const lastThree = densityData.slice(-3).map(item => item.count);
         const movingAvg = lastThree.reduce((sum, val) => sum + val, 0) / lastThree.length;
-        
+
         charts.predictions.data.datasets[0].data = [
             movingAvg * 1.1,  // +10% for next hour
             movingAvg * 1.2,  // +20% for next 2 hours
@@ -4704,7 +4704,7 @@ function updateDensityUI(densityData) {
         ];
         charts.predictions.update('none');
     }
-    
+
     // Update status indicators only when camera is active; otherwise keep zeros
     const latestDensity = densityData[0];
     if (cameraActive && latestDensity) {
@@ -4717,15 +4717,15 @@ function updateDensityUI(densityData) {
 function updateStatusIndicatorsWithRealData(densityData) {
     const count = densityData.count;
     const densityLevel = densityData.density;
-    
+
     // Update people count
     document.querySelector('.status-indicator:last-child span').textContent = `People Count: ${count}`;
-    
+
     // Update zone status based on density level
     let safeZones = 0;
     let warningZones = 0;
     let criticalZones = 0;
-    
+
     if (densityLevel === 'Low') {
         safeZones = 1;
     } else if (densityLevel === 'Medium') {
@@ -4733,11 +4733,11 @@ function updateStatusIndicatorsWithRealData(densityData) {
     } else if (densityLevel === 'High') {
         criticalZones = 1;
     }
-    
+
     document.querySelector('.status-safe span').textContent = `Safe Zones: ${safeZones}`;
     document.querySelector('.status-warning span').textContent = `Warning Zones: ${warningZones}`;
     document.querySelector('.status-critical span').textContent = `Critical Zones: ${criticalZones}`;
-    
+
     // Add alert for high density
     if (densityLevel === 'High') {
         addNewAlert({
@@ -4764,7 +4764,7 @@ function updateAlertsUI(alertsData) {
     }
 
     const message = latest && latest.message ? latest.message : 'Alert';
-    
+
     // Skip test messages
     if (message.includes('Test:') || message.includes('Exactly 2 people detected')) {
         return;
@@ -4777,7 +4777,7 @@ function updateAlertsUI(alertsData) {
     shownAlertKeys.add(key);
 
     const notifType = type === 'critical' ? 'error' : (type === 'warning' ? 'warning' : 'info');
-    try { showNotification(message, notifType); } catch (_) {}
+    try { showNotification(message, notifType); } catch (_) { }
 }
 
 // Update UI with routes
@@ -4865,7 +4865,7 @@ function initializeBackendIntegration() {
     fetchAlerts();
     fetchRoutes();
     fetchForecast();
-    
+
     // Set up auto-refresh for backend data
     setInterval(fetchDensityData, 10000);
     setInterval(fetchAlerts, 15000); // Refresh alerts every 15 seconds
@@ -4924,8 +4924,8 @@ function showDashboard() {
         startDataUpdates();
         initializeBackendIntegration(); // Add backend integration
         // Immediately fetch alerts and history so they're visible after refresh
-        try { fetchAlerts(); } catch (_) {}
-        try { fetchDensityData(); } catch (_) {}
+        try { fetchAlerts(); } catch (_) { }
+        try { fetchDensityData(); } catch (_) { }
     }, 500);
 }
 
@@ -4943,7 +4943,7 @@ function showNotification(message, type = 'info') {
         if (window.currentNotificationEl && window.currentNotificationEl.parentNode) {
             window.currentNotificationEl.parentNode.removeChild(window.currentNotificationEl);
         }
-    } catch (_) {}
+    } catch (_) { }
     window.currentNotificationEl = null;
     window.notificationActive = false;
 
@@ -4965,8 +4965,8 @@ function processNotificationQueue() {
     const t = (type || 'info').toString().toLowerCase();
     const bg = t === 'error' ? 'var(--danger-color)'
         : t === 'success' ? 'var(--success-color)'
-        : t === 'warning' ? 'var(--warning-color)'
-        : 'var(--primary-color)';
+            : t === 'warning' ? 'var(--warning-color)'
+                : 'var(--primary-color)';
 
     notification.style.cssText = `
         position: fixed;
@@ -5239,7 +5239,7 @@ function startCamera() {
 
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function(stream) {
+                .then(function (stream) {
                     // Store the stream for later use
                     window.cameraStream = stream;
 
@@ -5273,7 +5273,7 @@ function startCamera() {
                         startDetectionLoop(videoElement);
                     }
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.error('Error accessing camera:', error);
                     button.innerHTML = originalText;
                     button.disabled = false;
@@ -5479,11 +5479,11 @@ function resetDashboardAfterCameraClose() {
             icon: 'info-circle',
             color: 'var(--primary-color)'
         });
-    } catch (_) {}
+    } catch (_) { }
 
     // Remove any active safe route overlay and reset toggle
     if (window.currentRoute && typeof map !== 'undefined' && map) {
-        try { map.removeLayer(window.currentRoute); } catch (_) {}
+        try { map.removeLayer(window.currentRoute); } catch (_) { }
         window.currentRoute = null;
     }
     const safeRoutesBtn = document.getElementById('safeRoutes');
@@ -5515,7 +5515,7 @@ function takeScreenshot() {
         ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
 
         // Create download link
-        canvas.toBlob(function(blob) {
+        canvas.toBlob(function (blob) {
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
@@ -5556,11 +5556,11 @@ function startRecording() {
         });
 
         const chunks = [];
-        window.mediaRecorder.ondataavailable = function(e) {
+        window.mediaRecorder.ondataavailable = function (e) {
             chunks.push(e.data);
         };
 
-        window.mediaRecorder.onstop = function() {
+        window.mediaRecorder.onstop = function () {
             const blob = new Blob(chunks, { type: 'video/webm' });
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
@@ -5630,7 +5630,7 @@ function updateChartsForTheme() {
         const isDark = document.body.classList.contains('dark-mode');
         const textColor = isDark ? '#f8fafc' : '#0f172a';
         const gridColor = isDark ? '#475569' : '#e2e8f0';
-        
+
         if (typeof charts === 'object' && charts) {
             Object.values(charts).forEach(chart => {
                 if (chart && chart.options) {
@@ -5655,13 +5655,13 @@ function updateChartsForTheme() {
                             }
                         }
                     }
-                    
+
                     // Update legend text color
                     if (chart.options.plugins && chart.options.plugins.legend) {
                         chart.options.plugins.legend.labels = chart.options.plugins.legend.labels || {};
                         chart.options.plugins.legend.labels.color = textColor;
                     }
-                    
+
                     chart.update('none');
                 }
             });
@@ -5680,14 +5680,14 @@ function toggleTheme() {
         body.className = isDark ? 'light-mode' : 'dark-mode';
         localStorage.setItem('crowdshield_theme', isDark ? 'light' : 'dark');
         updateThemeIcon();
-        
+
         // Update charts for new theme
         try {
             updateChartsForTheme();
         } catch (e) {
             console.warn('Chart theme update failed:', e);
         }
-        
+
         // Sync settings toggle
         const darkModeToggle = document.getElementById('darkModeToggle');
         if (darkModeToggle) {
@@ -5706,16 +5706,16 @@ function toggleTheme() {
 function setupCameraViewControls() {
     const maximizeBtn = document.getElementById('maximizeBtn');
     const minimizeBtn = document.getElementById('minimizeBtn');
-    
+
     if (maximizeBtn) {
         maximizeBtn.addEventListener('click', maximizeCamera);
     }
     if (minimizeBtn) {
         minimizeBtn.addEventListener('click', minimizeCamera);
     }
-    
+
     // ESC key to minimize
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && window.cameraMaximized) {
             minimizeCamera();
         }
@@ -5726,14 +5726,14 @@ function maximizeCamera() {
     const container = document.getElementById('cameraContainer');
     const maximizeBtn = document.getElementById('maximizeBtn');
     const minimizeBtn = document.getElementById('minimizeBtn');
-    
+
     if (!container || !cameraActive) return;
-    
+
     container.classList.add('maximized');
     maximizeBtn.style.display = 'none';
     minimizeBtn.style.display = 'inline-block';
     window.cameraMaximized = true;
-    
+
     // Create floating minimize button
     const floatingMinimizeBtn = document.createElement('button');
     floatingMinimizeBtn.className = 'maximized-minimize-btn';
@@ -5741,13 +5741,13 @@ function maximizeCamera() {
     floatingMinimizeBtn.innerHTML = '<i class="fas fa-compress"></i> Minimize';
     floatingMinimizeBtn.onclick = minimizeCamera;
     container.appendChild(floatingMinimizeBtn);
-    
+
     // Add mobile swipe hint
     addMobileSwipeHint(container);
-    
+
     // Hide scrollbars
     document.body.style.overflow = 'hidden';
-    
+
     showNotification('Camera maximized. Press ESC to minimize.', 'info');
 }
 
@@ -5756,11 +5756,11 @@ function minimizeCamera() {
     const maximizeBtn = document.getElementById('maximizeBtn');
     const minimizeBtn = document.getElementById('minimizeBtn');
     const floatingBtn = document.getElementById('floatingMinimizeBtn');
-    
+
     if (!container) return;
-    
+
     container.classList.add('minimizing');
-    
+
     // Remove floating minimize button and mobile hint
     if (floatingBtn) {
         floatingBtn.remove();
@@ -5769,21 +5769,21 @@ function minimizeCamera() {
     if (mobileHint) {
         mobileHint.remove();
     }
-    
+
     // Reset any mobile transform
     container.style.transform = '';
     container.style.opacity = '';
-    
+
     setTimeout(() => {
         container.classList.remove('maximized', 'minimizing');
         maximizeBtn.style.display = 'inline-block';
         minimizeBtn.style.display = 'none';
         window.cameraMaximized = false;
-        
+
         // Restore scrollbars
         document.body.style.overflow = '';
     }, 500);
-    
+
     showNotification('Camera minimized.', 'info');
 }
 
@@ -5800,7 +5800,7 @@ function hideCameraControls() {
     if (controls) {
         controls.style.display = 'none';
     }
-    
+
     // Reset to minimized state if maximized
     if (window.cameraMaximized) {
         minimizeCamera();
@@ -5812,18 +5812,18 @@ function setupMobileCameraGestures() {
     let startY = 0;
     let currentY = 0;
     let isDragging = false;
-    
+
     function handleTouchStart(e) {
         if (!window.cameraMaximized) return;
         startY = e.touches[0].clientY;
         isDragging = true;
     }
-    
+
     function handleTouchMove(e) {
         if (!isDragging || !window.cameraMaximized) return;
         currentY = e.touches[0].clientY;
         const deltaY = currentY - startY;
-        
+
         // Only allow downward swipe to minimize
         if (deltaY > 50) {
             e.preventDefault();
@@ -5834,14 +5834,14 @@ function setupMobileCameraGestures() {
             }
         }
     }
-    
+
     function handleTouchEnd(e) {
         if (!isDragging || !window.cameraMaximized) return;
         isDragging = false;
-        
+
         const deltaY = currentY - startY;
         const container = document.getElementById('cameraContainer');
-        
+
         if (deltaY > 100) {
             // Minimize camera
             minimizeCamera();
@@ -5851,7 +5851,7 @@ function setupMobileCameraGestures() {
             container.style.opacity = '';
         }
     }
-    
+
     // Add touch event listeners
     document.addEventListener('touchstart', handleTouchStart, { passive: false });
     document.addEventListener('touchmove', handleTouchMove, { passive: false });
@@ -5865,7 +5865,7 @@ function addMobileSwipeHint(container) {
         hint.id = 'mobileSwipeHint';
         hint.innerHTML = '<i class="fas fa-arrow-down"></i> Swipe down to minimize';
         container.appendChild(hint);
-        
+
         // Auto-hide hint after 3 seconds
         setTimeout(() => {
             if (hint.parentNode) {
@@ -5882,17 +5882,17 @@ function setupAlertMonitoring() {
     const overcrowdingBtn = document.getElementById('monitorOvercrowdingBtn');
     const medicalBtn = document.getElementById('monitorMedicalBtn');
     const stampedeBtn = document.getElementById('monitorStampedeBtn');
-    
+
     const fireStopBtn = document.getElementById('stopFireBtn');
     const overcrowdingStopBtn = document.getElementById('stopOvercrowdingBtn');
     const medicalStopBtn = document.getElementById('stopMedicalBtn');
     const stampedeStopBtn = document.getElementById('stopStampedeBtn');
-    
+
     if (fireBtn) fireBtn.addEventListener('click', () => startAlertMonitoring('fire'));
     if (overcrowdingBtn) overcrowdingBtn.addEventListener('click', () => startAlertMonitoring('overcrowding'));
     if (medicalBtn) medicalBtn.addEventListener('click', () => startAlertMonitoring('medical'));
     if (stampedeBtn) stampedeBtn.addEventListener('click', () => startAlertMonitoring('stampede'));
-    
+
     if (fireStopBtn) fireStopBtn.addEventListener('click', () => stopAlertMonitoring('fire'));
     if (overcrowdingStopBtn) overcrowdingStopBtn.addEventListener('click', () => stopAlertMonitoring('overcrowding'));
     if (medicalStopBtn) medicalStopBtn.addEventListener('click', () => stopAlertMonitoring('medical'));
@@ -5904,18 +5904,18 @@ function startAlertMonitoring(alertType) {
     if (!cameraActive) {
         startCamera();
     }
-    
+
     // Set current monitoring type
     window.currentMonitoringType = alertType;
-    
+
     // Update UI
     updateMonitoringUI(alertType, true);
-    
+
     // Start AI detection for this alert type
     setTimeout(() => {
         runAIDetection(alertType);
     }, 2000);
-    
+
     showNotification(`${capitalizeFirst(alertType)} monitoring started with camera feed!`, 'info');
 }
 
@@ -5924,23 +5924,23 @@ function stopAlertMonitoring(alertType) {
     if (window.currentMonitoringType === alertType) {
         window.currentMonitoringType = null;
     }
-    
+
     // Update UI
     updateMonitoringUI(alertType, false);
-    
+
     // Hide result
     const resultDiv = document.getElementById(`${alertType}Result`);
     if (resultDiv) {
         resultDiv.style.display = 'none';
     }
-    
+
     showNotification(`${capitalizeFirst(alertType)} monitoring stopped.`, 'info');
 }
 
 function updateMonitoringUI(alertType, isMonitoring) {
     const monitorBtn = document.getElementById(`monitor${capitalizeFirst(alertType)}Btn`);
     const stopBtn = document.getElementById(`stop${capitalizeFirst(alertType)}Btn`);
-    
+
     // New animation-based logic for mobile
     if (window.innerWidth <= 768) {
         const actionsContainer = monitorBtn.parentElement;
@@ -5972,11 +5972,11 @@ function runAIDetection(alertType) {
         setTimeout(() => runAIDetection(alertType), 1000);
         return;
     }
-    
+
     window.cocoModel.detect(videoElement).then(predictions => {
         const result = analyzeForAlertType(alertType, predictions);
         displayDetectionResult(alertType, result);
-        
+
         // Continue monitoring if still active
         if (window.currentMonitoringType === alertType) {
             setTimeout(() => runAIDetection(alertType), 2000);
@@ -5992,7 +5992,7 @@ function runAIDetection(alertType) {
 function analyzeForAlertType(alertType, predictions) {
     const people = predictions.filter(p => p.class === 'person');
     const peopleCount = people.length;
-    
+
     switch (alertType) {
         case 'fire':
             // Simulate fire detection (no fire objects in COCO model)
@@ -6008,7 +6008,7 @@ function analyzeForAlertType(alertType, predictions) {
                 saveAlertToDatabase(result);
             }
             return result;
-            
+
         case 'overcrowding':
             const isOvercrowded = peopleCount >= 4;
             const overcrowdingResult = {
@@ -6024,7 +6024,7 @@ function analyzeForAlertType(alertType, predictions) {
                 saveAlertToDatabase(overcrowdingResult);
             }
             return overcrowdingResult;
-            
+
         case 'medical':
             // Simulate medical emergency detection
             const medicalResult = {
@@ -6039,7 +6039,7 @@ function analyzeForAlertType(alertType, predictions) {
                 saveAlertToDatabase(medicalResult);
             }
             return medicalResult;
-            
+
         case 'stampede':
             // Simulate stampede risk detection based on crowd density
             const stampedeRisk = peopleCount >= 6;
@@ -6056,7 +6056,7 @@ function analyzeForAlertType(alertType, predictions) {
                 saveAlertToDatabase(stampedeResult);
             }
             return stampedeResult;
-            
+
         default:
             return {
                 detected: false,
@@ -6088,17 +6088,17 @@ function saveAlertToDatabase(alertResult) {
     // Create unique key for this alert type and zone
     const alertKey = `${alertResult.alertType}_${alertResult.zoneId}`;
     const now = Date.now();
-    
+
     // Check if we recently saved this same alert (within 30 seconds)
     const lastSaved = lastSavedAlerts.get(alertKey);
     if (lastSaved && (now - lastSaved) < 30000) {
         console.log('Skipping duplicate alert save:', alertKey);
         return;
     }
-    
+
     // Update last saved time
     lastSavedAlerts.set(alertKey, now);
-    
+
     // Prepare alert data for database
     const alertData = {
         zoneId: alertResult.zoneId || 1,
@@ -6107,7 +6107,7 @@ function saveAlertToDatabase(alertResult) {
         status: 'active',
         timestamp: new Date().toISOString()
     };
-    
+
     // Save to MySQL database via backend API
     fetch('http://localhost:8080/api/alerts', {
         method: 'POST',
@@ -6116,21 +6116,21 @@ function saveAlertToDatabase(alertResult) {
         },
         body: JSON.stringify(alertData)
     })
-    .then(response => {
-        if (response.ok) {
-            console.log('Alert saved to database:', alertData);
-            // Refresh alerts display to show new alert in history
-            setTimeout(() => {
-                fetchAlerts();
-            }, 500);
-        } else {
-            console.error('Failed to save alert to database:', response.statusText);
-        }
-    })
-    .catch(error => {
-        console.error('Error saving alert to database:', error);
-    });
-    
+        .then(response => {
+            if (response.ok) {
+                console.log('Alert saved to database:', alertData);
+                // Refresh alerts display to show new alert in history
+                setTimeout(() => {
+                    fetchAlerts();
+                }, 500);
+            } else {
+                console.error('Failed to save alert to database:', response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error('Error saving alert to database:', error);
+        });
+
     // Also show notification to user
     showNotification(`${alertResult.alertType}: ${alertResult.message}`, alertResult.detected ? 'warning' : 'info');
 }
@@ -6142,13 +6142,13 @@ function showFullHistoryModal() {
         modal.style.display = 'flex';
         modal.style.alignItems = 'center';
         modal.style.justifyContent = 'center';
-        
+
         // Load full history data
         loadFullHistoryData();
-        
+
         // Add escape key listener
         document.addEventListener('keydown', handleFullHistoryEscape);
-        
+
         showNotification('Loading complete alert history from database...', 'info');
     }
 }
@@ -6157,7 +6157,7 @@ function hideFullHistoryModal() {
     const modal = document.getElementById('fullHistoryModal');
     if (modal) {
         modal.style.display = 'none';
-        
+
         // Remove escape key listener
         document.removeEventListener('keydown', handleFullHistoryEscape);
     }
@@ -6171,7 +6171,7 @@ function handleFullHistoryEscape(e) {
 
 function loadFullHistoryData() {
     const content = document.getElementById('fullHistoryContent');
-    
+
     // Show loading state
     content.innerHTML = `
         <div style="text-align: center; padding: 40px; color: #6b7280;">
@@ -6179,7 +6179,7 @@ function loadFullHistoryData() {
             <p>Loading complete alert history from MySQL database...</p>
         </div>
     `;
-    
+
     // Fetch complete history from backend
     fetch(`${API_BASE_URL}/api/alerts/history`)
         .then(response => response.json())
@@ -6202,7 +6202,7 @@ function loadFullHistoryData() {
 
 function displayFullHistory(history) {
     const content = document.getElementById('fullHistoryContent');
-    
+
     if (!history || history.length === 0) {
         content.innerHTML = `
             <div style="text-align: center; padding: 40px; color: var(--text-dark);">
@@ -6212,10 +6212,10 @@ function displayFullHistory(history) {
         `;
         return;
     }
-    
+
     // Group alerts by date
     const groupedAlerts = groupAlertsByDate(history);
-    
+
     let html = `
         <div style="margin-bottom: 20px; padding: 15px; background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1)); border-radius: 8px; border-left: 4px solid var(--primary-color);">
             <h4 style="margin: 0 0 8px 0; color: var(--primary-color); display: flex; align-items: center; gap: 8px;">
@@ -6229,24 +6229,24 @@ function displayFullHistory(history) {
             </div>
         </div>
     `;
-    
+
     // Display alerts grouped by date
     Object.keys(groupedAlerts).sort((a, b) => new Date(b) - new Date(a)).forEach(date => {
         const alerts = groupedAlerts[date];
         const dateObj = new Date(date);
         const isToday = isDateToday(dateObj);
         const isYesterday = isDateYesterday(dateObj);
-        
-        let dateLabel = dateObj.toLocaleDateString('en-US', { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
+
+        let dateLabel = dateObj.toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
         });
-        
+
         if (isToday) dateLabel = `Today - ${dateLabel}`;
         else if (isYesterday) dateLabel = `Yesterday - ${dateLabel}`;
-        
+
         html += `
             <div style="margin-bottom: 25px;">
                 <h4 style="margin: 0 0 15px 0; padding: 10px 15px; background: var(--light-bg); border-radius: 8px; color: var(--text-dark); border-left: 4px solid var(--primary-color);">
@@ -6254,12 +6254,12 @@ function displayFullHistory(history) {
                 </h4>
                 <div style="space-y: 10px;">
         `;
-        
+
         alerts.forEach(alert => {
             const time = new Date(alert.timestamp).toLocaleTimeString();
             const color = getAlertColor(alert.type);
             const icon = getAlertIcon(alert.type);
-            
+
             html += `
                 <div style="padding: 15px; margin-bottom: 10px; background: var(--light-bg); border-radius: 8px; border-left: 4px solid ${color}; animation: fadeInUp 0.3s ease-out;">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start;">
@@ -6279,10 +6279,10 @@ function displayFullHistory(history) {
                 </div>
             `;
         });
-        
+
         html += '</div></div>';
     });
-    
+
     content.innerHTML = html;
 }
 
@@ -6330,10 +6330,10 @@ function getAlertIcon(type) {
 function refreshFullHistory() {
     const button = document.getElementById('refreshHistoryBtn');
     const originalText = button.innerHTML;
-    
+
     button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
     button.disabled = true;
-    
+
     setTimeout(() => {
         loadFullHistoryData();
         button.innerHTML = originalText;
@@ -6345,7 +6345,7 @@ function refreshFullHistory() {
 function toggleQuickActions() {
     const header = document.getElementById('quickActionsToggle');
     const content = document.getElementById('quickActionsContent');
-    
+
     header.classList.toggle('active');
     content.classList.toggle('active');
 }
@@ -6356,15 +6356,15 @@ function playAlertSound() {
     try {
         window.audioContext = new (window.AudioContext || window.webkitAudioContext)();
         window.alertActive = true;
-        
+
         // Create dangerous continuous alarm
         createDangerousAlarm();
-        
+
         // Add stop button to page
         addStopAlertButton();
-        
+
         showNotification('🚨 DANGEROUS ALERT ACTIVATED - CONTINUOUS ALARM!', 'error');
-        
+
     } catch (error) {
         console.error('Audio not supported:', error);
         showNotification('🚨 PANIC ALERT ACTIVATED!', 'error');
@@ -6373,27 +6373,27 @@ function playAlertSound() {
 
 function createDangerousAlarm() {
     if (!window.alertActive) return;
-    
+
     const oscillator1 = window.audioContext.createOscillator();
     const oscillator2 = window.audioContext.createOscillator();
     const gainNode = window.audioContext.createGain();
-    
+
     oscillator1.connect(gainNode);
     oscillator2.connect(gainNode);
     gainNode.connect(window.audioContext.destination);
-    
+
     // Dangerous dual-tone alarm
     oscillator1.type = 'square';
     oscillator2.type = 'sawtooth';
     oscillator1.frequency.value = 1000;
     oscillator2.frequency.value = 1500;
-    
+
     // High volume for danger
     gainNode.gain.value = 0.7;
-    
+
     oscillator1.start();
     oscillator2.start();
-    
+
     // Stop after 1 second and restart
     setTimeout(() => {
         oscillator1.stop();
@@ -6406,22 +6406,22 @@ function createDangerousAlarm() {
 
 function addStopAlertButton() {
     if (document.getElementById('stopAlertBtn')) return;
-    
+
     const stopBtn = document.createElement('button');
     stopBtn.id = 'stopAlertBtn';
     stopBtn.innerHTML = '<i class="fas fa-stop"></i> STOP ALERT';
     stopBtn.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 99999; background: #ef4444; color: white; border: none; padding: 15px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; animation: pulse 1s infinite;';
     stopBtn.onclick = stopAlertSound;
-    
+
     document.body.appendChild(stopBtn);
 }
 
 function stopAlertSound() {
     window.alertActive = false;
-    
+
     const stopBtn = document.getElementById('stopAlertBtn');
     if (stopBtn) stopBtn.remove();
-    
+
     showNotification('Alert sound stopped', 'info');
 }
 
@@ -6469,31 +6469,31 @@ function selectTemplate(type) {
         medical: '🏥 MEDICAL EMERGENCY: Clear the area immediately. Medical personnel en route. Stay calm and follow staff instructions.',
         stampede: '🏃 STAMPEDE RISK: STOP. Do not push. Move slowly to nearest safe zone. Stay calm and help others.'
     };
-    
+
     const textarea = document.getElementById('notificationMessage');
     const charCount = document.getElementById('charCount');
-    
+
     if (textarea && templates[type]) {
         textarea.value = templates[type];
-        
+
         // Update character count
         if (charCount) {
             charCount.textContent = templates[type].length;
         }
-        
+
         // Add visual feedback
         textarea.style.borderColor = 'var(--success-color)';
         textarea.focus();
-        
+
         // Reset border color after animation
         setTimeout(() => {
             textarea.style.borderColor = 'var(--border-light)';
         }, 1000);
-        
+
         // Add selection effect to template button
         const templateBtns = document.querySelectorAll('.template-btn');
         templateBtns.forEach(btn => btn.classList.remove('selected'));
-        
+
         const selectedBtn = document.querySelector(`[data-type="${type}"]`);
         if (selectedBtn) {
             selectedBtn.classList.add('selected');
@@ -6504,7 +6504,7 @@ function selectTemplate(type) {
 // Helper: simple HTML escaper
 function escapeHtml(unsafe) {
     if (!unsafe) return '';
-    return String(unsafe).replace(/[&<>"']/g, function(m) { return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"})[m]; });
+    return String(unsafe).replace(/[&<>"']/g, function (m) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": "&#039;" })[m]; });
 }
 
 // Helper: open a small preview window on desktop with copy/open buttons
@@ -6518,7 +6518,7 @@ function openSmsPreviewWindow(phone, message, smsUri) {
             w.document.open();
             w.document.write(html);
             w.document.close();
-            try { w.focus(); } catch (e) {}
+            try { w.focus(); } catch (e) { }
             return;
         } catch (e) {
             // If writing fails (very old browsers or strict policies), fall through to fallback
@@ -6594,13 +6594,13 @@ function showRiskRadarPanel() {
     const panel = document.createElement('div');
     panel.id = 'riskRadarPanel';
     panel.className = 'risk-forecast-panel';
-    
+
     // Determine colors based on current theme
     const isDark = document.body.classList.contains('dark-mode');
     const bgColor = isDark ? '#1f2937' : '#ffffff';
     const borderColor = isDark ? '#374151' : '#e5e7eb';
     const textColor = isDark ? '#f9fafb' : '#1f2937';
-    
+
     panel.style.cssText = `
         position: fixed;
         left: 20px;
@@ -6616,7 +6616,7 @@ function showRiskRadarPanel() {
         overflow: hidden;
         color: ${textColor};
     `;
-    
+
     panel.innerHTML = `
         <div class="risk-header">
             <h4><i class="fas fa-chart-line"></i> Risk Forecast</h4>
@@ -6628,7 +6628,7 @@ function showRiskRadarPanel() {
             </div>
         </div>
     `;
-    
+
     document.body.appendChild(panel);
     loadRiskForecastData();
 }
@@ -6640,7 +6640,7 @@ function closeRiskRadarPanel() {
 
 function loadRiskForecastData() {
     const content = document.querySelector('#riskRadarPanel .risk-content');
-    
+
     // Fetch recent alerts and density data from MySQL
     Promise.all([
         fetch(`${API_BASE_URL}/api/alerts/history`).catch(() => ({ json: () => [] })),
@@ -6648,13 +6648,13 @@ function loadRiskForecastData() {
     ]).then(async ([alertsRes, densityRes]) => {
         const alerts = await alertsRes.json().catch(() => []);
         const density = await densityRes.json().catch(() => []);
-        
+
         displayRiskForecast(alerts, density, content);
     }).catch(() => {
         const isDark = document.body.classList.contains('dark-mode');
         const textColor = isDark ? '#f9fafb' : '#1f2937';
         const errorColor = isDark ? '#f87171' : '#ef4444';
-        
+
         content.innerHTML = `
             <div class="error-section" style="color: ${textColor};">
                 <i class="fas fa-exclamation-triangle" style="color: ${errorColor};"></i>
@@ -6668,11 +6668,11 @@ function loadRiskForecastData() {
 function displayRiskForecast(alerts, density, content) {
     const recentAlerts = alerts.slice(0, 10);
     const latestDensity = density.slice(0, 5);
-    
+
     // Calculate risk levels based on database data
     const riskLevels = calculateRiskFromData(recentAlerts, latestDensity);
     const predictions = generatePredictionsFromData(recentAlerts, latestDensity);
-    
+
     // Get theme-appropriate colors
     const isDark = document.body.classList.contains('dark-mode');
     const sectionBg = isDark ? '#374151' : '#f9fafb';
@@ -6680,7 +6680,7 @@ function displayRiskForecast(alerts, density, content) {
     const mutedColor = isDark ? '#9ca3af' : '#6b7280';
     const statBg = isDark ? '#374151' : '#f9fafb';
     const statBorder = isDark ? '#4b5563' : '#e5e7eb';
-    
+
     content.innerHTML = `
         <div class="forecast-section" style="background: ${sectionBg}; color: ${textColor};">
             <h5 style="color: ${textColor};">Next 10 Minutes (Database Analysis)</h5>
@@ -6723,7 +6723,7 @@ function displayRiskForecast(alerts, density, content) {
 
 function calculateRiskFromData(alerts, density) {
     const timeSlots = ['Now', '+2min', '+4min', '+6min', '+8min', '+10min'];
-    
+
     return timeSlots.map((time, index) => {
         // Calculate risk based on recent alert frequency and density trends
         const alertScore = alerts.filter(a => {
@@ -6731,12 +6731,12 @@ function calculateRiskFromData(alerts, density) {
             const hoursAgo = (Date.now() - alertTime.getTime()) / (1000 * 60 * 60);
             return hoursAgo <= (index + 1) * 2; // Weight recent alerts more
         }).length;
-        
-        const densityScore = density.length > index ? 
+
+        const densityScore = density.length > index ?
             (density[index].count || 0) / 10 : 0;
-        
+
         const totalScore = alertScore * 0.6 + densityScore * 0.4;
-        
+
         let risk, color, height;
         if (totalScore >= 3) {
             risk = 'High'; color = '#ef4444'; height = 90 + (index * 2);
@@ -6745,18 +6745,18 @@ function calculateRiskFromData(alerts, density) {
         } else {
             risk = 'Low'; color = '#10b981'; height = 30 + (index * 2);
         }
-        
+
         return { time, risk, color, height };
     });
 }
 
 function generatePredictionsFromData(alerts, density) {
     const predictions = [];
-    
+
     // Analyze alert patterns
     const criticalAlerts = alerts.filter(a => a.type === 'Critical').length;
     const warningAlerts = alerts.filter(a => a.type === 'Warning').length;
-    
+
     if (criticalAlerts >= 2) {
         predictions.push({
             title: 'Escalating Emergency Situation',
@@ -6765,7 +6765,7 @@ function generatePredictionsFromData(alerts, density) {
             severity: 'critical'
         });
     }
-    
+
     if (warningAlerts >= 3) {
         predictions.push({
             title: 'Potential Crowd Management Issue',
@@ -6774,7 +6774,7 @@ function generatePredictionsFromData(alerts, density) {
             severity: 'warning'
         });
     }
-    
+
     // Analyze density trends
     if (density.length >= 3) {
         const avgDensity = density.slice(0, 3).reduce((sum, d) => sum + (d.count || 0), 0) / 3;
@@ -6787,13 +6787,13 @@ function generatePredictionsFromData(alerts, density) {
             });
         }
     }
-    
+
     return predictions.slice(0, 3); // Limit to top 3 predictions
 }
 
 function preDeployResources() {
     closeRiskRadarPanel();
-    
+
     // Fetch current database data to determine what resources are needed
     Promise.all([
         fetch(`${API_BASE_URL}/api/alerts/history`).catch(() => ({ json: () => [] })),
@@ -6801,7 +6801,7 @@ function preDeployResources() {
     ]).then(async ([alertsRes, densityRes]) => {
         const alerts = await alertsRes.json().catch(() => []);
         const density = await densityRes.json().catch(() => []);
-        
+
         const deploymentPlan = analyzeDeploymentNeeds(alerts, density);
         showDeploymentModal(deploymentPlan);
     }).catch(() => {
@@ -6818,37 +6818,37 @@ function preDeployResources() {
 function analyzeDeploymentNeeds(alerts, density) {
     const needed = [];
     const notNeeded = [];
-    
+
     // Check recent alerts (last 24 hours)
     const recentAlerts = alerts.filter(a => {
         const alertTime = new Date(a.timestamp);
         const hoursAgo = (Date.now() - alertTime.getTime()) / (1000 * 60 * 60);
         return hoursAgo <= 24;
     });
-    
+
     const criticalAlerts = recentAlerts.filter(a => a.type === 'Critical').length;
     const medicalAlerts = recentAlerts.filter(a => a.message && a.message.includes('Medical')).length;
     const fireAlerts = recentAlerts.filter(a => a.message && a.message.includes('Fire')).length;
     const overcrowdingAlerts = recentAlerts.filter(a => a.message && a.message.includes('Overcrowding')).length;
-    
+
     // Check current density
     const latestDensity = density.length > 0 ? density[0] : null;
     const currentCount = latestDensity ? latestDensity.count : 0;
     const currentDensityLevel = latestDensity ? latestDensity.density : 'Low';
-    
+
     // Determine what's needed based on data
     if (medicalAlerts > 0 || criticalAlerts > 1) {
         needed.push('🚑 2 Ambulances → Nashik Central Hospital & Cidco Hospital');
     } else {
         notNeeded.push('Ambulances (no medical emergencies detected)');
     }
-    
+
     if (fireAlerts > 0) {
         needed.push('🚒 Fire rescue team → Nashik Fire Station, College Road');
     } else {
         notNeeded.push('Fire rescue (no fire alerts in database)');
     }
-    
+
     if (currentCount >= 3 || overcrowdingAlerts > 0 || currentDensityLevel === 'High') {
         needed.push('👮 Security personnel → Panchavati & MG Road checkpoints');
         needed.push('🚧 Crowd barriers → Nashik Road Station & Bus Stand exits');
@@ -6856,32 +6856,32 @@ function analyzeDeploymentNeeds(alerts, density) {
         notNeeded.push('Security personnel (crowd levels normal)');
         notNeeded.push('Crowd barriers (no overcrowding detected)');
     }
-    
+
     if (criticalAlerts > 0 || currentCount >= 5) {
         needed.push('📡 Emergency comms → All mobile towers in 5km radius');
     } else {
         notNeeded.push('Emergency communications (situation stable)');
     }
-    
+
     const reason = `Analysis: ${recentAlerts.length} alerts (${criticalAlerts} critical), ${currentCount} people detected, density: ${currentDensityLevel}`;
-    
+
     return { needed, notNeeded, reason };
 }
 
 function showDeploymentModal(plan) {
     const modal = document.createElement('div');
     modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 99999;';
-    
-    const neededHtml = plan.needed.length > 0 ? 
+
+    const neededHtml = plan.needed.length > 0 ?
         `<ul style="color: #1f2937; margin: 0; padding-left: 20px;">${plan.needed.map(item => `<li>${item}</li>`).join('')}</ul>` :
         '<p style="color: #10b981; margin: 0;">✅ No additional resources needed at this time</p>';
-    
+
     const notNeededHtml = plan.notNeeded.length > 0 ?
         `<div style="background: rgba(107, 114, 128, 0.1); border: 1px solid #6b7280; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
             <h4 style="color: #6b7280; margin: 0 0 10px 0;">⏸️ Resources Not Deployed:</h4>
             <ul style="color: #6b7280; margin: 0; padding-left: 20px; font-size: 0.9rem;">${plan.notNeeded.map(item => `<li>${item}</li>`).join('')}</ul>
         </div>` : '';
-    
+
     modal.innerHTML = `
         <div style="background: #ffffff; padding: 30px; border-radius: 12px; max-width: 500px; width: 90%; color: #1f2937;">
             <h3 style="color: #2563eb; margin: 0 0 20px 0;"><i class="fas fa-shield-alt"></i> Smart Resource Deployment</h3>
@@ -6903,7 +6903,7 @@ function showDeploymentModal(plan) {
             </button>
         </div>
     `;
-    
+
     document.body.appendChild(modal);
     showNotification('🎯 Smart deployment based on database analysis!', 'success');
 }
@@ -6937,12 +6937,12 @@ function setupMapSearch() {
     const searchInput = document.getElementById('mapSearch');
     const searchResults = document.getElementById('searchResults');
     const clearBtn = document.getElementById('clearSearch');
-    
+
     if (!searchInput) return;
-    
+
     searchInput.addEventListener('input', (e) => {
         const query = e.target.value.trim();
-        
+
         // Show/hide clear button
         if (query.length > 0) {
             clearBtn.style.display = 'flex';
@@ -6951,15 +6951,15 @@ function setupMapSearch() {
             clearBtn.style.display = 'none';
             clearBtn.classList.remove('show');
         }
-        
+
         if (query.length < 2) {
             searchResults.style.display = 'none';
             return;
         }
-        
+
         performMapSearch(query);
     });
-    
+
     // Clear button functionality
     if (clearBtn) {
         clearBtn.addEventListener('click', () => {
@@ -6969,13 +6969,13 @@ function setupMapSearch() {
             searchInput.focus();
         });
     }
-    
+
     searchInput.addEventListener('focus', () => {
         if (searchInput.value.trim().length >= 2) {
             searchResults.style.display = 'block';
         }
     });
-    
+
     // Hide results when clicking outside
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.map-search-box')) {
@@ -6986,7 +6986,7 @@ function setupMapSearch() {
 
 function performMapSearch(query) {
     const searchResults = document.getElementById('searchResults');
-    
+
     // Comprehensive location database
     const locations = [
         // Major Cities
@@ -7000,7 +7000,7 @@ function performMapSearch(query) {
         { name: 'Ahmedabad, Gujarat', coords: [23.0225, 72.5714], type: 'city' },
         { name: 'Jaipur, Rajasthan', coords: [26.9124, 75.7873], type: 'city' },
         { name: 'Nashik, Maharashtra', coords: [19.9975, 73.7898], type: 'city' },
-        
+
         // Nashik Specific
         { name: 'Nashik Road Railway Station', coords: [19.9615, 73.7926], type: 'transport' },
         { name: 'Sandip University, Nashik', coords: [19.9307, 73.7314], type: 'education' },
@@ -7010,14 +7010,14 @@ function performMapSearch(query) {
         { name: 'Panchavati Temple, Nashik', coords: [19.9990, 73.7910], type: 'religious' },
         { name: 'College Road, Nashik', coords: [19.9980, 73.7900], type: 'area' },
         { name: 'MG Road, Nashik', coords: [19.9985, 73.7905], type: 'area' },
-        
+
         // Points of Interest
         { name: 'Mumbai Airport (BOM)', coords: [19.0896, 72.8656], type: 'transport' },
         { name: 'Pune Airport', coords: [18.5821, 73.9197], type: 'transport' },
         { name: 'Shirdi Sai Baba Temple', coords: [19.7645, 74.4769], type: 'religious' },
         { name: 'Lonavala Hill Station', coords: [18.7537, 73.4068], type: 'tourist' },
         { name: 'Mahabaleshwar', coords: [17.9220, 73.6581], type: 'tourist' },
-        
+
         // International
         { name: 'New York, USA', coords: [40.7128, -74.0060], type: 'city' },
         { name: 'London, UK', coords: [51.5074, -0.1278], type: 'city' },
@@ -7026,16 +7026,16 @@ function performMapSearch(query) {
         { name: 'Dubai, UAE', coords: [25.2048, 55.2708], type: 'city' },
         { name: 'Singapore', coords: [1.3521, 103.8198], type: 'city' }
     ];
-    
-    const results = locations.filter(loc => 
+
+    const results = locations.filter(loc =>
         loc.name.toLowerCase().includes(query.toLowerCase())
     ).slice(0, 8);
-    
+
     if (results.length === 0) {
         searchResults.style.display = 'none';
         return;
     }
-    
+
     searchResults.innerHTML = results.map(result => {
         const icon = getLocationTypeIcon(result.type);
         return `
@@ -7050,7 +7050,7 @@ function performMapSearch(query) {
             </div>
         `;
     }).join('');
-    
+
     searchResults.style.display = 'block';
 }
 
@@ -7070,12 +7070,12 @@ function getLocationTypeIcon(type) {
 
 function selectSearchResult(lat, lng, name) {
     map.setView([lat, lng], 15);
-    
+
     // Add marker
     if (window.searchMarker) {
         map.removeLayer(window.searchMarker);
     }
-    
+
     window.searchMarker = L.marker([lat, lng]).addTo(map);
     window.searchMarker.bindPopup(`
         <div style="text-align: center;">
@@ -7083,11 +7083,11 @@ function selectSearchResult(lat, lng, name) {
             <small>Lat: ${lat.toFixed(4)}, Lng: ${lng.toFixed(4)}</small>
         </div>
     `).openPopup();
-    
+
     // Hide search results
     document.getElementById('searchResults').style.display = 'none';
     document.getElementById('mapSearch').value = name;
-    
+
     showNotification(`📍 Navigated to ${name}`, 'success');
 }
 
@@ -7095,10 +7095,10 @@ function switchMapLayer(layerType) {
     if (window.currentLayer) {
         map.removeLayer(window.mapLayers[window.currentLayer]);
     }
-    
+
     map.addLayer(window.mapLayers[layerType]);
     window.currentLayer = layerType;
-    
+
     // Add street labels for hybrid view
     if (layerType === 'hybrid') {
         if (!window.streetLabels) {
@@ -7110,32 +7110,32 @@ function switchMapLayer(layerType) {
     } else if (window.streetLabels) {
         map.removeLayer(window.streetLabels);
     }
-    
+
     showNotification(`🗺️ Switched to ${layerType} view`, 'info');
 }
 
 function getCurrentLocationOnMap() {
     const btn = document.getElementById('myLocation');
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-    
+
     if (!navigator.geolocation) {
         showNotification('Geolocation not supported', 'error');
         btn.innerHTML = '<i class="fas fa-crosshairs"></i>';
         return;
     }
-    
+
     navigator.geolocation.getCurrentPosition(
         position => {
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
-            
+
             map.setView([lat, lng], 16);
-            
+
             // Add current location marker
             if (window.currentLocationMarker) {
                 map.removeLayer(window.currentLocationMarker);
             }
-            
+
             window.currentLocationMarker = L.marker([lat, lng], {
                 icon: L.divIcon({
                     className: 'current-location-marker',
@@ -7144,9 +7144,9 @@ function getCurrentLocationOnMap() {
                     iconAnchor: [10, 10]
                 })
             }).addTo(map);
-            
+
             window.currentLocationMarker.bindPopup('📍 Your current location').openPopup();
-            
+
             btn.innerHTML = '<i class="fas fa-crosshairs"></i>';
             showNotification('📍 Current location found', 'success');
         },
@@ -7160,7 +7160,7 @@ function getCurrentLocationOnMap() {
 function toggleMapFullscreen() {
     const mapContainer = document.querySelector('.map-wrapper');
     const btn = document.getElementById('fullscreenMap');
-    
+
     if (!document.fullscreenElement) {
         mapContainer.requestFullscreen().then(() => {
             btn.innerHTML = '<i class="fas fa-compress"></i>';
@@ -7179,7 +7179,7 @@ function toggleMapFullscreen() {
 function activateStreetView() {
     const center = map.getCenter();
     const streetViewUrl = `https://www.google.com/maps/@${center.lat},${center.lng},3a,75y,90t/data=!3m6!1e1!3m4!1s0x0:0x0!2e0!7i13312!8i6656`;
-    
+
     // Open in new tab
     window.open(streetViewUrl, '_blank');
     showNotification('🚶 Opening Street View in new tab', 'info');
@@ -7187,18 +7187,18 @@ function activateStreetView() {
 
 function toggleTraffic() {
     const btn = document.getElementById('trafficToggle');
-    
+
     if (!window.trafficLayer) {
         // Simulate traffic layer with colored routes
         window.trafficLayer = L.layerGroup();
-        
+
         // Add sample traffic routes
         const trafficRoutes = [
             { coords: [[19.9975, 73.7898], [19.9615, 73.7926]], color: '#ef4444', status: 'Heavy' },
             { coords: [[19.9307, 73.7314], [20.0123, 73.7456]], color: '#f59e0b', status: 'Moderate' },
             { coords: [[19.9456, 73.8234], [20.0456, 73.7123]], color: '#10b981', status: 'Light' }
         ];
-        
+
         trafficRoutes.forEach(route => {
             const polyline = L.polyline(route.coords, {
                 color: route.color,
@@ -7209,7 +7209,7 @@ function toggleTraffic() {
             window.trafficLayer.addLayer(polyline);
         });
     }
-    
+
     if (btn.classList.contains('active')) {
         map.removeLayer(window.trafficLayer);
         btn.classList.remove('active');
@@ -7223,17 +7223,17 @@ function toggleTraffic() {
 
 function toggleTransit() {
     const btn = document.getElementById('transitToggle');
-    
+
     if (!window.transitLayer) {
         // Simulate transit layer with bus/train routes
         window.transitLayer = L.layerGroup();
-        
+
         // Add sample transit routes
         const transitRoutes = [
             { coords: [[19.9975, 73.7898], [19.9615, 73.7926]], type: 'Bus', line: 'Route 101' },
             { coords: [[19.9307, 73.7314], [20.0123, 73.7456]], type: 'Train', line: 'Central Line' }
         ];
-        
+
         transitRoutes.forEach(route => {
             const polyline = L.polyline(route.coords, {
                 color: '#3b82f6',
@@ -7243,7 +7243,7 @@ function toggleTransit() {
             });
             polyline.bindPopup(`${route.type}: ${route.line}`);
             window.transitLayer.addLayer(polyline);
-            
+
             // Add transit stops
             route.coords.forEach(coord => {
                 const marker = L.marker(coord, {
@@ -7257,7 +7257,7 @@ function toggleTransit() {
             });
         });
     }
-    
+
     if (btn.classList.contains('active')) {
         map.removeLayer(window.transitLayer);
         btn.classList.remove('active');
@@ -7271,7 +7271,7 @@ function toggleTransit() {
 
 function showNearbyPlaces() {
     const center = map.getCenter();
-    
+
     // Sample nearby places
     const nearbyPlaces = [
         { name: 'Restaurants', icon: '🍽️', coords: [center.lat + 0.001, center.lng + 0.001] },
@@ -7281,13 +7281,13 @@ function showNearbyPlaces() {
         { name: 'Shopping', icon: '🛒', coords: [center.lat + 0.002, center.lng] },
         { name: 'Hotels', icon: '🏨', coords: [center.lat, center.lng + 0.002] }
     ];
-    
+
     // Clear existing nearby markers
     if (window.nearbyMarkers) {
         window.nearbyMarkers.forEach(marker => map.removeLayer(marker));
     }
     window.nearbyMarkers = [];
-    
+
     // Add nearby place markers
     nearbyPlaces.forEach(place => {
         const marker = L.marker(place.coords, {
@@ -7298,19 +7298,19 @@ function showNearbyPlaces() {
                 iconAnchor: [15, 15]
             })
         }).addTo(map);
-        
+
         marker.bindPopup(`${place.icon} ${place.name}`);
         window.nearbyMarkers.push(marker);
     });
-    
+
     showNotification('🏢 Nearby places shown on map', 'success');
 }
 
 // Add keyboard shortcuts for map navigation
 document.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT') return; // Don't interfere with input fields
-    
-    switch(e.key) {
+
+    switch (e.key) {
         case '+':
         case '=':
             map.zoomIn();
@@ -7359,7 +7359,7 @@ function setTemplate(type) {
         overcrowding: '👥 OVERCROWDING ALERT 👥\n\nDangerous crowd levels detected at [LOCATION]. Please avoid the area and use alternative routes. Follow crowd control instructions.',
         stampede: '🏃‍♂️ STAMPEDE RISK ALERT 🏃‍♂️\n\nHigh stampede risk at [LOCATION]. Do not run. Move slowly and calmly. Follow emergency personnel instructions immediately.'
     };
-    
+
     messageField.value = templates[type] || '';
     showNotification(`${type.charAt(0).toUpperCase() + type.slice(1)} template loaded`, 'success');
 }
@@ -7388,7 +7388,7 @@ function openContactList() {
             else {
                 window.open("tel:", "_blank");
             }
-            
+
             showNotification('Opening mobile contacts app...', 'info');
         } catch (error) {
             showNotification('Unable to open contacts app. Please select contacts manually.', 'warning');
@@ -7404,10 +7404,10 @@ function toggleContact(contactElement) {
     const checkbox = contactElement.querySelector('.contact-checkbox');
     const phone = contactElement.dataset.phone;
     const name = contactElement.dataset.name;
-    
+
     // Toggle checkbox
     checkbox.checked = !checkbox.checked;
-    
+
     // Update visual state
     if (checkbox.checked) {
         contactElement.style.background = 'rgba(16, 185, 129, 0.1)';
@@ -7416,7 +7416,7 @@ function toggleContact(contactElement) {
         contactElement.style.background = 'transparent';
         contactElement.style.border = '1px solid transparent';
     }
-    
+
     // Update recipients input
     updateRecipientsInput();
     updateSelectedCount();
@@ -7426,14 +7426,14 @@ function toggleContact(contactElement) {
 // Select all contacts
 function selectAllContacts() {
     const contactItems = document.querySelectorAll('.contact-item');
-    const allSelected = Array.from(contactItems).every(item => 
+    const allSelected = Array.from(contactItems).every(item =>
         item.querySelector('.contact-checkbox').checked
     );
-    
+
     contactItems.forEach(item => {
         const checkbox = item.querySelector('.contact-checkbox');
         checkbox.checked = !allSelected;
-        
+
         if (checkbox.checked) {
             item.style.background = 'rgba(16, 185, 129, 0.1)';
             item.style.border = '1px solid #10b981';
@@ -7442,7 +7442,7 @@ function selectAllContacts() {
             item.style.border = '1px solid transparent';
         }
     });
-    
+
     updateRecipientsInput();
     updateSelectedCount();
     updateContactChips();
@@ -7451,10 +7451,10 @@ function selectAllContacts() {
 // Update recipients input field
 function updateRecipientsInput() {
     const selectedContacts = document.querySelectorAll('.contact-item .contact-checkbox:checked');
-    const phoneNumbers = Array.from(selectedContacts).map(checkbox => 
+    const phoneNumbers = Array.from(selectedContacts).map(checkbox =>
         checkbox.closest('.contact-item').dataset.phone
     );
-    
+
     document.getElementById('mnPhone').value = phoneNumbers.join(', ');
 }
 
@@ -7469,16 +7469,16 @@ function updateContactChips() {
     const selectedContacts = document.querySelectorAll('.contact-item .contact-checkbox:checked');
     const chipsContainer = document.getElementById('contactChips');
     const display = document.getElementById('selectedContactsDisplay');
-    
+
     if (selectedContacts.length > 0) {
         display.style.display = 'block';
         chipsContainer.innerHTML = '';
-        
+
         selectedContacts.forEach(checkbox => {
             const contactItem = checkbox.closest('.contact-item');
             const name = contactItem.dataset.name;
             const phone = contactItem.dataset.phone;
-            
+
             const chip = document.createElement('div');
             chip.style.cssText = `
                 background: #10b981;
@@ -7509,7 +7509,7 @@ function removeContactChip(phone) {
         checkbox.checked = false;
         contactItem.style.background = 'transparent';
         contactItem.style.border = '1px solid transparent';
-        
+
         updateRecipientsInput();
         updateSelectedCount();
         updateContactChips();
@@ -7520,7 +7520,7 @@ function removeContactChip(phone) {
 function clearRecipients() {
     // Clear input field
     document.getElementById('mnPhone').value = '';
-    
+
     // Uncheck all contacts
     const contactItems = document.querySelectorAll('.contact-item');
     contactItems.forEach(item => {
@@ -7529,7 +7529,7 @@ function clearRecipients() {
         item.style.background = 'transparent';
         item.style.border = '1px solid transparent';
     });
-    
+
     updateSelectedCount();
     updateContactChips();
     showNotification('All recipients cleared', 'info');
@@ -7539,28 +7539,28 @@ function clearRecipients() {
 function sendMassNotification() {
     const phoneNumbers = document.getElementById('mnPhone').value.trim();
     const message = document.getElementById('mnMessage').value.trim();
-    
+
     if (!phoneNumbers) {
         showNotification('Please select at least one recipient', 'warning');
         return;
     }
-    
+
     if (!message) {
         showNotification('Please enter a message', 'warning');
         return;
     }
-    
+
     // Split phone numbers by comma and clean them
     const numbers = phoneNumbers.split(',').map(num => num.trim()).filter(num => num);
-    
+
     if (numbers.length === 0) {
         showNotification('Please enter valid phone numbers', 'warning');
         return;
     }
-    
+
     // Show confirmation
     const confirmMessage = `Send alert to ${numbers.length} recipient(s)?\n\nRecipients: ${numbers.join(', ')}\n\nMessage: ${message}`;
-    
+
     if (confirm(confirmMessage)) {
         // Simulate sending to multiple numbers
         numbers.forEach((number, index) => {
@@ -7573,7 +7573,7 @@ function sendMassNotification() {
                 }
             }, index * 500); // Stagger the sends by 500ms
         });
-        
+
         showNotification(`Mass notification sent to ${numbers.length} recipients!`, 'success');
         hideMassNotificationModal();
     }
@@ -7640,7 +7640,7 @@ document.head.appendChild(contactStyles);
 function initializeCursorTrail() {
     const cursorTrail = document.getElementById('cursorTrail');
     if (!cursorTrail || window.innerWidth <= 768) { // Disable on mobile for performance
-        if(cursorTrail) cursorTrail.style.display = 'none';
+        if (cursorTrail) cursorTrail.style.display = 'none';
         return;
     }
 
@@ -7661,7 +7661,7 @@ function initializeCursorTrail() {
     let mouseX = -100;
     let mouseY = -100;
 
-    window.addEventListener('mousemove', function(e) {
+    window.addEventListener('mousemove', function (e) {
         mouseX = e.clientX;
         mouseY = e.clientY;
     });
@@ -7693,30 +7693,30 @@ document.addEventListener('DOMContentLoaded', initializeCursorTrail);
 document.head.appendChild(contactStyles);// Location-aware template function
 function setTemplate(type) {
     const messageField = document.getElementById('mnMessage');
-    
+
     // Show loading state
     messageField.placeholder = 'Getting current location...';
     messageField.disabled = true;
-    
+
     // Add visual feedback to the clicked button
     const buttons = document.querySelectorAll('.template-btn');
     buttons.forEach(btn => btn.classList.remove('selected'));
     event.target.classList.add('selected');
-    
+
     // Get current location first
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-            function(position) {
+            function (position) {
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
-                
+
                 const location = {
                     lat: lat,
                     lng: lng
                 };
                 setTemplateWithLocation(type, location, messageField);
             },
-            function(error) {
+            function (error) {
                 console.warn('Geolocation error:', error.message);
                 // Fallback to default location
                 setTemplateWithLocation(type, null, messageField);
@@ -7759,7 +7759,7 @@ function setTemplateWithLocation(type, location, messageField) {
         overcrowding: `👥 OVERCROWDING ALERT 👥\n\nDangerous crowd levels detected ${locationString}. Please avoid the area and use alternative routes. Follow crowd control instructions.`,
         stampede: `🏃‍♂️ STAMPEDE RISK ALERT 🏃‍♂️\n\nHigh risk of stampede detected ${locationString}! STOP MOVING and stay where you are. Do not push or run. Wait for crowd to thin before moving slowly.`
     };
-    
+
     if (templates[type]) {
         messageField.value = templates[type];
         messageField.disabled = false;
@@ -7816,7 +7816,7 @@ function startDatabaseScan() {
     // Fetch data from backend to get results
     fetchDataForScan().then(data => {
         setTimeout(() => {
-  scanStatusText.textContent = 'Scan Complete.';
+            scanStatusText.textContent = 'Scan Complete.';
             scanLight.classList.remove('scanning');
             scanLight.classList.add('complete');
             scanProgress.style.width = '100%';
@@ -7859,16 +7859,16 @@ async function fetchDataForScan() {
 
 
 // PWA Service Worker Registration and Install Prompt
-(function() {
+(function () {
     'use strict';
-    
-  // Register service worker for PWA functionality
+
+    // Register service worker for PWA functionality
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('/sw.js')
                 .then(registration => {
                     console.log('CrowdShield: Service Worker registered successfully:', registration.scope);
-                    
+
                     // Check for updates
                     registration.addEventListener('updatefound', () => {
                         const newWorker = registration.installing;
@@ -7887,20 +7887,20 @@ async function fetchDataForScan() {
                     console.log('CrowdShield: Service Worker registration failed:', error);
                 });
         });
-        
+
         // Handle service worker updates
         navigator.serviceWorker.addEventListener('controllerchange', () => {
             window.location.reload();
         });
     }
-    
+
     // PWA Install Prompt
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
         console.log('CrowdShield: Install prompt available');
         e.preventDefault();
         deferredPrompt = e;
-        
+
         // Show custom install button after login
         setTimeout(() => {
             const loginPage = document.getElementById('loginPage');
@@ -7909,7 +7909,7 @@ async function fetchDataForScan() {
             }
         }, 5000);
     });
-    
+
     function showInstallPrompt() {
         if (deferredPrompt && !document.getElementById('installBanner')) {
             const installBanner = document.createElement('div');
@@ -7961,8 +7961,8 @@ async function fetchDataForScan() {
             document.body.appendChild(installBanner);
         }
     }
-    
-    window.installApp = function() {
+
+    window.installApp = function () {
         if (deferredPrompt) {
             deferredPrompt.prompt();
             deferredPrompt.userChoice.then((choiceResult) => {
@@ -7976,20 +7976,20 @@ async function fetchDataForScan() {
             });
         }
     };
-    
-    window.dismissInstall = function() {
+
+    window.dismissInstall = function () {
         const banner = document.getElementById('installBanner');
         if (banner) {
             banner.remove();
         }
     };
-    
+
     // Handle app installation
     window.addEventListener('appinstalled', (evt) => {
         console.log('CrowdShield: App was installed successfully');
         window.dismissInstall();
     });
-    
+
     // Add slide-in animation
     const style = document.createElement('style');
     style.textContent = `
@@ -8005,43 +8005,43 @@ async function fetchDataForScan() {
         }
     `;
     document.head.appendChild(style);
-    
+
     // Mobile-specific optimizations
     function initMobileOptimizations() {
         // Prevent zoom on input focus for iOS
         const inputs = document.querySelectorAll('input, select, textarea');
         inputs.forEach(input => {
-            input.addEventListener('focus', function() {
+            input.addEventListener('focus', function () {
                 if (this.style.fontSize !== '16px') {
                     this.style.fontSize = '16px';
                 }
             });
         });
-        
+
         // Handle viewport changes for mobile
         function setVH() {
             const vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         }
-        
+
         setVH();
         window.addEventListener('resize', setVH);
         window.addEventListener('orientationchange', () => setTimeout(setVH, 100));
-        
+
         // Add mobile device class
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             document.body.classList.add('mobile-device');
         }
-        
+
         // Touch-friendly improvements
-        document.addEventListener('touchstart', function() {}, { passive: true });
+        document.addEventListener('touchstart', function () { }, { passive: true });
     }
-    
+
     // Initialize mobile optimizations when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initMobileOptimizations);
     } else {
         initMobileOptimizations();
     }
-    
+
 })();
