@@ -395,21 +395,30 @@ function initializeNavbarButtons() {
     // Theme toggle button
     const themeBtn = document.getElementById('themeToggle');
     if (themeBtn && !themeBtn.hasAttribute('data-initialized')) {
+        try { themeBtn.removeEventListener('click', toggleTheme); } catch (_) { }
         themeBtn.addEventListener('click', toggleTheme);
+        try { themeBtn.removeEventListener('touchstart', toggleTheme); } catch (_) { }
+        themeBtn.addEventListener('touchstart', function (e) { e.preventDefault(); toggleTheme(); }, { passive: false });
         themeBtn.setAttribute('data-initialized', 'true');
     }
 
     // Logout button
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn && !logoutBtn.hasAttribute('data-initialized')) {
+        try { logoutBtn.removeEventListener('click', handleLogout); } catch (_) { }
         logoutBtn.addEventListener('click', handleLogout);
+        try { logoutBtn.removeEventListener('touchstart', handleLogout); } catch (_) { }
+        logoutBtn.addEventListener('touchstart', function (e) { e.preventDefault(); handleLogout(); }, { passive: false });
         logoutBtn.setAttribute('data-initialized', 'true');
     }
 
     // Sidebar toggle button
     const sidebarBtn = document.getElementById('sidebarToggle');
     if (sidebarBtn && !sidebarBtn.hasAttribute('data-initialized')) {
+        try { sidebarBtn.removeEventListener('click', toggleSidebar); } catch (_) { }
         sidebarBtn.addEventListener('click', toggleSidebar);
+        try { sidebarBtn.removeEventListener('touchstart', toggleSidebar); } catch (_) { }
+        sidebarBtn.addEventListener('touchstart', function (e) { e.preventDefault(); toggleSidebar(); }, { passive: false });
         sidebarBtn.setAttribute('data-initialized', 'true');
     }
 
@@ -421,7 +430,11 @@ function initializeNavbarButtons() {
 
 function setupEventListeners() {
     const loginForm = document.getElementById('loginForm');
-    if (loginForm) loginForm.addEventListener('submit', handleLogin);
+    if (loginForm) {
+        // Ensure a single submit handler is attached (defensive: remove then add)
+        try { loginForm.removeEventListener('submit', handleLogin); } catch (_) { }
+        loginForm.addEventListener('submit', handleLogin);
+    }
 
     const startButton = document.getElementById('startButton');
     if (startButton) startButton.addEventListener('click', showLoginPage);
@@ -463,6 +476,17 @@ function setupEventListeners() {
             }
         }
     });
+
+    // Ensure the sidebar toggle is resilient on mobile: attach both click and touchstart
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    if (sidebarToggle) {
+        try { sidebarToggle.removeEventListener('click', toggleSidebar); } catch (_) { }
+        sidebarToggle.addEventListener('click', toggleSidebar);
+
+        // For some mobile browsers, touchstart is more reliable than click
+        try { sidebarToggle.removeEventListener('touchstart', toggleSidebar); } catch (_) { }
+        sidebarToggle.addEventListener('touchstart', function (e) { e.preventDefault(); toggleSidebar(); }, { passive: false });
+    }
 
     // Settings toggles
     setupSettingsToggles();
@@ -799,12 +823,19 @@ function showLoginStatus(type, message) {
 }
 
 function resetLoginButton() {
-    const loginBtn = document.querySelector('.login-btn');
+    const loginForm = document.getElementById('loginForm');
+    let loginBtn = null;
+    if (loginForm) {
+        loginBtn = loginForm.querySelector('button[type="submit"], .login-btn');
+    }
+    // Fallback to any .login-btn (defensive)
+    if (!loginBtn) loginBtn = document.querySelector('.login-btn');
+
     const loginText = document.getElementById('loginText');
     const loginLoading = document.getElementById('loginLoading');
-    loginBtn.disabled = false;
-    loginText.classList.remove('hidden');
-    loginLoading.classList.add('hidden');
+    if (loginBtn) loginBtn.disabled = false;
+    if (loginText) loginText.classList.remove('hidden');
+    if (loginLoading) loginLoading.classList.add('hidden');
 }
 
 function showDashboard() {
@@ -848,6 +879,38 @@ function handleLogout() {
     document.getElementById('loginForm').reset();
     document.getElementById('loginStatus').style.display = 'none';
     resetLoginButton();
+
+    // Hide test review popup (if visible) and ensure login panel is shown so user can re-login
+    try {
+        const testReviewPopup = document.getElementById('testReviewPopup');
+        if (testReviewPopup) {
+            testReviewPopup.classList.remove('visible');
+            testReviewPopup.classList.add('hide-popup');
+            testReviewPopup.style.display = 'none';
+            testReviewPopup.style.animation = 'none';
+        }
+
+        const loginPanel = document.querySelector('.login-panel');
+        if (loginPanel) {
+            // Make sure the login panel is visible and ready for input
+            loginPanel.classList.add('show-panel');
+            loginPanel.style.display = '';
+        }
+
+        // Close camera if active to avoid background locks
+        if (cameraActive && typeof closeCamera === 'function') {
+            closeCamera();
+        }
+
+        // Remove sidebar-open flag (if present) to restore page state
+        document.body.classList.remove('sidebar-open');
+
+        // Focus username for quicker re-login
+        const usernameInput = document.getElementById('username');
+        if (usernameInput) usernameInput.focus();
+    } catch (e) {
+        console.warn('handleLogout cleanup error', e);
+    }
 }
 
 // =============== NAVIGATION ===============
