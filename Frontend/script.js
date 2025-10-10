@@ -446,8 +446,30 @@ function setupEventListeners() {
     if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
 
     const sidebarOverlay = document.getElementById('sidebarOverlay');
-    if (sidebarOverlay) {
-        sidebarOverlay.addEventListener('click', toggleSidebar);
+    if (sidebarOverlay && !sidebarOverlay.hasAttribute('data-initialized')) {
+        // Clicking the overlay should always close the sidebar (not toggle)
+        const closeSidebarFromOverlay = function (e) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            if (!sidebar || !overlay) return;
+            if (sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+                document.body.classList.remove('sidebar-open');
+
+                // restore hamburger icon
+                const sidebarBtn = document.getElementById('sidebarToggle');
+                if (sidebarBtn) {
+                    sidebarBtn.classList.remove('open');
+                    sidebarBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            }
+        };
+
+        sidebarOverlay.addEventListener('click', closeSidebarFromOverlay);
+        try { sidebarOverlay.removeEventListener('touchstart', closeSidebarFromOverlay); } catch (_) { }
+        sidebarOverlay.addEventListener('touchstart', function (e) { e.preventDefault(); closeSidebarFromOverlay(e); }, { passive: false });
+        sidebarOverlay.setAttribute('data-initialized', 'true');
     }
 
     document.querySelectorAll('.nav-item').forEach(item => {
@@ -464,28 +486,42 @@ function setupEventListeners() {
         });
     });
 
-    // Close sidebar when clicking outside on mobile
+    // Close sidebar when clicking outside on mobile - defensive and deterministic close
     document.addEventListener('click', function (e) {
         const sidebar = document.getElementById('sidebar');
         const sidebarToggle = document.getElementById('sidebarToggle');
         const overlay = document.getElementById('sidebarOverlay');
 
         if (window.innerWidth <= 1024 && sidebar && sidebar.classList.contains('open')) {
-            if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
-                toggleSidebar();
+            const clickedInsideSidebar = sidebar.contains(e.target);
+            const clickedOnToggle = sidebarToggle ? sidebarToggle.contains(e.target) : false;
+            const clickedOnOverlay = overlay ? overlay.contains(e.target) : false;
+
+            if (!clickedInsideSidebar && !clickedOnToggle && !clickedOnOverlay) {
+                // close (not toggle) to ensure we don't accidentally reopen
+                sidebar.classList.remove('open');
+                if (overlay) overlay.classList.remove('active');
+                document.body.classList.remove('sidebar-open');
+
+                const sidebarBtn = document.getElementById('sidebarToggle');
+                if (sidebarBtn) {
+                    sidebarBtn.classList.remove('open');
+                    sidebarBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
             }
         }
     });
 
-    // Ensure the sidebar toggle is resilient on mobile: attach both click and touchstart
+    // Ensure the sidebar toggle is resilient on mobile: attach both click and touchstart once
     const sidebarToggle = document.getElementById('sidebarToggle');
-    if (sidebarToggle) {
+    if (sidebarToggle && !sidebarToggle.hasAttribute('data-initialized')) {
         try { sidebarToggle.removeEventListener('click', toggleSidebar); } catch (_) { }
-        sidebarToggle.addEventListener('click', toggleSidebar);
+        sidebarToggle.addEventListener('click', function (e) { e.preventDefault(); toggleSidebar(); });
 
         // For some mobile browsers, touchstart is more reliable than click
         try { sidebarToggle.removeEventListener('touchstart', toggleSidebar); } catch (_) { }
         sidebarToggle.addEventListener('touchstart', function (e) { e.preventDefault(); toggleSidebar(); }, { passive: false });
+        sidebarToggle.setAttribute('data-initialized', 'true');
     }
 
     // Settings toggles
