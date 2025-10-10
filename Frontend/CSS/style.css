@@ -7075,43 +7075,37 @@
           padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 20px) !important;
       }
 
-      .sidebar.open {
-          left: 0 !important;
-      }
-
       /* Sidebar Navigation Items Mobile - full-width touch targets */
       .sidebar nav {
           display: block !important;
           width: 100% !important;
       }
-
-      /* Make each nav item an easy-to-tap full-width link */
-      .sidebar nav a.nav-item {
-          display: block !important; /* anchors must be block-level to cover full row */
-          min-height: 56px !important; /* comfortable touch target */
-          line-height: 56px !important;
-          padding: 0 20px !important; /* left/right padding; vertical centered by line-height */
+      
+      .sidebar.open {
+          left: 0 !important;
+      }
+      
+      .sidebar .nav-item {
+          display: flex !important;
+          align-items: center !important;
+          min-height: 56px !important;
+          padding: 0 20px !important;
           margin: 6px 12px !important;
           border-radius: 8px !important;
           font-size: 1.05rem !important;
           color: inherit !important;
           text-decoration: none !important;
-          -webkit-tap-highlight-color: rgba(0,0,0,0.06) !important;
-          pointer-events: auto !important; /* ensure anchor itself can receive taps */
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0.06) !important;
+          pointer-events: auto !important;
       }
-
-      /* Provide an internal layout for icon + label while leaving anchor as single hit area */
-      .sidebar nav a.nav-item .nav-content {
-          display: flex !important;
-          align-items: center !important;
-          gap: 12px !important;
+      
+      .sidebar .nav-item i,
+      .sidebar .nav-item span {
+          pointer-events: none;
       }
-
-      /* Icons and labels should not intercept pointer events (anchor handles clicks) */
-      .sidebar nav a.nav-item i,
-      .sidebar nav a.nav-item .nav-label {
-          pointer-events: none !important;
-          vertical-align: middle !important;
+      
+      .sidebar .nav-item:active {
+          background-color: rgba(37, 99, 235, 0.12);
       }
 
       /* Larger icon area and spacing */
@@ -7120,13 +7114,6 @@
           text-align: center !important;
           font-size: 1.2rem !important;
           flex-shrink: 0 !important;
-      }
-
-      /* Active/pressed state */
-      .sidebar nav a.nav-item:active,
-      .sidebar nav a.nav-item:focus {
-          background: rgba(37, 99, 235, 0.12) !important;
-          outline: none !important;
       }
 
       /* Quick Actions in Sidebar Mobile */
