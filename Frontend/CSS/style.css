@@ -442,6 +442,7 @@
 
   .navbar {
       height: 70px;
+      /* Desktop: subtle frosted backdrop; disabled on mobile/sidebar-open to avoid full-screen blur */
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
       background: linear-gradient(90deg, var(--light-bg), var(--light-secondary), var(--light-bg));
@@ -468,7 +469,11 @@
 
   /* Fix dark mode visibility for mobile */
   @media (max-width: 768px) {
+      /* Disable navbar backdrop blur on small screens */
+      .navbar,
       .dark-mode .navbar {
+          -webkit-backdrop-filter: none !important;
+          backdrop-filter: none !important;
           background: var(--dark-secondary);
       }
 
@@ -6945,8 +6950,9 @@
           z-index: 1190 !important;
           opacity: 0 !important;
           transition: opacity 0.25s ease-in-out !important;
-          backdrop-filter: blur(3px) !important;
-          -webkit-backdrop-filter: blur(3px) !important;
+          /* Remove blur to avoid full-screen blur on mobile when nav opens */
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
           pointer-events: none !important;
       }
 
@@ -7060,29 +7066,75 @@
           z-index: 1000 !important;
           transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
           box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4) !important;
-          backdrop-filter: blur(10px) !important;
+          /* avoid blurring underlying content */
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
           overflow-y: auto !important;
           -webkit-overflow-scrolling: touch !important;
+          /* Ensure sidebar content can scroll independently and does not hide last items */
+          padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 20px) !important;
       }
 
       .sidebar.open {
           left: 0 !important;
       }
 
-      /* Sidebar Navigation Items Mobile */
+      /* Sidebar Navigation Items Mobile - full-width touch targets */
+      .sidebar nav {
+          display: block !important;
+          width: 100% !important;
+      }
+
       .sidebar .nav-item {
-          padding: 16px 20px !important;
-          font-size: 1rem !important;
           display: flex !important;
           align-items: center !important;
           gap: 12px !important;
-          border-left: 4px solid transparent !important;
-          transition: all 0.3s ease !important;
+          padding: 16px 20px !important;
+          font-size: 1.05rem !important;
+      /* Make each nav item an easy-to-tap full-width link */
+      .sidebar .nav-item {
+          display: block !important;
+          min-height: 56px !important; /* comfortable touch target */
+          line-height: 56px !important;
+          padding: 0 20px !important; /* inner padding handled below */
       }
 
+      .sidebar .nav-item .nav-label, 
       .sidebar .nav-item i {
+          vertical-align: middle !important;
+          pointer-events: none !important; /* child elements shouldn't intercept taps */
+      }
+
+      /* inner content layout inside anchor */
+      .sidebar .nav-item .nav-content {
+          display: flex !important;
+          align-items: center !important;
+          gap: 12px !important;
+      }
+          border-radius: 8px !important;
+          margin: 6px 12px !important;
+          -webkit-tap-highlight-color: rgba(0,0,0,0.06) !important;
+      }
+
+      /* Larger icon area and spacing */
+      .sidebar .nav-item i {
+          width: 36px !important;
+          text-align: center !important;
           font-size: 1.2rem !important;
-          width: 24px !important;
+      }
+
+      /* Ensure hit area extends across entire row */
+      .sidebar .nav-item > * {
+          pointer-events: none !important;
+      }
+      .sidebar .nav-item {
+          pointer-events: auto !important;
+      .sidebar .nav-item i {
+          width: 36px !important;
+          text-align: center !important;
+          font-size: 1.2rem !important;
+          flex-shrink: 0 !important;
+      }
           text-align: center !important;
       }
 
