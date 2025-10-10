@@ -486,6 +486,36 @@ function setupEventListeners() {
         });
     });
 
+    // Delegated fallback: some mobile browsers/embedded webviews can miss direct handlers
+    // Attach a delegated touchend + click listener that only runs when the event wasn't
+    // already handled (check e.defaultPrevented). This improves reliability for taps
+    // on .nav-item children (icons/labels) which may intercept pointer events.
+    const delegatedNavHandler = function (e) {
+        try {
+            if (e.defaultPrevented) return; // already handled by the element handler
+            const el = (e.target && e.target.closest) ? e.target.closest('.nav-item') : null;
+            if (!el) return;
+            e.preventDefault();
+            const page = el.getAttribute('data-page');
+            if (page) showPage(page);
+
+            // Close sidebar on mobile/tablet after navigation
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth <= 1024 && sidebar && sidebar.classList.contains('open')) {
+                toggleSidebar();
+            }
+        } catch (err) {
+            // defensive - don't throw for unexpected targets
+            console.warn('delegatedNavHandler error', err);
+        }
+    };
+
+    // Use touchend (more responsive) and a normal click as a fallback
+    try { document.removeEventListener('touchend', delegatedNavHandler); } catch(_) {}
+    document.addEventListener('touchend', delegatedNavHandler, { passive: false });
+    try { document.removeEventListener('click', delegatedNavHandler); } catch(_) {}
+    document.addEventListener('click', delegatedNavHandler);
+
     // Close sidebar when clicking outside on mobile - defensive and deterministic close
     document.addEventListener('click', function (e) {
         const sidebar = document.getElementById('sidebar');
