@@ -6912,29 +6912,87 @@
           top: 0 !important;
           left: 0 !important;
           right: 0 !important;
-          z-index: 1000 !important;
+          z-index: 1300 !important;
           background: var(--dark-bg) !important;
           border-bottom: 1px solid var(--border-dark) !important;
           box-sizing: border-box !important;
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
       }
 
-      /* Sidebar Overlay for Mobile */
+      /* Sidebar Overlay for Mobile - improved and robust selectors
+         Use the body.sidebar-open flag (added by JS) to reliably style
+         the overlay and the hamburger icon regardless of DOM order. */
+      :root {
+          --navbar-height: 70px;
+      }
+
+      /* Responsive overrides for navbar height */
+      @media (max-width: 768px) {
+          :root { --navbar-height: 60px; }
+      }
+      @media (max-width: 480px) {
+          :root { --navbar-height: 56px; }
+      }
+
       .sidebar-overlay {
           display: none !important;
           position: fixed !important;
-          top: 60px !important;
+          top: var(--navbar-height) !important;
           left: 0 !important;
           right: 0 !important;
           bottom: 0 !important;
-          background: rgba(0, 0, 0, 0.5) !important;
-          z-index: 999 !important;
-          backdrop-filter: blur(2px) !important;
+          background: rgba(0, 0, 0, 0.55) !important;
+          z-index: 1190 !important;
+          opacity: 0 !important;
+          transition: opacity 0.25s ease-in-out !important;
+          backdrop-filter: blur(3px) !important;
+          -webkit-backdrop-filter: blur(3px) !important;
+          pointer-events: none !important;
       }
 
-      .sidebar.open~.sidebar-overlay,
+      /* When body has sidebar-open, make overlay visible and interactive */
+      body.sidebar-open .sidebar-overlay,
       .sidebar-overlay.active {
           display: block !important;
+          opacity: 1 !important;
+          pointer-events: auto !important;
+      }
+
+      /* Ensure the sidebar sits under the navbar but above overlay/content */
+      .sidebar {
+          z-index: 1200 !important;
+          top: var(--navbar-height) !important;
+      }
+
+      /* Emphasize navbar slightly when sidebar is open to attract user attention */
+      body.sidebar-open .navbar {
+          box-shadow: 0 8px 30px rgba(37, 99, 235, 0.12) !important;
+          transition: box-shadow 0.25s ease-in-out !important;
+      }
+
+      /* Hamburger -> X animation using the body flag (works regardless of DOM order) */
+      /* Support both approaches: .icon-bar bars or font-icon swaps */
+      body.sidebar-open .navbar #sidebarToggle.open {
+          background: rgba(255, 255, 255, 0.04) !important;
+          color: var(--text-light) !important;
+      }
+
+      body.sidebar-open .navbar #sidebarToggle .icon-bar:nth-child(1) {
+          transform: translateY(6px) rotate(45deg) !important;
+      }
+      body.sidebar-open .navbar #sidebarToggle .icon-bar:nth-child(2) {
+          opacity: 0 !important;
+      }
+      body.sidebar-open .navbar #sidebarToggle .icon-bar:nth-child(3) {
+          transform: translateY(-6px) rotate(-45deg) !important;
+      }
+
+      /* If innerHTML swaps to an <i> icon (font-awesome), allow visual toggle as well */
+      body.sidebar-open .navbar #sidebarToggle i.fas.fa-bars {
+          display: none !important;
+      }
+      body.sidebar-open .navbar #sidebarToggle i.fas.fa-times {
+          display: inline-block !important;
       }
 
       .navbar-left {
@@ -8061,6 +8119,7 @@
       }
 
       .form-group input {
+          appearance: none !important;
           -webkit-appearance: none !important;
           border-radius: 8px !important;
       }
@@ -8068,6 +8127,7 @@
       .login-btn,
       .modal-btn,
       .camera-btn {
+          appearance: none !important;
           -webkit-appearance: none !important;
           border-radius: 8px !important;
       }
