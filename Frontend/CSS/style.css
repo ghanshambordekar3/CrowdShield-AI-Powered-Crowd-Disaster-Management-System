@@ -7298,7 +7298,7 @@
       .status-indicator span {
           font-weight: 600 !important;
           font-size: 1rem !important;
-          color: var(--text-dark) !important;
+          color: var(--text-light) !important;
       }
 
       .chart-container canvas {
