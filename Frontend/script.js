@@ -393,6 +393,49 @@ function handleViewportChanges() {
     window.addEventListener('orientationchange', () => setTimeout(setVH, 100));
 }
 
+// Keep navbar/sidebar theme classes in sync for very small screens.
+function syncNavbarSidebarThemeForMobile() {
+    try {
+        const vw = window.innerWidth || document.documentElement.clientWidth;
+        const isDark = document.body.classList.contains('dark-mode');
+        const navbar = document.querySelector('.navbar');
+        const sidebar = document.getElementById('sidebar');
+
+        if (vw <= 480) {
+            if (navbar) {
+                navbar.classList.remove('dark-mode', 'light-mode');
+                navbar.classList.add(isDark ? 'dark-mode' : 'light-mode');
+            }
+            if (sidebar) {
+                sidebar.classList.remove('dark-mode', 'light-mode');
+                sidebar.classList.add(isDark ? 'dark-mode' : 'light-mode');
+            }
+        } else {
+            if (navbar) navbar.classList.remove('dark-mode', 'light-mode');
+            if (sidebar) sidebar.classList.remove('dark-mode', 'light-mode');
+        }
+    } catch (e) {
+        console.warn('syncNavbarSidebarThemeForMobile error', e);
+    }
+}
+
+// Call sync on resize/orientation changes
+window.addEventListener('resize', function () {
+    // small debounce
+    if (window._syncThemeTimeout) clearTimeout(window._syncThemeTimeout);
+    window._syncThemeTimeout = setTimeout(() => {
+        syncNavbarSidebarThemeForMobile();
+    }, 120);
+});
+window.addEventListener('orientationchange', function () {
+    setTimeout(syncNavbarSidebarThemeForMobile, 150);
+});
+
+// Ensure initial sync after DOM ready
+document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(syncNavbarSidebarThemeForMobile, 250);
+});
+
 function initializeNavbarButtons() {
     // Theme toggle button
     const themeBtn = document.getElementById('themeToggle');
@@ -1047,26 +1090,8 @@ function toggleSidebar() {
 }
 
 // =============== THEME MANAGEMENT ===============
-function toggleTheme() {
-    const body = document.body;
-    const isDark = body.classList.contains('dark-mode');
-
-    // Toggle theme classes without overwriting other body classes
-    body.classList.remove('dark-mode', 'light-mode');
-    body.classList.add(isDark ? 'light-mode' : 'dark-mode');
-    localStorage.setItem('crowdshield_theme', isDark ? 'light' : 'dark');
-    updateThemeIcon();
-
-    // Sync settings toggle
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    if (darkModeToggle) {
-        if (isDark) {
-            darkModeToggle.classList.remove('active');
-        } else {
-            darkModeToggle.classList.add('active');
-        }
-    }
-}
+/* toggleTheme implementation moved further below; duplicate removed to
+   ensure a single authoritative function handles theme changes. */
 
 function updateThemeIcon() {
     const icon = document.getElementById('themeIcon');
@@ -5840,6 +5865,29 @@ function toggleTheme() {
             } else {
                 darkModeToggle.classList.add('active');
             }
+        }
+        
+        // MOBILE-SPECIFIC: apply explicit theme classes to navbar and sidebar
+        // when viewport is <= 480px. Desktop/tablet keep original behavior.
+        try {
+            const vw = window.innerWidth || document.documentElement.clientWidth;
+            const navbar = document.querySelector('.navbar');
+            const sidebar = document.getElementById('sidebar');
+            if (vw <= 480) {
+                if (navbar) {
+                    navbar.classList.remove('dark-mode', 'light-mode');
+                    navbar.classList.add(isDark ? 'light-mode' : 'dark-mode');
+                }
+                if (sidebar) {
+                    sidebar.classList.remove('dark-mode', 'light-mode');
+                    sidebar.classList.add(isDark ? 'light-mode' : 'dark-mode');
+                }
+            } else {
+                if (navbar) navbar.classList.remove('dark-mode', 'light-mode');
+                if (sidebar) sidebar.classList.remove('dark-mode', 'light-mode');
+            }
+        } catch (e) {
+            console.warn('toggleTheme mobile-class application error', e);
         }
     } catch (e) {
         console.warn('Theme toggle failed:', e);

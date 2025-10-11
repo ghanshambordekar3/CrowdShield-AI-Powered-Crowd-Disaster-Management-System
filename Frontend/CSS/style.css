@@ -1886,6 +1886,33 @@
       .setting-item p {
           font-size: 0.85rem;
       }
+
+      /* Ensure navbar and sidebar explicitly follow theme on very small screens
+         Mobile browsers sometimes ignore higher-level body theme due to
+         backdrop-filter or inline styles. Limit these rules to <=480px only. */
+      .dark-mode .navbar, body.dark-mode .navbar {
+          background: var(--dark-secondary) !important;
+          color: var(--text-light) !important;
+          border-bottom-color: var(--border-dark) !important;
+      }
+
+      .light-mode .navbar, body.light-mode .navbar {
+          background: linear-gradient(90deg, var(--light-bg), var(--light-secondary), var(--light-bg)) !important;
+          color: var(--text-dark) !important;
+          border-bottom-color: var(--border-light) !important;
+      }
+
+      .dark-mode .sidebar, body.dark-mode .sidebar {
+          background: rgba(30, 41, 59, 0.95) !important;
+          color: var(--text-light) !important;
+          border-right-color: var(--border-dark) !important;
+      }
+
+      .light-mode .sidebar, body.light-mode .sidebar {
+          background: rgba(248, 250, 252, 0.98) !important;
+          color: var(--text-dark) !important;
+          border-right-color: var(--border-light) !important;
+      }
   }
 
   /* Landscape Mobile Optimization */
