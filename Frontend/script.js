@@ -167,7 +167,9 @@ function initializeApp() {
 
     // Initialize theme - default to dark mode
     const savedTheme = localStorage.getItem('crowdshield_theme') || 'dark';
-    document.body.className = savedTheme + '-mode';
+    // Preserve other body classes (like sidebar-open, mobile-device) when applying theme
+    document.body.classList.remove('dark-mode', 'light-mode');
+    document.body.classList.add(savedTheme + '-mode');
     updateThemeIcon();
 
     // Generate initial simulated data
@@ -1049,7 +1051,9 @@ function toggleTheme() {
     const body = document.body;
     const isDark = body.classList.contains('dark-mode');
 
-    body.className = isDark ? 'light-mode' : 'dark-mode';
+    // Toggle theme classes without overwriting other body classes
+    body.classList.remove('dark-mode', 'light-mode');
+    body.classList.add(isDark ? 'light-mode' : 'dark-mode');
     localStorage.setItem('crowdshield_theme', isDark ? 'light' : 'dark');
     updateThemeIcon();
 
@@ -5815,7 +5819,9 @@ function toggleTheme() {
         const body = document.body;
         const isDark = body.classList.contains('dark-mode');
 
-        body.className = isDark ? 'light-mode' : 'dark-mode';
+    // Toggle theme classes without overwriting other body classes
+    body.classList.remove('dark-mode', 'light-mode');
+    body.classList.add(isDark ? 'light-mode' : 'dark-mode');
         localStorage.setItem('crowdshield_theme', isDark ? 'light' : 'dark');
         updateThemeIcon();
 
