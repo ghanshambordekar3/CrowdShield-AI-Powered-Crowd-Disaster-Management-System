@@ -469,6 +469,7 @@
 
   /* Fix dark mode visibility for mobile */
   @media (max-width: 768px) {
+
       /* Disable navbar backdrop blur on small screens */
       .navbar,
       .dark-mode .navbar {
@@ -678,9 +679,6 @@
       margin: 2px 0;
       font-weight: 500;
       font-size: 0.95rem;
-      cursor: pointer;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
   }
 
   .dark-mode .nav-item {
@@ -2192,7 +2190,7 @@
       width: 100vw;
       height: 100%;
       background: rgba(0, 0, 0, 0.5);
-      z-index: 1500;
+      z-index: 998;
       opacity: 0;
       /* Initially transparent */
       transition: opacity 0.3s ease-in-out;
@@ -2209,7 +2207,7 @@
 
       /* Ensure sidebar is above overlay on mobile/tablet */
       .sidebar {
-          z-index: 2001;
+          z-index: 1001;
       }
   }
 
@@ -6921,27 +6919,31 @@
           left: 0 !important;
           right: 0 !important;
           z-index: 1300 !important;
+          /* Keep navbar highest */
           background: var(--dark-bg) !important;
           border-bottom: 1px solid var(--border-dark) !important;
           box-sizing: border-box !important;
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
       }
 
-      /* Sidebar Overlay for Mobile - improved and robust selectors
-         Use the body.sidebar-open flag (added by JS) to reliably style
-         the overlay and the hamburger icon regardless of DOM order. */
+      /* Root and responsive navbar height */
       :root {
           --navbar-height: 70px;
       }
 
-      /* Responsive overrides for navbar height */
       @media (max-width: 768px) {
-          :root { --navbar-height: 60px; }
-      }
-      @media (max-width: 480px) {
-          :root { --navbar-height: 56px; }
+          :root {
+              --navbar-height: 60px;
+          }
       }
 
+      @media (max-width: 480px) {
+          :root {
+              --navbar-height: 56px;
+          }
+      }
+
+      /* Sidebar Overlay for Mobile */
       .sidebar-overlay {
           display: none !important;
           position: fixed !important;
@@ -6951,15 +6953,15 @@
           bottom: 0 !important;
           background: rgba(0, 0, 0, 0.55) !important;
           z-index: 1190 !important;
+          /* Below navbar & sidebar */
           opacity: 0 !important;
           transition: opacity 0.25s ease-in-out !important;
-          /* Remove blur to avoid full-screen blur on mobile when nav opens */
           backdrop-filter: none !important;
           -webkit-backdrop-filter: none !important;
           pointer-events: none !important;
       }
 
-      /* When body has sidebar-open, make overlay visible and interactive */
+      /* Show overlay when sidebar is open */
       body.sidebar-open .sidebar-overlay,
       .sidebar-overlay.active {
           display: block !important;
@@ -6967,20 +6969,23 @@
           pointer-events: auto !important;
       }
 
-      /* Ensure the sidebar sits under the navbar but above overlay/content */
+      /* Sidebar should be above overlay but below navbar */
       .sidebar {
-          z-index: 1200 !important;
+          position: fixed !important;
+          z-index: 1250 !important;
           top: var(--navbar-height) !important;
+          height: calc(100vh - var(--navbar-height)) !important;
+          background: var(--dark-bg) !important;
+          overflow-y: auto !important;
       }
 
-      /* Emphasize navbar slightly when sidebar is open to attract user attention */
+      /* Navbar shadow animation when sidebar opens */
       body.sidebar-open .navbar {
           box-shadow: 0 8px 30px rgba(37, 99, 235, 0.12) !important;
           transition: box-shadow 0.25s ease-in-out !important;
       }
 
-      /* Hamburger -> X animation using the body flag (works regardless of DOM order) */
-      /* Support both approaches: .icon-bar bars or font-icon swaps */
+      /* Hamburger to X animation */
       body.sidebar-open .navbar #sidebarToggle.open {
           background: rgba(255, 255, 255, 0.04) !important;
           color: var(--text-light) !important;
@@ -6989,21 +6994,25 @@
       body.sidebar-open .navbar #sidebarToggle .icon-bar:nth-child(1) {
           transform: translateY(6px) rotate(45deg) !important;
       }
+
       body.sidebar-open .navbar #sidebarToggle .icon-bar:nth-child(2) {
           opacity: 0 !important;
       }
+
       body.sidebar-open .navbar #sidebarToggle .icon-bar:nth-child(3) {
           transform: translateY(-6px) rotate(-45deg) !important;
       }
 
-      /* If innerHTML swaps to an <i> icon (font-awesome), allow visual toggle as well */
+      /* Font Awesome toggle support */
       body.sidebar-open .navbar #sidebarToggle i.fas.fa-bars {
           display: none !important;
       }
+
       body.sidebar-open .navbar #sidebarToggle i.fas.fa-times {
           display: inline-block !important;
       }
 
+      /* Navbar layout */
       .navbar-left {
           display: flex !important;
           align-items: center !important;
@@ -7017,6 +7026,22 @@
           gap: 10px !important;
           flex-shrink: 0 !important;
       }
+
+      /* ✅ Ensure nav items are clickable */
+      .nav-item,
+      .nav-item a {
+          position: relative !important;
+          z-index: 1350 !important;
+          /* Above overlay */
+          pointer-events: auto !important;
+          cursor: pointer !important;
+      }
+
+      /* Prevent overlay from blocking clicks on nav when closed */
+      body:not(.sidebar-open) .sidebar-overlay {
+          pointer-events: none !important;
+      }
+
 
       .logo {
           font-size: 1.2rem !important;
@@ -7090,17 +7115,21 @@
 
       /* Make each nav item an easy-to-tap full-width link */
       .sidebar nav a.nav-item {
-          display: block !important; /* anchors must be block-level to cover full row */
-          min-height: 56px !important; /* comfortable touch target */
+          display: block !important;
+          /* anchors must be block-level to cover full row */
+          min-height: 56px !important;
+          /* comfortable touch target */
           line-height: 56px !important;
-          padding: 0 20px !important; /* left/right padding; vertical centered by line-height */
+          padding: 0 20px !important;
+          /* left/right padding; vertical centered by line-height */
           margin: 6px 12px !important;
           border-radius: 8px !important;
           font-size: 1.05rem !important;
           color: inherit !important;
           text-decoration: none !important;
-          -webkit-tap-highlight-color: rgba(0,0,0,0.06) !important;
-          pointer-events: auto !important; /* ensure anchor itself can receive taps */
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0.06) !important;
+          pointer-events: auto !important;
+          /* ensure anchor itself can receive taps */
       }
 
       /* Provide an internal layout for icon + label while leaving anchor as single hit area */
