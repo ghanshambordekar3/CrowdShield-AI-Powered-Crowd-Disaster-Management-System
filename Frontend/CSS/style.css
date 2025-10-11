@@ -470,12 +470,20 @@
   /* Fix dark mode visibility for mobile */
   @media (max-width: 768px) {
 
-      /* Disable navbar backdrop blur on small screens */
-      .navbar,
-      .dark-mode .navbar {
+      /* Disable navbar backdrop blur on small screens but don't force a dark background.
+         Background should follow the active theme (.dark-mode or .light-mode). */
+      .navbar {
           -webkit-backdrop-filter: none !important;
           backdrop-filter: none !important;
+      }
+
+      /* Mobile: theme-specific navbar backgrounds */
+      .dark-mode .navbar {
           background: var(--dark-secondary);
+      }
+
+      .light-mode .navbar {
+          background: linear-gradient(90deg, var(--light-bg), var(--light-secondary), var(--light-bg));
       }
 
       .dark-mode .sidebar {
@@ -1333,8 +1341,9 @@
   }
 
   .analytics-right-column .chart-container {
-      /* height: 100%; */
-      /* This can cause layout issues, better to let content define height */
+      /* keep this selector non-empty to avoid empty-ruleset lint errors */
+      min-height: 0;
+      /* height: 100%; This can cause layout issues, better to let content define height */
   }
 
   @media (max-width: 1024px) {
@@ -1503,6 +1512,12 @@
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
           background: rgba(30, 41, 59, 0.85);
+      }
+
+      /* Mobile: light-mode sidebar background so theme toggle affects sidebar on mobile */
+      .light-mode .sidebar {
+          background: rgba(248, 250, 252, 0.98); /* var(--light-secondary) with slight opacity */
+          border-right-color: var(--border-light);
       }
 
 
@@ -7060,6 +7075,31 @@
       body.sidebar-open .navbar {
           box-shadow: 0 8px 30px rgba(37, 99, 235, 0.12) !important;
           transition: box-shadow 0.25s ease-in-out !important;
+      }
+
+       /* Disable navbar backdrop blur on small screens but don't force a dark background.
+         Background should follow the active theme (.dark-mode or .light-mode). */
+      .navbar {
+          -webkit-backdrop-filter: none !important;
+          backdrop-filter: none !important;
+      }
+
+      /* Mobile: theme-specific navbar backgrounds */
+      .dark-mode .navbar {
+          background: var(--dark-secondary);
+      }
+
+      .light-mode .navbar {
+          background: linear-gradient(90deg, var(--light-bg), var(--light-secondary), var(--light-bg));
+      }
+
+      .light-mode .sidebar {
+          background: var(--light-bg);
+          border-right-color: var(--border-light);
+      }
+
+      .light-mode .siderbar  nav a.nav-item{
+            color: var(--text-dark);
       }
 
       .logo {
