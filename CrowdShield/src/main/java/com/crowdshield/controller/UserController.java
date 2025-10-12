@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "https://crowd-shield-ai-powered-crowd-disas-cyan.vercel.app/")
+@CrossOrigin(origins = "https://crowd-shield-ai-powered-crowd-disas-rust.vercel.app/")
 @RequestMapping("/api")
 public class UserController {
 
