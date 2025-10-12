@@ -1851,6 +1851,70 @@
           height: 250px;
       }
 
+      /* Fix map overlay controls placement for very small screens
+         Ensure controls are positioned absolutely inside .map-wrapper
+         (which is already position:relative in markup) so they stay
+         fixed over the map and are touch-friendly. */
+      .map-wrapper .map-overlay-controls {
+          position: absolute !important;
+          top: 8px !important;
+          right: 8px !important;
+          left: auto !important;
+          z-index: 9999 !important;
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 10px !important;
+          align-items: flex-end !important;
+          pointer-events: auto !important;
+      }
+
+      /* Make each control group align to the right and provide larger
+         touch targets on mobile */
+      .map-wrapper .map-overlay-controls>div {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 8px !important;
+          align-items: center !important;
+      }
+
+      .map-wrapper .map-overlay-controls button {
+          width: 48px !important;
+          height: 48px !important;
+          min-width: 48px !important;
+          min-height: 48px !important;
+          font-size: 18px !important;
+          border-radius: 10px !important;
+          box-shadow: 0 6px 18px rgba(0,0,0,0.25) !important;
+      }
+
+      /* Layer menu should open to the left of the layer button on small screens
+         to avoid overflow off-screen */
+      .map-wrapper .layer-controls {
+          position: relative !important;
+      }
+
+      .map-wrapper .layer-controls .layer-menu {
+          position: absolute !important;
+          top: calc(100% + 8px) !important;
+          right: 0 !important;
+          left: auto !important;
+          min-width: 140px !important;
+          max-width: 220px !important;
+          background: var(--light-bg) !important;
+          border: 1px solid var(--border-light) !important;
+          border-radius: 8px !important;
+          box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
+          padding: 8px !important;
+          z-index: 10000 !important;
+      }
+
+      /* Ensure dark-mode layer menu also looks correct */
+      body.dark-mode .map-wrapper .layer-controls .layer-menu {
+          background: var(--dark-secondary) !important;
+          border-color: var(--border-dark) !important;
+          color: var(--text-light) !important;
+      }
+
       /* Chart Container Extra Small */
       .chart-container {
           padding: 12px;
